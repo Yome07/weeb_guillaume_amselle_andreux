@@ -1,16 +1,39 @@
-# React + Vite
+# Weeb - Blog sur le Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📝 Description
+Site vitrine avec blog et authentification pour l'entreprise Weeb.
 
-Currently, two official plugins are available:
+## 🛠️ Technologies utilisées
+- React 18
+- Vite
+- Tailwind CSS
+- React Router DOM
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📦 Librairies installées
+- `react-router-dom` : Gestion du routing entre les pages
+- `tailwindcss` : Framework CSS utility-first pour le styling
+- `react-icons` : Bibliothèque d'icônes pour le footer et UI
 
-## React Compiler
+## 🏗️ Architecture du projet
+```
+src/
+├── components/     # Composants réutilisables
+│   ├── layout/     # Header, Footer, Layout
+│   └── ui/         # Button, Input
+├── pages/          # Pages de l'application
+├── assets/         # Images et ressources
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Installation
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📋 Conventions Git
+Utilisation de Conventional Commits :
+- `feat:` nouvelle fonctionnalité
+- `fix:` correction de bug
+- `style:` modifications CSS/UI
+- `refactor:` refactoring de code
+- `docs:` documentation
