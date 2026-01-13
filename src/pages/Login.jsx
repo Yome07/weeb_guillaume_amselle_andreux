@@ -7,7 +7,6 @@ import Button from '../components/ui/Button';
 /**
  * Page de connexion (Login)
  * Contient un formulaire avec email et password
- * Version Mobile First
  */
 function Login() {
   // États pour gérer les valeurs des champs du formulaire

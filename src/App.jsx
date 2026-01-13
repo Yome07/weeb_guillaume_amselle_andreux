@@ -1,9 +1,8 @@
-import { useState } from 'react'
-import Login from './pages/Login';
+import Contact from './pages/Contact';
 
 function App() {
 
-  return <Login />;
+  return <Contact />;
 }
 
 export default App
