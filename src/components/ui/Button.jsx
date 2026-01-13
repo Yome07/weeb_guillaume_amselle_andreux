@@ -10,7 +10,7 @@
  */
 function Button({ children, onClick, type = "button", variant = "primary", className = "" }) {
   // Classes CSS communes à tous les boutons
-  const baseClasses = "flex items-center justify-center p-8 rounded-lg font-medium transition duration-200 text-white border-2";
+  const baseClasses = "flex items-center justify-center px-4 py-2 rounded-lg font-medium transition duration-200 text-white border-2";
   
   // Définition des différentes variantes de style
   const variants = {

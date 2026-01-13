@@ -26,68 +26,73 @@ function Header() {
 
   return (
     <>
-      <header className="w-full bg-white/5 shadow-dark-xxl rounded-b-[10px] relative z-50">
-        {/* Container responsive avec breakpoints */}
-        <div className="flex justify-between items-center px-5 py-[15px] max-w-[320px] mx-auto md:max-w-[768px] md:px-10 lg:max-w-[1280px] lg:px-20">
-          
-          {/* Logo Weeb */}
-          <h1 className="text-white font-roboto font-bold text-[32px] leading-[110%]">
-            weeb
-          </h1>
+      <header className="w-full relative z-50 md:mt-6 mb-6">
+        <div className="max-w-[1000px] mx-auto p-4 bg-white/5 shadow-dark-xxl rounded-[10px]">
+          {/* Container responsive avec breakpoints */}
+          <div className="flex justify-between items-center">
 
-          {/* Navigation Desktop/Tablette - cachée sur mobile */}
-          <nav className="hidden md:flex items-center gap-8">
-            <a 
-              href="#" 
-              className="text-white font-roboto font-normal text-base hover:text-purple-light transition"
-            >
-              About Us
-            </a>
-            <a 
-              href="#" 
-              className="text-white font-roboto font-normal text-base hover:text-purple-light transition"
-            >
-              Contact
-            </a>
-          </nav>
+            {/* Groupe gauche : Logo + Navigation */}
+            <div className="flex items-center gap-8">
+              {/* Logo Weeb */}
+              <h1 className="text-white font-roboto font-bold text-[32px] leading-[110%]">
+                weeb
+              </h1>
 
-          {/* Boutons Desktop/Tablette - cachés sur mobile */}
-          <div className="hidden md:flex items-center gap-4">
-            {/* Bouton Log In */}
-            <Button variant='secondary' >
-              Log In
-            </Button>
-            
-            {/* Bouton Join Now */}
-            <Button>
-              Join Now
-            </Button>
+              {/* Navigation Desktop/Tablette - cachée sur mobile */}
+              <nav className="hidden md:flex items-center gap-8">
+                <a 
+                  href="#" 
+                  className="text-white font-roboto font-normal text-base hover:text-purple-light transition"
+                >
+                  About Us
+                </a>
+                <a 
+                  href="#" 
+                  className="text-white font-roboto font-normal text-base hover:text-purple-light transition"
+                >
+                  Contact
+                </a>
+              </nav>
+            </div>
+
+            {/* Boutons Desktop/Tablette - cachés sur mobile */}
+            <div className="hidden md:flex items-center gap-4">
+              {/* Bouton Log In */}
+              <Button variant='secondary' >
+                Log In
+              </Button>
+              
+              {/* Bouton Join Now */}
+              <Button>
+                Join Now
+              </Button>
+            </div>
+
+            {/* Menu Burger - visible uniquement sur mobile */}
+            <button 
+              onClick={toggleMenu}
+              className="md:hidden w-12 h-11 bg-purple-600 border-2 border-purple-600 rounded-lg flex flex-col justify-center items-center gap-1 hover:bg-purple-light hover:border-purple-light transition"
+              aria-label="Menu"
+              aria-expanded={isMenuOpen}
+            >
+              {/* Animation des barres en X quand le menu est ouvert */}
+              <span 
+                className={`w-7 h-1 bg-white rounded-full transition-transform duration-300 ${
+                  isMenuOpen ? 'rotate-45 translate-y-2' : ''
+                }`}
+              ></span>
+              <span 
+                className={`w-7 h-1 bg-white rounded-full transition-opacity duration-300 ${
+                  isMenuOpen ? 'opacity-0' : 'opacity-100'
+                }`}
+              ></span>
+              <span 
+                className={`w-7 h-1 bg-white rounded-full transition-transform duration-300 ${
+                  isMenuOpen ? '-rotate-45 -translate-y-2' : ''
+                }`}
+              ></span>
+            </button>
           </div>
-
-          {/* Menu Burger - visible uniquement sur mobile */}
-          <button 
-            onClick={toggleMenu}
-            className="md:hidden w-12 h-11 bg-purple-600 border-2 border-purple-600 rounded-lg flex flex-col justify-center items-center gap-1 hover:bg-purple-light hover:border-purple-light transition"
-            aria-label="Menu"
-            aria-expanded={isMenuOpen}
-          >
-            {/* Animation des barres en X quand le menu est ouvert */}
-            <span 
-              className={`w-7 h-1 bg-white rounded-full transition-transform duration-300 ${
-                isMenuOpen ? 'rotate-45 translate-y-2' : ''
-              }`}
-            ></span>
-            <span 
-              className={`w-7 h-1 bg-white rounded-full transition-opacity duration-300 ${
-                isMenuOpen ? 'opacity-0' : 'opacity-100'
-              }`}
-            ></span>
-            <span 
-              className={`w-7 h-1 bg-white rounded-full transition-transform duration-300 ${
-                isMenuOpen ? '-rotate-45 -translate-y-2' : ''
-              }`}
-            ></span>
-          </button>
         </div>
       </header>
 
