@@ -34,6 +34,5 @@ npm run dev
 Utilisation de Conventional Commits :
 - `feat:` nouvelle fonctionnalité
 - `fix:` correction de bug
-- `style:` modifications CSS/UI
 - `refactor:` refactoring de code
 - `docs:` documentation

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Button from '../ui/Button'
+import { Link } from 'react-router-dom';
 
 /**
  * Composant Header (En-tête) - RESPONSIVE avec Menu Mobile
@@ -33,34 +34,39 @@ function Header() {
 
             {/* Groupe gauche : Logo + Navigation */}
             <div className="flex items-center gap-8">
-              {/* Logo Weeb */}
-              <h1 className="text-white font-roboto font-bold text-[32px] leading-[110%]">
-                weeb
-              </h1>
+              {/* Logo Weeb avec lien vers Home*/}
+              <Link to="/">
+                <h1 className="text-white font-roboto font-bold text-[32px] leading-[110%]">
+                  weeb
+                </h1>
+              </Link>
 
               {/* Navigation Desktop/Tablette - cachée sur mobile */}
               <nav className="hidden md:flex items-center gap-8">
-                <a 
-                  href="#" 
+                <Link 
+                  to="/" 
                   className="text-white font-roboto font-normal text-base hover:text-purple-light transition"
                 >
                   About Us
-                </a>
-                <a 
-                  href="#" 
+                </Link>
+                <Link 
+                  to="/contact" 
                   className="text-white font-roboto font-normal text-base hover:text-purple-light transition"
                 >
                   Contact
-                </a>
+                </Link>
               </nav>
             </div>
 
             {/* Boutons Desktop/Tablette - cachés sur mobile */}
             <div className="hidden md:flex items-center gap-4">
               {/* Bouton Log In */}
-              <Button variant='secondary' >
+              <Link 
+                to="/login"
+                className="text-white font-roboto font-normal text-base hover:text-purple-light transition"
+              >
                 Log In
-              </Button>
+              </Link>
               
               {/* Bouton Join Now */}
               <Button>
@@ -106,33 +112,34 @@ function Header() {
         <nav className="flex flex-col items-center justify-center h-full gap-8 px-8">
           
           {/* Lien About Us */}
-         <a 
-            href="#"
+         <Link
+            to="/"
             onClick={closeMenu}
             className="text-white font-roboto font-medium text-2xl hover:text-purple-light transition"
           >
             About Us
-          </a>
+          </Link>
 
           {/* Lien Contact */}
-        <a  
-            href="#"
-            onClick={closeMenu}
-            className="text-white font-roboto font-medium text-2xl hover:text-purple-light transition"
+          <Link
+              to="/contact"
+              onClick={closeMenu}
+              className="text-white font-roboto font-medium text-2xl hover:text-purple-light transition"
           >
             Contact
-          </a>
+          </Link>
 
           {/* Séparateur */}
           <div className="w-24 h-px bg-white/20 my-4"></div>
 
           {/* Bouton Log In */}
-          <button
+          <Link
+            to="/login"
             onClick={closeMenu}
             className="text-white font-roboto font-medium text-xl hover:text-purple-light transition"
           >
             Log In
-          </button>
+          </Link>
 
           {/* Bouton Join Now */}
           <button
