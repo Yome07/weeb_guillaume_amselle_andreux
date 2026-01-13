@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import Header from '../components/layout/Header';
-import Footer from '../components/layout/Footer';
 import Button from '../components/ui/Button';
 import DesktopImage from '../assets/Desktop.png';
 import ShapesImage from '../assets/Shapes.png';
@@ -17,6 +14,23 @@ import { FaArrowRight } from "react-icons/fa";
  * Version Responsive
  */
 function Home() {
+  // Classes CSS réutilisables
+  const sectionClass = "bg-blue-gray-900 py-12 lg:py-20";
+  const containerClass = "max-w-[1200px] mx-auto px-5 md:px-10 lg:px-20";
+  const titleClass = "text-white font-roboto font-extrabold text-[40px] leading-[110%] mb-4 lg:text-[48px]";
+  const subtitleClass = "text-white font-roboto font-bold uppercase tracking-widest mb-4";
+  const paragraphClass = "text-white font-roboto font-normal text-base leading-[140%] mb-6 lg:text-lg";
+  const linkClass = "inline-flex items-center gap-2 text-white font-roboto font-medium text-base hover:text-purple-light transition";
+
+  // Données des partenaires
+  const partners = [
+    { name: "SmartFinder", logo: SmartFinderSVG },
+    { name: "Zoomerr", logo: ZoomerrSVG },
+    { name: "SHELLS", logo: SHELLSSVG },
+    { name: "WAVES", logo: WAVESSVG },
+    { name: "ArtVenue", logo: ArtVenueSVG },
+  ];
+
   return (
     <>
       {/* Section Hero */}
@@ -24,12 +38,15 @@ function Home() {
         
         {/* Titre principal */}
         <h1 className="text-white font-roboto font-extrabold text-[40px] leading-[110%] text-center mb-6 lg:text-[56px] max-w-[600px]">
-          Explorez le <span className="text-purple-light font-normal">Web</span> sous toutes ses <span className="underline decoration-purple-light">facettes</span>
+          Explorez le <span className="text-purple-light font-normal">Web</span> sous toutes ses{' '}
+          <span className="underline decoration-purple-light">facettes</span>
         </h1>
 
         {/* Description */}
         <p className="text-white font-roboto font-normal text-base leading-[140%] text-center mb-8 max-w-[700px] lg:text-lg">
-          Le monde du web évolue constamment, et nous sommes là pour vous guider à travers ses tendances, technologies et meilleures pratiques. Que vous soyez développeur, designer ou passionné du digital, notre blog vous offre du contenu de qualité pour rester à la pointe.
+          Le monde du web évolue constamment, et nous sommes là pour vous guider à travers ses tendances, 
+          technologies et meilleures pratiques. Que vous soyez développeur, designer ou passionné du digital, 
+          notre blog vous offre du contenu de qualité pour rester à la pointe.
         </p>
 
         {/* Boutons CTA */}
@@ -53,73 +70,48 @@ function Home() {
       </section>
 
       {/* Section "Ils nous font confiance" */}
-      <section className="bg-blue-gray-900 py-12 lg:py-20">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-20">
+      <section className={sectionClass}>
+        <div className={containerClass}>
           
           {/* Titre de la section */}
           <h2 className="text-white font-roboto font-extrabold text-[32px] leading-[110%] text-center mb-12 lg:text-[40px]">
             Ils nous font confiance
           </h2>
 
-          {/* Logos des partenaires */}
+          {/* Logos des partenaires - générés dynamiquement */}
           <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16">
-            {/* Logo 1 - SmartFinder */}
-            <div className="flex items-center gap-2 text-white">
-              <img src={SmartFinderSVG} />
-              <span className="font-roboto font-bold text-lg">SmartFinder</span>
-            </div>
-
-            {/* Logo 2 - Zoomer */}
-            <div className="flex items-center gap-2 text-white">
-              <img src={ZoomerrSVG} />
-              <span className="font-roboto font-bold text-lg">Zoomerr</span>
-            </div>
-
-            {/* Logo 3 - SHELLS */}
-            <div className="flex items-center gap-2 text-white">
-              <img src={SHELLSSVG} />
-              <span className="font-roboto font-bold text-lg">SHELLS</span>
-            </div>
-
-            {/* Logo 4 - WAVES */}
-            <div className="flex items-center gap-2 text-white">
-              <img src={WAVESSVG} />
-              <span className="font-roboto font-bold text-lg">WAVES</span>
-            </div>
-
-            {/* Logo 5 - ArtVenue */}
-            <div className="flex items-center gap-2 text-white">
-              <img src={ArtVenueSVG} />
-              <span className="font-roboto font-bold text-lg">ArtVenue</span>
-            </div>
+            {partners.map((partner, index) => (
+              <div key={index} className="flex items-center gap-2 text-white">
+                <img src={partner.logo} alt="" />
+                <span className="font-roboto font-bold text-lg">{partner.name}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Section "Apprenez et progressez" */}
-      <section className="bg-blue-gray-900 py-12 lg:py-20">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-20">
+      <section className={sectionClass}>
+        <div className={containerClass}>
           
           {/* Layout 2 colonnes sur desktop */}
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
             
             {/* Colonne gauche - Texte */}
             <div className="flex-1 text-center lg:text-left">
-              <p className="text-white font-roboto font-bold uppercase tracking-widest mb-4">
+              <p className={subtitleClass}>
                 DES RESSOURCES POUR TOUS LES NIVEAUX
               </p>
-              <h2 className="text-white font-roboto font-extrabold text-[40px] leading-[110%] mb-4 lg:text-[48px]">
-                <span className="text-purple-light">Apprenez</span> et <span className="text-purple-light">progressez</span>
+              <h2 className={titleClass}>
+                <span className="text-purple-light">Apprenez</span> et{' '}
+                <span className="text-purple-light">progressez</span>
               </h2>
-              <p className="text-white font-roboto font-normal text-base leading-[140%] mb-6 lg:text-lg">
+              <p className={paragraphClass}>
                 Que vous débutiez en développement web ou que vous soyez un expert 
                 cherchant à approfondir vos connaissances, nous vous proposons des tutoriels, 
                 guides et bonnes pratiques pour apprendre efficacement.
               </p>
-              <a 
-                href="#" 
-                className="inline-flex items-center gap-2 text-white font-roboto font-medium text-base hover:text-purple-light transition"
-              >
+              <a href="#" className={linkClass}>
                 Explorer les ressources
                 <FaArrowRight />
               </a>
@@ -138,29 +130,27 @@ function Home() {
       </section>
 
       {/* Section "Restez informé" */}
-      <section className="bg-blue-gray-900 py-12 lg:py-20">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-20">
+      <section className={sectionClass}>
+        <div className={containerClass}>
           
           {/* Layout 2 colonnes sur desktop (inverse) */}
           <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-16">
             
             {/* Colonne droite - Texte */}
             <div className="flex-1 text-center lg:text-left">
-              <p className="text-white font-roboto font-bold uppercase tracking-widest mb-4">
+              <p className={subtitleClass}>
                 LE WEB, UN ÉCOSYSTÈME EN CONSTANTE ÉVOLUTION
               </p>
-              <h2 className="text-white font-roboto font-extrabold text-[40px] leading-[110%] mb-4 lg:text-[48px]">
-                Restez informé des dernières <span className="text-purple-light">tendances</span>
+              <h2 className={titleClass}>
+                Restez informé des dernières{' '}
+                <span className="text-purple-light">tendances</span>
               </h2>
-              <p className="text-white font-roboto font-normal text-base leading-[140%] mb-6 lg:text-lg">
+              <p className={paragraphClass}>
                 Chaque semaine, nous analysons les nouveautés du web : frameworks émergents, 
                 bonnes pratiques SEO, accessibilité, et bien plus encore. Ne manquez aucune 
                 actualité du digital !
               </p>
-              <a 
-                href="#" 
-                className="inline-flex items-center gap-2 text-white font-roboto font-medium text-base hover:text-purple-light transition"
-              >
+              <a href="#" className={linkClass}>
                 Lire les articles récents
                 <FaArrowRight />
               </a>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Button from '../ui/Button'
 import { Link } from 'react-router-dom';
+import Button from '../ui/Button';
 
 /**
  * Composant Header (En-tête) - RESPONSIVE avec Menu Mobile
@@ -19,118 +19,98 @@ function Header() {
   };
 
   /**
-   * Ferme le menu mobile (utilisé lors du clic sur un lien)
+   * Ferme le menu mobile
    */
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
 
+  // Classes CSS réutilisables
+  const navLinkClass = "text-white font-roboto font-normal text-base hover:text-purple-light transition";
+  const mobileNavLinkClass = "text-white font-roboto font-medium text-2xl hover:text-purple-light transition";
+  const burgerBarClass = "w-7 h-1 bg-white rounded-full transition-all duration-300";
+
+  // Liens de navigation
+  const navLinks = [
+    { name: "About Us", path: "/" },
+    { name: "Contact", path: "/contact" },
+  ];
+
   return (
     <>
       <header className="w-full relative z-50 md:mt-6 mb-6">
         <div className="max-w-[1000px] mx-auto p-4 bg-white/5 shadow-dark-xxl rounded-[10px]">
-          {/* Container responsive avec breakpoints */}
           <div className="flex justify-between items-center">
 
             {/* Groupe gauche : Logo + Navigation */}
             <div className="flex items-center gap-8">
-              {/* Logo Weeb avec lien vers Home*/}
+              {/* Logo Weeb */}
               <Link to="/">
-                <h1 className="text-white font-roboto font-bold text-[32px] leading-[110%]">
+                <h1 className="text-white font-roboto font-bold text-[32px] leading-[110%] hover:text-purple-light transition cursor-pointer">
                   weeb
                 </h1>
               </Link>
 
-              {/* Navigation Desktop/Tablette - cachée sur mobile */}
+              {/* Navigation Desktop - cachée sur mobile */}
               <nav className="hidden md:flex items-center gap-8">
-                <Link 
-                  to="/" 
-                  className="text-white font-roboto font-normal text-base hover:text-purple-light transition"
-                >
-                  About Us
-                </Link>
-                <Link 
-                  to="/contact" 
-                  className="text-white font-roboto font-normal text-base hover:text-purple-light transition"
-                >
-                  Contact
-                </Link>
+                {navLinks.map((link, index) => (
+                  <Link
+                    key={index}
+                    to={link.path}
+                    className={navLinkClass}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
               </nav>
             </div>
 
-            {/* Boutons Desktop/Tablette - cachés sur mobile */}
+            {/* Boutons Desktop - cachés sur mobile */}
             <div className="hidden md:flex items-center gap-4">
-              {/* Bouton Log In */}
-              <Link 
-                to="/login"
-                className="text-white font-roboto font-normal text-base hover:text-purple-light transition"
-              >
+              <Link to="/login" className={navLinkClass}>
                 Log In
               </Link>
-              
-              {/* Bouton Join Now */}
-              <Button>
-                Join Now
-              </Button>
+              <Button>Join Now</Button>
             </div>
 
             {/* Menu Burger - visible uniquement sur mobile */}
-            <button 
+            <button
               onClick={toggleMenu}
               className="md:hidden w-12 h-11 bg-purple-600 border-2 border-purple-600 rounded-lg flex flex-col justify-center items-center gap-1 hover:bg-purple-light hover:border-purple-light transition"
               aria-label="Menu"
               aria-expanded={isMenuOpen}
             >
-              {/* Animation des barres en X quand le menu est ouvert */}
-              <span 
-                className={`w-7 h-1 bg-white rounded-full transition-transform duration-300 ${
-                  isMenuOpen ? 'rotate-45 translate-y-2' : ''
-                }`}
-              ></span>
-              <span 
-                className={`w-7 h-1 bg-white rounded-full transition-opacity duration-300 ${
-                  isMenuOpen ? 'opacity-0' : 'opacity-100'
-                }`}
-              ></span>
-              <span 
-                className={`w-7 h-1 bg-white rounded-full transition-transform duration-300 ${
-                  isMenuOpen ? '-rotate-45 -translate-y-2' : ''
-                }`}
-              ></span>
+              {/* Barres du burger animées */}
+              <span className={`${burgerBarClass} ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+              <span className={`${burgerBarClass} ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
+              <span className={`${burgerBarClass} ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
             </button>
           </div>
         </div>
       </header>
 
-      {/* Menu Mobile Full-Screen - s'affiche au clic */}
+      {/* Menu Mobile Full-Screen */}
       <div
         className={`fixed inset-0 bg-blue-gray-900 z-40 md:hidden transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        {/* Container du menu mobile */}
         <nav className="flex flex-col items-center justify-center h-full gap-8 px-8">
           
-          {/* Lien About Us */}
-         <Link
-            to="/"
-            onClick={closeMenu}
-            className="text-white font-roboto font-medium text-2xl hover:text-purple-light transition"
-          >
-            About Us
-          </Link>
-
-          {/* Lien Contact */}
-          <Link
-              to="/contact"
+          {/* Liens de navigation mobile */}
+          {navLinks.map((link, index) => (
+            <Link
+              key={index}
+              to={link.path}
               onClick={closeMenu}
-              className="text-white font-roboto font-medium text-2xl hover:text-purple-light transition"
-          >
-            Contact
-          </Link>
+              className={mobileNavLinkClass}
+            >
+              {link.name}
+            </Link>
+          ))}
 
           {/* Séparateur */}
-          <div className="w-24 h-px bg-white/20 my-4"></div>
+          <div className="w-24 h-px bg-white/20 my-4" />
 
           {/* Bouton Log In */}
           <Link
@@ -142,21 +122,16 @@ function Header() {
           </Link>
 
           {/* Bouton Join Now */}
-          <button
-            onClick={closeMenu}
-            className="bg-purple-600 text-white font-roboto font-medium text-base px-8 py-4 rounded-lg border-2 border-purple-600 hover:bg-purple-light hover:border-purple-light transition"
-          >
-            Join Now
-          </button>
+          <Button onClick={closeMenu}>Join Now</Button>
         </nav>
       </div>
 
-      {/* Overlay pour fermer le menu en cliquant à l'extérieur */}
+      {/* Overlay - ferme le menu au clic */}
       {isMenuOpen && (
         <div
           onClick={closeMenu}
           className="fixed inset-0 bg-black/50 z-30 md:hidden"
-        ></div>
+        />
       )}
     </>
   );
