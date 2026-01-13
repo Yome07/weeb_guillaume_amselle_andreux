@@ -1,7 +1,4 @@
-// src/pages/Contact.jsx
 import { useState } from 'react';
-import Header from '../components/layout/Header';
-import Footer from '../components/layout/Footer';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 
@@ -30,10 +27,7 @@ function Contact() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-blue-gray-900">
-      {/* En-tête avec logo et menu */}
-      <Header />
-
+    <>
       {/* Section principale du formulaire */}
       <main className="flex-1 flex flex-col items-center px-5 py-12 md:px-10 lg:px-20 lg:py-20">
         
@@ -114,10 +108,7 @@ function Contact() {
           </form>
         </div>
       </main>
-
-      {/* Pied de page */}
-      <Footer />
-    </div>
+    </>
   );
 }
 

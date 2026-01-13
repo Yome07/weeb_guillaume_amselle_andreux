@@ -18,10 +18,7 @@ import { FaArrowRight } from "react-icons/fa";
  */
 function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-blue-gray-900">
-      {/* En-tête avec logo et menu */}
-      <Header />
-
+    <>
       {/* Section Hero */}
       <section className="flex-1 flex flex-col items-center px-5 py-12 md:px-10 lg:px-20 lg:py-20">
         
@@ -180,10 +177,7 @@ function Home() {
           </div>
         </div>
       </section>
-
-      {/* Pied de page */}
-      <Footer />
-    </div>
+    </>
   );
 }
 

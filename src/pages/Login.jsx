@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import Header from '../components/layout/Header';
-import Footer from '../components/layout/Footer';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 
@@ -25,10 +23,7 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-blue-gray-900">
-      {/* En-tête avec logo et menu */}
-      <Header />
-
+    <>
       {/* Section principale du formulaire */}
       <main className="flex-1 flex flex-col items-center px-20 py-[50px] gap-20">
         
@@ -83,10 +78,7 @@ function Login() {
           </p>
         </div>
       </main>
-
-      {/* Pied de page */}
-      <Footer />
-    </div>
+    </>
   );
 }
 
