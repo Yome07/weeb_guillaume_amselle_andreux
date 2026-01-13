@@ -29,7 +29,7 @@ function Input({ label, type = "text", id, value, onChange, placeholder = "" }) 
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="w-full bg-transparent border-b border-purple-light text-white font-inter text-lg px-2 py-2 focus:outline-none focus:border-purple-600 transition"
+        className="w-full bg-transparent border-b border-purple-light text-white font-inter text-lg px-2 py-2 focus:outline-none focus:border-purple-600 transition text-center"
       />
     </div>
   );

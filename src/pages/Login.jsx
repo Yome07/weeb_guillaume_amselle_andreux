@@ -65,7 +65,7 @@ function Login() {
             />
 
             {/* Bouton de soumission */}
-            <Button type="submit" className="w-[156px] mx-auto">
+            <Button type="submit" className="cursor-pointer w-[156px] mx-auto">
               Se connecter
             </Button>
           </form>
@@ -80,7 +80,7 @@ function Login() {
 
           {/* Texte inscription */}
           <p className="text-gray-light font-poppins font-medium text-xs leading-[18px] text-center max-w-[121px]">
-            Vous n'avez pas de compte ? Vous pouvez en créer un
+            Vous n'avez pas de compte ? Vous pouvez en <a href="#" className='text-white underline'>créer un</a>
           </p>
         </div>
       </main>
