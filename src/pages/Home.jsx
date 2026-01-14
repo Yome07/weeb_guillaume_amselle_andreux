@@ -33,8 +33,9 @@ function Home() {
 
   return (
     <>
+    
       {/* Section Hero */}
-      <section className="flex-1 flex flex-col items-center px-5 py-12 md:px-10 lg:px-20 lg:py-20">
+      <section className="flex-1 flex flex-col items-center pb-12 lg:pb-20">
         
         {/* Titre principal */}
         <h1 className="text-white font-extrabold text-4xl leading-[110%] text-center mb-6 lg:text-6xl max-w-2xl">

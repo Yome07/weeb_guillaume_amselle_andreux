@@ -28,11 +28,10 @@ function Contact() {
 
   return (
     <>
-      {/* Section principale du formulaire */}
-      <main className="flex-1 flex flex-col items-center px-5 py-12 md:px-10 lg:px-20 lg:py-20">
+      
         
         {/* Titre et description */}
-        <div className="text-center mb-8 lg:mb-12 max-w-4xl">
+        <div className="text-center mb-8 lg:mb-12 max-w-4xl mx-auto">
           <h1 className="text-white font-extrabold text-4xl mb-6 lg:text-6xl">
             Votre avis compte !
           </h1>
@@ -42,7 +41,7 @@ function Contact() {
         </div>
 
         {/* Container du formulaire avec bordure violette */}
-        <div className="w-full max-w-sm lg:max-w-2xl p-8 lg:p-12 border-2 border-purple-light rounded-3xl bg-purple-dark">
+        <div className="w-full max-w-sm lg:max-w-2xl p-8 lg:p-12 border-2 border-purple-light rounded-3xl bg-purple-dark mx-auto">
           
           {/* Formulaire de contact */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 lg:gap-8">
@@ -107,7 +106,6 @@ function Contact() {
             </Button>
           </form>
         </div>
-      </main>
     </>
   );
 }

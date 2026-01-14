@@ -14,7 +14,7 @@ function Layout() {
       <Header />
       
       {/* Contenu de la page (Home, Contact, Login, etc.) */}
-      <main>
+      <main className="px-20 py-20">
         <Outlet />
       </main>
       

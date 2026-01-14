@@ -24,8 +24,7 @@ function Login() {
 
   return (
     <>
-      {/* Section principale du formulaire */}
-      <main className="px-20 py-12">
+      
         
         {/* Container du formulaire */}
         <div className="mx-auto flex flex-col items-center gap-8 w-full max-w-3xs">
@@ -77,7 +76,6 @@ function Login() {
             Vous n'avez pas de compte ? Vous pouvez en <a href="#" className='text-white underline'>créer un</a>
           </p>
         </div>
-      </main>
     </>
   );
 }
