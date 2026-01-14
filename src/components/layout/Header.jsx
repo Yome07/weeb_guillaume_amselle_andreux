@@ -32,7 +32,6 @@ function Header() {
 
   // Liens de navigation
   const navLinks = [
-    { name: "À propos", path: "/" },
     { name: "Contact", path: "/contact" },
   ];
 
