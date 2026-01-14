@@ -17,7 +17,7 @@ function Home() {
   // Classes CSS réutilisables
   const sectionClass = "py-12 lg:py-20";
   const containerClass = "max-w-7xl mx-auto px-5 md:px-10 lg:px-20";
-  const titleClass = "text-white font-extrabold text-10 mb-4 lg:text-5xl";
+  const titleClass = "text-white font-extrabold text-4xl mb-4 lg:text-5xl";
   const subtitleClass = "text-white font-bold uppercase tracking-widest mb-4";
   const paragraphClass = "text-white mb-6 lg:text-lg";
   const linkClass = "inline-flex items-center gap-2 text-white font-medium hover:text-purple-light transition";
@@ -63,7 +63,7 @@ function Home() {
         <div className="w-full max-w-lg lg:max-w-2xl">
           <img 
             src={DesktopImage} 
-            alt="Mockup navigateur web" 
+            alt="" 
             className="w-full h-auto"
           />
         </div>
@@ -157,7 +157,7 @@ function Home() {
             </div>
 
             {/* Colonne gauche - Image géométrique */}
-            <div className="flex-1 w-full max-w-xs flex justify-center">
+            <div className="flex-1 w-full max-w-xs">
               <img 
                 src={ShapesImage} 
                 alt="" 
