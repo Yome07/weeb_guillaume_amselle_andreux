@@ -1,4 +1,5 @@
-import { FaYoutube, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaYoutube, FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaBluesky } from "react-icons/fa6";
 
 /**
  * Composant Footer (Pied de page) - RESPONSIVE
@@ -55,7 +56,7 @@ function Footer() {
   const socialLinks = [
     { name: "Youtube", icon: FaYoutube, url: "#" },
     { name: "Facebook", icon: FaFacebook, url: "#" },
-    { name: "Twitter", icon: FaTwitter, url: "#" },
+    { name: "Bluesky", icon: FaBluesky, url: "#" },
     { name: "Instagram", icon: FaInstagram, url: "#" },
     { name: "Linkedin", icon: FaLinkedin, url: "#" },
   ];
