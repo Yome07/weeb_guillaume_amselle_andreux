@@ -106,7 +106,7 @@ function Contact() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows="5"
-                className="border-b border-purple-light text-white text-lg p-2 font-inter focus:outline-none focus:border-purple-600 resize-none"
+                className="border-b border-purple-light text-white text-lg p-2 font-inter focus:outline-none focus:border-purple-600 resize-none text-center"
               />
             </div>
 

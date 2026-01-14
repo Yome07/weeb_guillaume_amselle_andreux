@@ -28,17 +28,17 @@ function Input({ label, type = "text", id, value, onChange }) {
         onChange={onChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        className="w-full bg-transparent border-b border-purple-light text-white font-inter text-lg px-2 pt-6 pb-2 focus:outline-none focus:border-purple-600 transition-colors peer"
+        className="w-full bg-transparent border-b border-purple-light text-white font-inter text-lg px-2 pt-6 pb-2 focus:outline-none focus:border-purple-600 transition-colors peer text-center"
       />
 
       {/* Label flottant */}
       <label
         htmlFor={id}
         className={`
-          absolute left-2 font-inter font-medium pointer-events-none transition-all duration-300
+          absolute left-1/2 font-inter font-medium pointer-events-none transition-all duration-300 whitespace-nowrap text-purple-light
           ${shouldFloat 
-            ? 'top-1 text-base text-purple-light' 
-            : 'top-1/2 -translate-y-1/2 text-2xl text-purple-light/70'
+            ? 'top-1 -translate-x-1/2 text-base' 
+            : 'top-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl'
           }
         `}
       >
