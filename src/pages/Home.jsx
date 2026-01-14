@@ -7,6 +7,7 @@ import SmartFinderSVG from '../assets/SmartFinder.svg';
 import WAVESSVG from '../assets/WAVES.svg';
 import ZoomerrSVG from '../assets/Zoomerr.svg';
 import { FaArrowRight } from "react-icons/fa";
+import FadeInOnScroll from '../components/animation/FadeInOnScroll';
 
 /**
  * Page d'accueil (Home)
@@ -38,36 +39,44 @@ function Home() {
       <section className="flex-1 flex flex-col items-center pb-12 lg:pb-20">
         
         {/* Titre principal */}
-        <h1 className="text-white font-extrabold text-4xl leading-[110%] text-center mb-6 lg:text-6xl max-w-2xl">
-          Explorez le <span className="text-purple-light font-normal">Web</span> sous toutes ses{' '}
-          <span className="underline decoration-purple-light">facettes</span>
-        </h1>
+        <FadeInOnScroll delay={0}>
+            <h1 className="text-white font-extrabold text-4xl leading-[110%] text-center mb-6 lg:text-6xl max-w-2xl">
+            Explorez le <span className="text-purple-light font-normal">Web</span> sous toutes ses{' '}
+            <span className="underline decoration-purple-light">facettes</span>
+            </h1>
+        </FadeInOnScroll>
 
         {/* Description */}
-        <p className="text-white leading-[140%] text-center mb-8 max-w-2xl lg:text-lg">
-          Le monde du web évolue constamment, et nous sommes là pour vous guider à travers ses tendances, 
-          technologies et meilleures pratiques. Que vous soyez développeur, designer ou passionné du digital, 
-          notre blog vous offre du contenu de qualité pour rester à la pointe.
-        </p>
+        <FadeInOnScroll delay={0.2}>
+            <p className="text-white leading-[140%] text-center mb-8 max-w-2xl lg:text-lg">
+            Le monde du web évolue constamment, et nous sommes là pour vous guider à travers ses tendances, 
+            technologies et meilleures pratiques. Que vous soyez développeur, designer ou passionné du digital, 
+            notre blog vous offre du contenu de qualité pour rester à la pointe.
+            </p>
+        </FadeInOnScroll>
 
         {/* Boutons CTA */}
-        <div className="flex flex-col md:flex-row gap-4 mb-12 lg:mb-16">
-          <Button className="cursor-pointer">
-            Découvrir les articles
-          </Button>
-          <Button variant="secondary" className="cursor-pointer">
-            S'abonner à la newsletter
-          </Button>
-        </div>
+        <FadeInOnScroll delay={0.4}>
+            <div className="flex flex-col md:flex-row gap-4 mb-12 lg:mb-16">
+            <Button className="cursor-pointer">
+                Découvrir les articles
+            </Button>
+            <Button variant="secondary" className="cursor-pointer">
+                S'abonner à la newsletter
+            </Button>
+            </div>
+        </FadeInOnScroll>
 
         {/* Image mockup navigateur */}
-        <div className="w-full max-w-lg lg:max-w-2xl">
-          <img 
-            src={DesktopImage} 
-            alt="" 
-            className="w-full h-auto"
-          />
-        </div>
+        <FadeInOnScroll delay={0.6}>
+            <div className="w-full max-w-lg lg:max-w-2xl">
+            <img 
+                src={DesktopImage} 
+                alt="" 
+                className="w-full h-auto"
+            />
+            </div>
+        </FadeInOnScroll>
       </section>
 
       {/* Section "Ils nous font confiance" */}
@@ -75,17 +84,20 @@ function Home() {
         <div className={containerClass}>
           
           {/* Titre de la section */}
-          <h2 className="text-white font-extrabold text-3xl leading-[110%] text-center mb-12 lg:text-5xl">
-            Ils nous font confiance
-          </h2>
-
+            <FadeInOnScroll>
+                <h2 className="text-white font-extrabold text-3xl leading-[110%] text-center mb-12 lg:text-5xl">
+                    Ils nous font confiance
+                </h2>
+            </FadeInOnScroll>
           {/* Logos des partenaires - générés dynamiquement */}
           <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16">
             {partners.map((partner, index) => (
-              <div key={index} className="flex items-center gap-2 text-white">
-                <img src={partner.logo} alt="" />
-                <span className="font-bold text-lg">{partner.name}</span>
-              </div>
+                <FadeInOnScroll key={index} delay={index * 0.1}>
+                    <div key={index} className="flex items-center gap-2 text-white">
+                        <img src={partner.logo} alt="" />
+                        <span className="font-bold text-lg">{partner.name}</span>
+                    </div>
+                </FadeInOnScroll>
             ))}
           </div>
         </div>
@@ -99,7 +111,7 @@ function Home() {
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
             
             {/* Colonne gauche - Texte */}
-            <div className="flex-1 text-center lg:text-left">
+            <FadeInOnScroll direction="right" className="flex-1 text-center lg:text-left">
               <p className={subtitleClass}>
                 DES RESSOURCES POUR TOUS LES NIVEAUX
               </p>
@@ -116,16 +128,16 @@ function Home() {
                 Explorer les ressources
                 <FaArrowRight />
               </a>
-            </div>
+            </FadeInOnScroll>
 
             {/* Colonne droite - Image */}
-            <div className="flex-1 w-full max-w-lg">
+            <FadeInOnScroll direction="left" delay={0.2} className="flex-1 w-full max-w-lg">
               <img 
                 src={DesktopImage} 
                 alt="" 
                 className="w-full h-auto"
               />
-            </div>
+            </FadeInOnScroll>
           </div>
         </div>
       </section>
@@ -138,7 +150,7 @@ function Home() {
           <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-16">
             
             {/* Colonne droite - Texte */}
-            <div className="flex-1 text-center lg:text-left">
+            <FadeInOnScroll direction="left" className="flex-1 text-center lg:text-left">
               <p className={subtitleClass}>
                 LE WEB, UN ÉCOSYSTÈME EN CONSTANTE ÉVOLUTION
               </p>
@@ -155,16 +167,16 @@ function Home() {
                 Lire les articles récents
                 <FaArrowRight />
               </a>
-            </div>
+            </FadeInOnScroll>
 
             {/* Colonne gauche - Image géométrique */}
-            <div className="flex-1 w-full max-w-xs">
+            <FadeInOnScroll direction="right" delay={0.2} className="flex-1 w-full max-w-xs">
               <img 
                 src={ShapesImage} 
                 alt="" 
                 className="w-full h-auto"
               />
-            </div>
+            </FadeInOnScroll>
           </div>
         </div>
       </section>
