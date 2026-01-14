@@ -72,17 +72,31 @@ function Contact() {
                 />
               </div>
             </div>
-
-            {/* Champ Email */}
-            <Input
-              label="Email"
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder=""
-            />
-
+            <div className="flex flex-col gap-6 lg:flex-row lg:gap-6">
+                {/* Champ Téléphone */}
+                <div className="flex-1">
+                    <Input
+                    label="Téléphone"
+                    type="tel"
+                    id="tel"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder=""
+                    />
+                </div>
+                
+                {/* Champ Email */}
+                <div className="flex-1">
+                    <Input
+                    label="Email"
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder=""
+                    />
+                </div>
+            </div>
             {/* Champ Message (textarea) */}
             <div className="flex flex-col gap-2">
               <label 
