@@ -11,6 +11,7 @@ function Contact() {
   const [lastname, setLastname] = useState('');
   const [firstname, setFirstname] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
 
   /**
@@ -22,6 +23,7 @@ function Contact() {
     console.log('Lastname:', lastname);
     console.log('Firstname:', firstname);
     console.log('Email:', email);
+    console.log('Phone:', phone);
     console.log('Message:', message);
     // TODO: Ajouter la logique d'envoi du message
   };
@@ -54,7 +56,6 @@ function Contact() {
                   id="lastname"
                   value={lastname}
                   onChange={(e) => setLastname(e.target.value)}
-                  placeholder=""
                 />
               </div>
 
@@ -66,7 +67,6 @@ function Contact() {
                   id="firstname"
                   value={firstname}
                   onChange={(e) => setFirstname(e.target.value)}
-                  placeholder=""
                 />
               </div>
             </div>
@@ -77,9 +77,8 @@ function Contact() {
                     label="Téléphone"
                     type="tel"
                     id="tel"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder=""
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     />
                 </div>
                 
@@ -91,7 +90,6 @@ function Contact() {
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder=""
                     />
                 </div>
             </div>
