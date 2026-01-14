@@ -11,12 +11,12 @@
  */
 function Input({ label, type = "text", id, value, onChange, placeholder = "" }) {
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-2">
       {/* Affiche le label seulement s'il est fourni */}
       {label && (
         <label 
           htmlFor={id} 
-          className="text-purple-light font-inter font-medium text-[23px] text-center"
+          className="text-purple-light font-inter font-inter font-medium text-2xl text-center"
         >
           {label}
         </label>
@@ -29,7 +29,7 @@ function Input({ label, type = "text", id, value, onChange, placeholder = "" }) 
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="w-full bg-transparent border-b border-purple-light text-white font-inter text-lg px-2 py-2 focus:outline-none focus:border-purple-600 transition text-center"
+        className="border-b border-purple-light text-white text-lg p-2 font-inter focus:outline-none focus:border-purple-600 text-center"
       />
     </div>
   );

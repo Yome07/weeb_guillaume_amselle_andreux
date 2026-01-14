@@ -14,7 +14,7 @@ function Layout() {
       <Header />
       
       {/* Contenu de la page (Home, Contact, Login, etc.) */}
-      <main className="flex-1">
+      <main>
         <Outlet />
       </main>
       

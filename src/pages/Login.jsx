@@ -25,13 +25,13 @@ function Login() {
   return (
     <>
       {/* Section principale du formulaire */}
-      <main className="flex-1 flex flex-col items-center px-20 py-[50px] gap-20">
+      <main className="px-20 py-12">
         
         {/* Container du formulaire */}
-        <div className="flex flex-col items-center gap-8 w-full max-w-[250px]">
+        <div className="mx-auto flex flex-col items-center gap-8 w-full max-w-3xs">
           
           {/* Titre principal */}
-          <h2 className="text-white font-roboto font-extrabold text-[40px] leading-[110%] text-center">
+          <h2 className="text-white font-extrabold text-4xl text-center">
             Se connecter
           </h2>
 
@@ -59,7 +59,7 @@ function Login() {
             />
 
             {/* Bouton de soumission */}
-            <Button type="submit" className="cursor-pointer w-[156px] mx-auto">
+            <Button type="submit" className="cursor-pointer w-3/5 mx-auto">
               Se connecter
             </Button>
           </form>
@@ -67,13 +67,13 @@ function Login() {
           {/* Lien mot de passe oublié */}
           <a 
             href="#" 
-            className="text-white font-inter font-semibold text-[13px] leading-4 text-center hover:text-purple-light transition"
+            className="text-white font-inter font-semibold text-sm text-center hover:text-purple-light transition"
           >
             Mot de passe oublié ?
           </a>
 
           {/* Texte inscription */}
-          <p className="text-gray-light font-poppins font-medium text-xs leading-[18px] text-center max-w-[121px]">
+          <p className="text-gray-light font-poppins font-medium text-xs leading-5 text-center max-w-3/5">
             Vous n'avez pas de compte ? Vous pouvez en <a href="#" className='text-white underline'>créer un</a>
           </p>
         </div>

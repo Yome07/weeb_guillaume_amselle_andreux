@@ -32,17 +32,17 @@ function Contact() {
       <main className="flex-1 flex flex-col items-center px-5 py-12 md:px-10 lg:px-20 lg:py-20">
         
         {/* Titre et description */}
-        <div className="text-center mb-8 lg:mb-12 max-w-[900px]">
-          <h1 className="text-white font-roboto font-extrabold text-[40px] leading-[110%] mb-6 lg:text-[56px]">
+        <div className="text-center mb-8 lg:mb-12 max-w-4xl">
+          <h1 className="text-white font-extrabold text-4xl mb-6 lg:text-6xl">
             Votre avis compte !
           </h1>
-          <p className="text-white font-roboto font-normal text-base leading-[140%] lg:text-lg">
+          <p className="text-white lg:text-lg">
             Votre retour est essentiel pour nous améliorer ! Partagez votre expérience, dites-nous ce que vous aimez et ce que nous pourrions améliorer. Vos suggestions nous aident à faire de ce blog une ressource toujours plus utile et enrichissante.
           </p>
         </div>
 
         {/* Container du formulaire avec bordure violette */}
-        <div className="w-full max-w-[350px] lg:max-w-[600px] p-8 lg:p-12 border-2 border-purple-light rounded-[20px] bg-purple-dark">
+        <div className="w-full max-w-sm lg:max-w-2xl p-8 lg:p-12 border-2 border-purple-light rounded-3xl bg-purple-dark">
           
           {/* Formulaire de contact */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 lg:gap-8">
@@ -85,10 +85,10 @@ function Contact() {
             />
 
             {/* Champ Message (textarea) */}
-            <div className="flex flex-col gap-2 w-full">
+            <div className="flex flex-col gap-2">
               <label 
                 htmlFor="message" 
-                className="text-purple-light font-inter font-medium text-[23px] text-center"
+                className="text-purple-light font-inter font-medium text-2xl text-center"
               >
                 Message
               </label>
@@ -97,12 +97,12 @@ function Contact() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows="5"
-                className="w-full bg-transparent border-b border-purple-light text-white font-inter text-lg px-2 py-2 focus:outline-none focus:border-purple-600 transition resize-none"
+                className="border-b border-purple-light text-white text-lg p-2 font-inter focus:outline-none focus:border-purple-600 resize-none"
               />
             </div>
 
             {/* Bouton de soumission */}
-            <Button type="submit" className="cursor-pointer w-[156px] mx-auto mt-4">
+            <Button type="submit" className="cursor-pointer w-39 mx-auto mt-4">
               Contact
             </Button>
           </form>

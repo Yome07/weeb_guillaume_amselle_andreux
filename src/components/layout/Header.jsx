@@ -26,8 +26,8 @@ function Header() {
   };
 
   // Classes CSS réutilisables
-  const navLinkClass = "text-white font-roboto font-normal text-base hover:text-purple-light transition";
-  const mobileNavLinkClass = "text-white font-roboto font-medium text-2xl hover:text-purple-light transition";
+  const navLinkClass = "text-white hover:text-purple-light transition";
+  const mobileNavLinkClass = "text-white font-medium text-2xl hover:text-purple-light transition";
   const burgerBarClass = "w-7 h-1 bg-white rounded-full transition-all duration-300";
 
   // Liens de navigation
@@ -38,15 +38,15 @@ function Header() {
 
   return (
     <>
-      <header className="w-full relative z-50 md:mt-6 mb-6">
-        <div className="max-w-[1000px] mx-auto p-4 bg-white/5 shadow-dark-xxl rounded-[10px]">
+      <header className="relative z-50 md:mt-6 mb-6">
+        <div className="max-w-5xl mx-auto p-4 bg-white/5 shadow-2xl rounded-xl">
           <div className="flex justify-between items-center">
 
             {/* Groupe gauche : Logo + Navigation */}
             <div className="flex items-center gap-8">
               {/* Logo Weeb */}
               <Link to="/">
-                <h1 className="text-white font-roboto font-bold text-[32px] leading-[110%] hover:text-purple-light transition cursor-pointer">
+                <h1 className="text-white font-bold text-3xl hover:text-purple-light transition cursor-pointer">
                   weeb
                 </h1>
               </Link>
@@ -76,7 +76,7 @@ function Header() {
             {/* Menu Burger - visible uniquement sur mobile */}
             <button
               onClick={toggleMenu}
-              className="md:hidden w-12 h-11 bg-purple-600 border-2 border-purple-600 rounded-lg flex flex-col justify-center items-center gap-1 hover:bg-purple-light hover:border-purple-light transition"
+              className="md:hidden w-12 h-12 bg-purple-600 rounded-lg flex flex-col justify-center items-center gap-1 hover:bg-purple-light transition"
               aria-label="Menu"
               aria-expanded={isMenuOpen}
             >
@@ -95,7 +95,7 @@ function Header() {
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <nav className="flex flex-col items-center justify-center h-full gap-8 px-8">
+        <nav className="flex flex-col items-center justify-center h-full gap-8">
           
           {/* Liens de navigation mobile */}
           {navLinks.map((link, index) => (
@@ -130,7 +130,7 @@ function Header() {
       {isMenuOpen && (
         <div
           onClick={closeMenu}
-          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          className="fixed inset-0 z-30 bg-black/50 md:hidden"
         />
       )}
     </>

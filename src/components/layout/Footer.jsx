@@ -8,8 +8,8 @@ import { FaYoutube, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react
  */
 function Footer() {
   // Classes CSS réutilisables
-  const titleClass = "text-blue-gray-400 font-roboto font-medium text-base uppercase mb-4";
-  const linkClass = "text-blue-gray-900 text-base hover:text-purple-600 transition";
+  const titleClass = "text-blue-gray-400 font-medium uppercase mb-4";
+  const linkClass = "text-blue-gray-900 hover:text-purple-600 transition";
 
   // Données des sections du footer
   const footerSections = [
@@ -64,14 +64,14 @@ function Footer() {
     <>
       <footer className="w-full bg-white border-t border-blue-gray-300">
         {/* Container principal responsive */}
-        <div className="max-w-[320px] mx-auto px-20 py-12 md:max-w-[768px] md:px-10 lg:max-w-[1280px] lg:px-20">
+        <div className="max-w-xs mx-auto px-20 py-12 md:max-w-3xl lg:max-w-7xl">
 
           {/* Grid des sections - responsive */}
           <div className="grid grid-cols-1 gap-12 mb-12 md:grid-cols-3 lg:grid-cols-5 lg:gap-8">
             
             {/* Logo */}
             <div>
-              <h2 className="text-blue-gray-900 font-roboto font-bold text-[32px] leading-[110%]">
+              <h2 className="text-blue-gray-900 font-bold text-3xl">
                 weeb
               </h2>
             </div>
@@ -98,12 +98,12 @@ function Footer() {
             <div className="flex flex-col gap-6 md:flex-row md:justify-between md:items-center">
               
               {/* Copyright */}
-              <p className="text-blue-gray-900 text-base order-1 lg:order-2">
+              <p className="text-blue-gray-900">
                 @ 2025 Weeb, Inc. All rights reserved.
               </p>
               
               {/* Social Icons - générés dynamiquement */}
-              <div className="flex gap-4 order-2 lg:order-3">
+              <div className="flex gap-4">
                 {socialLinks.map((social, index) => {
                   const Icon = social.icon;
                   return (

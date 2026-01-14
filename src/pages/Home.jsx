@@ -15,12 +15,12 @@ import { FaArrowRight } from "react-icons/fa";
  */
 function Home() {
   // Classes CSS réutilisables
-  const sectionClass = "bg-blue-gray-900 py-12 lg:py-20";
-  const containerClass = "max-w-[1200px] mx-auto px-5 md:px-10 lg:px-20";
-  const titleClass = "text-white font-roboto font-extrabold text-[40px] leading-[110%] mb-4 lg:text-[48px]";
-  const subtitleClass = "text-white font-roboto font-bold uppercase tracking-widest mb-4";
-  const paragraphClass = "text-white font-roboto font-normal text-base leading-[140%] mb-6 lg:text-lg";
-  const linkClass = "inline-flex items-center gap-2 text-white font-roboto font-medium text-base hover:text-purple-light transition";
+  const sectionClass = "py-12 lg:py-20";
+  const containerClass = "max-w-7xl mx-auto px-5 md:px-10 lg:px-20";
+  const titleClass = "text-white font-extrabold text-10 mb-4 lg:text-5xl";
+  const subtitleClass = "text-white font-bold uppercase tracking-widest mb-4";
+  const paragraphClass = "text-white mb-6 lg:text-lg";
+  const linkClass = "inline-flex items-center gap-2 text-white font-medium hover:text-purple-light transition";
 
   // Données des partenaires
   const partners = [
@@ -37,13 +37,13 @@ function Home() {
       <section className="flex-1 flex flex-col items-center px-5 py-12 md:px-10 lg:px-20 lg:py-20">
         
         {/* Titre principal */}
-        <h1 className="text-white font-roboto font-extrabold text-[40px] leading-[110%] text-center mb-6 lg:text-[56px] max-w-[600px]">
+        <h1 className="text-white font-extrabold text-4xl leading-[110%] text-center mb-6 lg:text-6xl max-w-2xl">
           Explorez le <span className="text-purple-light font-normal">Web</span> sous toutes ses{' '}
           <span className="underline decoration-purple-light">facettes</span>
         </h1>
 
         {/* Description */}
-        <p className="text-white font-roboto font-normal text-base leading-[140%] text-center mb-8 max-w-[700px] lg:text-lg">
+        <p className="text-white leading-[140%] text-center mb-8 max-w-2xl lg:text-lg">
           Le monde du web évolue constamment, et nous sommes là pour vous guider à travers ses tendances, 
           technologies et meilleures pratiques. Que vous soyez développeur, designer ou passionné du digital, 
           notre blog vous offre du contenu de qualité pour rester à la pointe.
@@ -60,11 +60,11 @@ function Home() {
         </div>
 
         {/* Image mockup navigateur */}
-        <div className="w-full max-w-[500px] lg:max-w-[700px]">
+        <div className="w-full max-w-lg lg:max-w-2xl">
           <img 
             src={DesktopImage} 
             alt="Mockup navigateur web" 
-            className="w-full h-auto rounded-lg"
+            className="w-full h-auto"
           />
         </div>
       </section>
@@ -74,7 +74,7 @@ function Home() {
         <div className={containerClass}>
           
           {/* Titre de la section */}
-          <h2 className="text-white font-roboto font-extrabold text-[32px] leading-[110%] text-center mb-12 lg:text-[40px]">
+          <h2 className="text-white font-extrabold text-3xl leading-[110%] text-center mb-12 lg:text-5xl">
             Ils nous font confiance
           </h2>
 
@@ -83,7 +83,7 @@ function Home() {
             {partners.map((partner, index) => (
               <div key={index} className="flex items-center gap-2 text-white">
                 <img src={partner.logo} alt="" />
-                <span className="font-roboto font-bold text-lg">{partner.name}</span>
+                <span className="font-bold text-lg">{partner.name}</span>
               </div>
             ))}
           </div>
@@ -118,11 +118,11 @@ function Home() {
             </div>
 
             {/* Colonne droite - Image */}
-            <div className="flex-1 w-full max-w-[500px]">
+            <div className="flex-1 w-full max-w-lg">
               <img 
                 src={DesktopImage} 
-                alt="Ressources d'apprentissage" 
-                className="w-full h-auto rounded-lg"
+                alt="" 
+                className="w-full h-auto"
               />
             </div>
           </div>
@@ -157,10 +157,10 @@ function Home() {
             </div>
 
             {/* Colonne gauche - Image géométrique */}
-            <div className="flex-1 w-full max-w-[300px] flex justify-center">
+            <div className="flex-1 w-full max-w-xs flex justify-center">
               <img 
                 src={ShapesImage} 
-                alt="Forme géométrique" 
+                alt="" 
                 className="w-full h-auto"
               />
             </div>

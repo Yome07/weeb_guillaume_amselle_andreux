@@ -20,9 +20,6 @@
   --font-family-roboto: 'Roboto', sans-serif;
   --font-family-inter: 'Inter', sans-serif;
   --font-family-poppins: 'Poppins', sans-serif;
-  
-  /* Ombres personnalisées */
-  --shadow-dark-xxl: 0px 25px 50px -12px rgba(0, 0, 0, 0.25), 0px 0px 15px rgba(0, 0, 0, 0.07);
 }
 
 /* Reset de base */
@@ -30,8 +27,18 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: var(--font-family-roboto);
 }
 
-body {
+/* Définir les classes de polices personnalisées */
+.font-inter {
+  font-family: var(--font-family-inter);
+}
+
+.font-poppins {
+  font-family: var(--font-family-poppins);
+}
+
+.font-roboto {
   font-family: var(--font-family-roboto);
 }
