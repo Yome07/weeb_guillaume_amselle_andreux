@@ -58,7 +58,7 @@ function Login() {
             />
 
             {/* Bouton de soumission */}
-            <Button type="submit" className="cursor-pointer w-3/5 mx-auto">
+            <Button type="submit" className="w-3/5 mx-auto">
               Se connecter
             </Button>
           </form>

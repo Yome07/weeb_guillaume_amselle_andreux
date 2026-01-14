@@ -238,7 +238,7 @@ function Register() {
           </div>
 
           {/* Bouton de soumission */}
-          <Button type="submit" className="cursor-pointer w-full mt-4">
+          <Button type="submit" className="w-full mt-4">
             S'inscrire
           </Button>
         </form>

@@ -113,7 +113,7 @@ function Contact() {
             </div>
 
             {/* Bouton de soumission */}
-            <Button type="submit" className="cursor-pointer w-39 mx-auto mt-4">
+            <Button type="submit" className="w-39 mx-auto mt-4">
               Contact
             </Button>
           </form>
