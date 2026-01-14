@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 /**
  * Composant Input réutilisable avec label
  * Crée un champ de saisie stylisé avec un label au-dessus
@@ -9,28 +11,39 @@
  * @param {Function} onChange - Fonction appelée à chaque modification
  * @param {string} placeholder - Texte d'indication dans l'input
  */
-function Input({ label, type = "text", id, value, onChange, placeholder = "" }) {
+function Input({ label, type = "text", id, value, onChange }) {
+  // État pour savoir si l'input est focus
+  const [isFocused, setIsFocused] = useState(false);
+
+  // Le label doit monter si l'input est focus OU si il contient du texte
+  const shouldFloat = isFocused || value;
+
   return (
-    <div className="flex flex-col gap-2">
-      {/* Affiche le label seulement s'il est fourni */}
-      {label && (
-        <label 
-          htmlFor={id} 
-          className="text-purple-light font-inter font-inter font-medium text-2xl text-center"
-        >
-          {label}
-        </label>
-      )}
-      
-      {/* Champ de saisie avec bordure inférieure */}
+    <div className="relative w-full">
+      {/* Input */}
       <input
         type={type}
         id={id}
         value={value}
         onChange={onChange}
-        placeholder={placeholder}
-        className="border-b border-purple-light text-white text-lg p-2 font-inter focus:outline-none focus:border-purple-600 text-center"
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        className="w-full bg-transparent border-b border-purple-light text-white font-inter text-lg px-2 pt-6 pb-2 focus:outline-none focus:border-purple-600 transition-colors peer"
       />
+
+      {/* Label flottant */}
+      <label
+        htmlFor={id}
+        className={`
+          absolute left-2 font-inter font-medium pointer-events-none transition-all duration-300
+          ${shouldFloat 
+            ? 'top-1 text-base text-purple-light' 
+            : 'top-1/2 -translate-y-1/2 text-2xl text-purple-light/70'
+          }
+        `}
+      >
+        {label}
+      </label>
     </div>
   );
 }
