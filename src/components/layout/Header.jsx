@@ -32,7 +32,7 @@ function Header() {
 
   // Liens de navigation
   const navLinks = [
-    { name: "About Us", path: "/" },
+    { name: "À propos", path: "/" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -68,9 +68,9 @@ function Header() {
             {/* Boutons Desktop - cachés sur mobile */}
             <div className="hidden md:flex items-center gap-4">
               <Link to="/login" className={navLinkClass}>
-                Log In
+                Connexion
               </Link>
-              <Button>Join Now</Button>
+              <Button>S’inscrire</Button>
             </div>
 
             {/* Menu Burger - visible uniquement sur mobile */}
@@ -118,11 +118,11 @@ function Header() {
             onClick={closeMenu}
             className="text-white font-roboto font-medium text-xl hover:text-purple-light transition"
           >
-            Log In
+            Connexion
           </Link>
 
           {/* Bouton Join Now */}
-          <Button onClick={closeMenu}>Join Now</Button>
+          <Button onClick={closeMenu}>S’inscrire</Button>
         </nav>
       </div>
 

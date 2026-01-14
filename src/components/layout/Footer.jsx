@@ -14,12 +14,12 @@ function Footer() {
   // Données des sections du footer
   const footerSections = [
     {
-      title: "PRODUCT",
+      title: "PRODUIT",
       links: [
-        { name: "Pricing", url: "#" },
-        { name: "Overview", url: "#" },
-        { name: "Browse", url: "#" },
-        { name: "Accessibility", url: "#" },
+        { name: "Tarifs", url: "#" },
+        { name: "Aperçu", url: "#" },
+        { name: "Parcourir", url: "#" },
+        { name: "Accessibilité", url: "#" },
         { name: "Five", url: "#" },
       ],
     },
@@ -27,26 +27,26 @@ function Footer() {
       title: "SOLUTIONS",
       links: [
         { name: "Brainstorming", url: "#" },
-        { name: "Ideation", url: "#" },
+        { name: "Idéation", url: "#" },
         { name: "Wireframing", url: "#" },
-        { name: "Research", url: "#" },
+        { name: "Recherche", url: "#" },
       ],
     },
     {
-      title: "RESOURCES",
+      title: "RESSOURCES",
       links: [
-        { name: "Help Center", url: "#" },
+        { name: "Centre d’aide", url: "#" },
         { name: "Blog", url: "#" },
-        { name: "Tutorials", url: "#" },
+        { name: "Tutoriels", url: "#" },
       ],
     },
     {
-      title: "COMPANY",
+      title: "ENTREPRISE",
       links: [
-        { name: "About", url: "#" },
-        { name: "Press", url: "#" },
-        { name: "Events", url: "#" },
-        { name: "Careers", url: "#" },
+        { name: "À propos", url: "#" },
+        { name: "Presse", url: "#" },
+        { name: "Événements", url: "#" },
+        { name: "Carrières", url: "#" },
       ],
     },
   ];
