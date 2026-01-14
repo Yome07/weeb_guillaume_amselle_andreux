@@ -6,6 +6,7 @@ import Layout from './components/layout/Layout'
 import Home from './pages/Home'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
+import Register from './pages/Register';
 
 // Configuration des routes avec createBrowserRouter
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "login", // Route /login
         element: <Login />, // Coposant Login
+      },
+      {
+        path: "register", // ← Nouvelle route
+        element: <Register />,
       },
     ],
   },

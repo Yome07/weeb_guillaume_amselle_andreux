@@ -73,7 +73,7 @@ function Login() {
 
           {/* Texte inscription */}
           <p className="text-gray-light font-poppins font-medium text-xs leading-5 text-center max-w-3/5">
-            Vous n'avez pas de compte ? Vous pouvez en <a href="#" className='text-white underline'>créer un</a>
+            Vous n'avez pas de compte ? Vous pouvez en <a href="/register" className='text-white underline'>créer un</a>
           </p>
         </div>
     </>

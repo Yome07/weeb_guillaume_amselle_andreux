@@ -70,7 +70,9 @@ function Header() {
               <Link to="/login" className={navLinkClass}>
                 Connexion
               </Link>
-              <Button>S’inscrire</Button>
+              <Link to="/register">
+                <Button>S’inscrire</Button>
+              </Link>
             </div>
 
             {/* Menu Burger - visible uniquement sur mobile */}
@@ -122,7 +124,9 @@ function Header() {
           </Link>
 
           {/* Bouton Join Now */}
-          <Button onClick={closeMenu}>S’inscrire</Button>
+          <Link to="/register" onClick={closeMenu}>
+            <Button>S’inscrire</Button>
+          </Link>
         </nav>
       </div>
 

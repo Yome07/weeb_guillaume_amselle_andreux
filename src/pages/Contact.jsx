@@ -28,8 +28,6 @@ function Contact() {
 
   return (
     <>
-      
-        
         {/* Titre et description */}
         <div className="text-center mb-8 lg:mb-12 max-w-4xl mx-auto">
           <h1 className="text-white font-extrabold text-4xl mb-6 lg:text-6xl">
