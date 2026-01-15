@@ -44,19 +44,26 @@ function Header() {
             {/* Groupe gauche : Logo + Navigation */}
             <div className="flex items-center gap-8">
               {/* Logo Weeb */}
-              <Link to="/">
+              <Link 
+                to="/"
+                aria-label="Weeb - Retour à l'accueil"
+              >
                 <h1 className="text-white font-bold text-3xl hover:text-purple-light transition cursor-pointer">
                   weeb
                 </h1>
               </Link>
 
               {/* Navigation Desktop - cachée sur mobile */}
-              <nav className="hidden md:flex items-center gap-8">
+              <nav 
+                className="hidden md:flex items-center gap-8"
+                aria-label="Navigation principale"
+              >
                 {navLinks.map((link, index) => (
                   <Link
                     key={index}
                     to={link.path}
                     className={navLinkClass}
+                    aria-current={location.pathname === link.path ? 'page' : undefined}
                   >
                     {link.name}
                   </Link>
@@ -66,11 +73,11 @@ function Header() {
 
             {/* Boutons Desktop - cachés sur mobile */}
             <div className="hidden md:flex items-center gap-4">
-              <Link to="/login" className={navLinkClass}>
+              <Link to="/login" className={navLinkClass} aria-label="Se connecter à votre compte">
                 Connexion
               </Link>
               <Link to="/register">
-                <Button>S’inscrire</Button>
+                <Button aria-label="Créer un nouveau compte">S’inscrire</Button>
               </Link>
             </div>
 
@@ -78,13 +85,17 @@ function Header() {
             <button
               onClick={toggleMenu}
               className="md:hidden w-12 h-12 bg-purple-600 rounded-lg flex flex-col justify-center items-center gap-1 hover:bg-purple-light transition"
-              aria-label="Menu"
+              aria-label={isMenuOpen ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation"}
               aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
               {/* Barres du burger animées */}
-              <span className={`${burgerBarClass} ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-              <span className={`${burgerBarClass} ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
-              <span className={`${burgerBarClass} ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+              <span className={`${burgerBarClass} ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} aria-hidden="true" />
+              <span className={`${burgerBarClass} ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} aria-hidden="true" />
+              <span className={`${burgerBarClass} ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} aria-hidden="true" />
+              <span className="sr-only">
+                {isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              </span>
             </button>
           </div>
         </div>
@@ -92,11 +103,15 @@ function Header() {
 
       {/* Menu Mobile Full-Screen */}
       <div
+        id="mobile-menu"
         className={`fixed inset-0 bg-blue-gray-900 z-40 md:hidden transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu de navigation mobile"
       >
-        <nav className="flex flex-col items-center justify-center h-full gap-8">
+        <nav className="flex flex-col items-center justify-center h-full gap-8" aria-label="Navigation mobile">
           
           {/* Liens de navigation mobile */}
           {navLinks.map((link, index) => (
@@ -105,26 +120,28 @@ function Header() {
               to={link.path}
               onClick={closeMenu}
               className={mobileNavLinkClass}
+              aria-current={location.pathname === link.path ? 'page' : undefined}
             >
               {link.name}
             </Link>
           ))}
 
           {/* Séparateur */}
-          <div className="w-24 h-px bg-white/20 my-4" />
+          <div className="w-24 h-px bg-white/20 my-4" aria-hidden="true" />
 
           {/* Bouton Log In */}
           <Link
             to="/login"
             onClick={closeMenu}
             className="text-white font-roboto font-medium text-xl hover:text-purple-light transition"
+            aria-label="Se connecter à votre compte"
           >
             Connexion
           </Link>
 
           {/* Bouton Join Now */}
           <Link to="/register" onClick={closeMenu}>
-            <Button>S’inscrire</Button>
+            <Button aria-label="Créer un nouveau compte">S’inscrire</Button>
           </Link>
         </nav>
       </div>
@@ -134,6 +151,9 @@ function Header() {
         <div
           onClick={closeMenu}
           className="fixed inset-0 z-30 bg-black/50 md:hidden"
+          role="button"
+          tabIndex={0}
+          aria-label="Fermer le menu de navigation"
         />
       )}
     </>
