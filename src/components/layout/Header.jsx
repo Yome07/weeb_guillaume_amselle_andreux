@@ -33,6 +33,7 @@ function Header() {
   // Liens de navigation
   const navLinks = [
     { name: "Contact", path: "/contact" },
+    // d’autres liens de navigation pourraient être rajoutés ici
   ];
 
   return (
@@ -104,9 +105,12 @@ function Header() {
       {/* Menu Mobile Full-Screen */}
       <div
         id="mobile-menu"
-        className={`fixed inset-0 bg-blue-gray-900 z-40 md:hidden transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`
+          fixed inset-0 bg-blue-gray-900 z-40 md:hidden transition-transform duration-300 ease-in-out 
+          ${
+            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }
+        `}
         role="dialog"
         aria-modal="true"
         aria-label="Menu de navigation mobile"

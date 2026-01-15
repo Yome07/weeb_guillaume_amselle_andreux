@@ -24,56 +24,54 @@ function Login() {
 
   return (
     <>
-      
+      {/* Container du formulaire */}
+      <div className="mx-auto flex flex-col items-center gap-8 w-full max-w-3xs">
         
-        {/* Container du formulaire */}
-        <div className="mx-auto flex flex-col items-center gap-8 w-full max-w-3xs">
+        {/* Titre principal */}
+        <h2 className="text-white font-extrabold text-4xl text-center">
+          Se connecter
+        </h2>
+
+        {/* Formulaire de connexion */}
+        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-8">
           
-          {/* Titre principal */}
-          <h2 className="text-white font-extrabold text-4xl text-center">
+          {/* Champ Email */}
+          <Input
+            label="Email"
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          {/* Champ Password */}
+          <Input
+            label="Password"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          {/* Bouton de soumission */}
+          <Button type="submit" className="w-3/5 mx-auto">
             Se connecter
-          </h2>
+          </Button>
+        </form>
 
-          {/* Formulaire de connexion */}
-          <form onSubmit={handleSubmit} className="w-full flex flex-col gap-8">
-            
-            {/* Champ Email */}
-            <Input
-              label="Email"
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+        {/* Lien mot de passe oublié */}
+        <a 
+          href="#" 
+          className="text-white font-inter font-semibold text-sm text-center hover:text-purple-light transition"
+        >
+          Mot de passe oublié ?
+        </a>
 
-            {/* Champ Password */}
-            <Input
-              label="Password"
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-
-            {/* Bouton de soumission */}
-            <Button type="submit" className="w-3/5 mx-auto">
-              Se connecter
-            </Button>
-          </form>
-
-          {/* Lien mot de passe oublié */}
-          <a 
-            href="#" 
-            className="text-white font-inter font-semibold text-sm text-center hover:text-purple-light transition"
-          >
-            Mot de passe oublié ?
-          </a>
-
-          {/* Texte inscription */}
-          <p className="text-gray-light font-poppins font-medium text-xs leading-5 text-center max-w-3/5">
-            Vous n'avez pas de compte ? Vous pouvez en <a href="/register" className='text-white underline'>créer un</a>
-          </p>
-        </div>
+        {/* Texte inscription */}
+        <p className="text-gray-light font-poppins font-medium text-xs leading-5 text-center max-w-3/5">
+          Vous n'avez pas de compte ? Vous pouvez en <a href="/register" className='text-white underline'>créer un</a>
+        </p>
+      </div>
     </>
   );
 }

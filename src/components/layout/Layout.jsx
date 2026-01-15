@@ -13,7 +13,7 @@ function Layout() {
       {/* Header présent sur toutes les pages */}
       <Header />
       
-      {/* Contenu de la page (Home, Contact, Login, etc.) */}
+      {/* Contenu de la page (Home, Contact, Login, Register) */}
       <main className="px-20 py-20">
         <Outlet />
       </main>

@@ -40,42 +40,42 @@ function Home() {
         
         {/* Titre principal */}
         <FadeInOnScroll delay={0}>
-            <h1 className="text-white font-extrabold text-4xl leading-[110%] text-center mb-6 lg:text-6xl max-w-2xl">
-            Explorez le <span className="text-purple-light font-normal">Web</span> sous toutes ses{' '}
-            <span className="underline decoration-purple-light">facettes</span>
-            </h1>
+          <h1 className="text-white font-extrabold text-4xl leading-[110%] text-center mb-6 lg:text-6xl max-w-2xl">
+          Explorez le <span className="text-purple-light font-normal">Web</span> sous toutes ses{' '}
+          <span className="underline decoration-purple-light">facettes</span>
+          </h1>
         </FadeInOnScroll>
 
         {/* Description */}
         <FadeInOnScroll delay={0.2}>
-            <p className="text-white leading-[140%] text-center mb-8 max-w-2xl lg:text-lg">
-            Le monde du web évolue constamment, et nous sommes là pour vous guider à travers ses tendances, 
-            technologies et meilleures pratiques. Que vous soyez développeur, designer ou passionné du digital, 
-            notre blog vous offre du contenu de qualité pour rester à la pointe.
-            </p>
+          <p className="text-white leading-[140%] text-center mb-8 max-w-2xl lg:text-lg">
+          Le monde du web évolue constamment, et nous sommes là pour vous guider à travers ses tendances, 
+          technologies et meilleures pratiques. Que vous soyez développeur, designer ou passionné du digital, 
+          notre blog vous offre du contenu de qualité pour rester à la pointe.
+          </p>
         </FadeInOnScroll>
 
         {/* Boutons CTA */}
         <FadeInOnScroll delay={0.4}>
-            <div className="flex flex-col md:flex-row gap-4 mb-12 lg:mb-16">
-            <Button className="cursor-pointer">
-                Découvrir les articles
-            </Button>
-            <Button variant="secondary" className="cursor-pointer">
-                S'abonner à la newsletter
-            </Button>
-            </div>
+          <div className="flex flex-col md:flex-row gap-4 mb-12 lg:mb-16">
+          <Button className="cursor-pointer">
+              Découvrir les articles
+          </Button>
+          <Button variant="secondary" className="cursor-pointer">
+              S'abonner à la newsletter
+          </Button>
+          </div>
         </FadeInOnScroll>
 
         {/* Image mockup navigateur */}
         <FadeInOnScroll delay={0.6}>
-            <div className="w-full max-w-lg lg:max-w-2xl">
+          <div className="w-full max-w-lg lg:max-w-2xl">
             <img 
                 src={DesktopImage} 
                 alt="" 
                 className="w-full h-auto"
             />
-            </div>
+          </div>
         </FadeInOnScroll>
       </section>
 
@@ -84,20 +84,20 @@ function Home() {
         <div className={containerClass}>
           
           {/* Titre de la section */}
-            <FadeInOnScroll>
-                <h2 className="text-white font-extrabold text-3xl leading-[110%] text-center mb-12 lg:text-5xl">
-                    Ils nous font confiance
-                </h2>
-            </FadeInOnScroll>
+          <FadeInOnScroll>
+            <h2 className="text-white font-extrabold text-3xl leading-[110%] text-center mb-12 lg:text-5xl">
+                Ils nous font confiance
+            </h2>
+          </FadeInOnScroll>
           {/* Logos des partenaires - générés dynamiquement */}
           <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16">
             {partners.map((partner, index) => (
-                <FadeInOnScroll key={index} delay={index * 0.1}>
-                    <div key={index} className="flex items-center gap-2 text-white">
-                        <img src={partner.logo} alt="" />
-                        <span className="font-bold text-lg">{partner.name}</span>
-                    </div>
-                </FadeInOnScroll>
+              <FadeInOnScroll key={index} delay={index * 0.1}>
+                <div key={index} className="flex items-center gap-2 text-white">
+                  <img src={partner.logo} alt="" />
+                  <span className="font-bold text-lg">{partner.name}</span>
+                </div>
+              </FadeInOnScroll>
             ))}
           </div>
         </div>

@@ -15,7 +15,7 @@ function Input({ label, type = "text", id, value, onChange }) {
   // État pour savoir si l'input est focus
   const [isFocused, setIsFocused] = useState(false);
 
-  // Le label doit monter si l'input est focus OU si il contient du texte
+  // Le label doit monter si l'input est focus OU s'il contient du texte
   const shouldFloat = isFocused || value;
 
   return (

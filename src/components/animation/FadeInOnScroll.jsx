@@ -11,18 +11,19 @@ import { useRef } from 'react';
  * @param {string} direction - Direction de l'animation ('up', 'down', 'left', 'right')
  */
 function FadeInOnScroll({ children, delay = 0, direction = 'up' }) {
+  // Permet d’avoir accès à un élément du DOM sans déclencher de re-render
   const ref = useRef(null);
   
   // Détecte quand l'élément entre dans le viewport
   const isInView = useInView(ref, { 
     once: true,    // Animation une seule fois
-    amount: 0.33    // Déclenche quand 20% de l'élément est visible
+    amount: 0.33    // Déclenche quand 33% de l'élément est visible
   });
 
   // Positions initiales selon la direction
   const directions = {
-    up: { y: 50 },      // Monte de 50px
-    down: { y: -50 },   // Descend de 50px
+    up: { y: 50 },      // Monte
+    down: { y: -50 },   // Descend
     left: { x: 50 },    // Vient de la droite
     right: { x: -50 },  // Vient de la gauche
   };
@@ -30,13 +31,13 @@ function FadeInOnScroll({ children, delay = 0, direction = 'up' }) {
   return (
     <motion.div
       ref={ref}
-      initial={{ 
-        opacity: 0, 
-        ...directions[direction] 
+      initial={{                  // état intial de l’animation 
+        opacity: 0,               // élément non visible
+        ...directions[direction]  // décalage suivant la direction choisie
       }}
-      animate={isInView ? { 
-        opacity: 1, 
-        x: 0, 
+      animate={isInView ? {       // état final si élément dans le viewPort
+        opacity: 1,               // élément visible
+        x: 0,                     // retrouve sa position
         y: 0 
       } : {}}
       transition={{ 

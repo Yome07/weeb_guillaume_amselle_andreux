@@ -6,7 +6,7 @@ import Button from '../components/ui/Button';
  * Page d'inscription (Register)
  * Formulaire avec validation complète :
  * - Format email
- * - Mot de passe fort (8 car., maj, min, chiffre, spécial)
+ * - Mot de passe fort (8 caractères, majuscule, mininuscule, chiffre, spécial)
  * - Vérification de correspondance des mots de passe
  */
 function Register() {
