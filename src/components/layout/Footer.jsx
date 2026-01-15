@@ -9,7 +9,7 @@ import { FaBluesky } from "react-icons/fa6";
  */
 function Footer() {
   // Classes CSS réutilisables
-  const titleClass = "text-blue-gray-400 font-medium uppercase mb-4";
+  const titleClass = "text-blue-gray-600 font-medium uppercase mb-4";
   const linkClass = "text-blue-gray-900 hover:text-purple-600 transition";
 
   // Données des sections du footer

@@ -14,7 +14,7 @@ function Button({ children, onClick, type = "button", variant = "primary", class
   
   // Définition des différentes variantes de style
   const variants = {
-    primary: "bg-purple-600 border-purple-600 hover:bg-purple-light hover:border-purple-light",
+    primary: "bg-purple-600 border-purple-600 hover:bg-purple-light hover:border-purple-light hover:text-blue-gray-900",
     secondary: "bg-transparent border-white hover:bg-white hover:text-blue-gray-900",
   };
 
