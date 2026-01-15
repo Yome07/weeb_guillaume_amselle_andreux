@@ -71,7 +71,7 @@ function Footer() {
           <div className="grid grid-cols-1 gap-12 mb-12 md:grid-cols-3 lg:grid-cols-5 lg:gap-8">
             
             {/* Logo */}
-            <div>
+            <div className="md:row-span-2">
               <h2 className="text-blue-gray-900 font-bold text-3xl">
                 weeb
               </h2>
