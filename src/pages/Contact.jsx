@@ -28,7 +28,6 @@ function Contact() {
     console.log('Email:', email);
     console.log('Phone:', phone);
     console.log('Message:', message);
-    // TODO: Ajouter la logique d'envoi du message
   };
 
   return (
@@ -113,7 +112,7 @@ function Contact() {
               />
             </div>
 
-            {/* Bouton de soumission */}
+            {/* Bouton d’envoi */}
             <Button type="submit" className="w-39 mx-auto mt-4">
               {t.contact.form.submit}
             </Button>

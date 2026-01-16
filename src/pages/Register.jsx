@@ -57,7 +57,7 @@ function Register() {
   };
 
   /**
-   * Gère la soumission du formulaire
+   * Gère l’envoi du formulaire
    */
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -103,9 +103,8 @@ function Register() {
       return;
     }
 
-    // Si tout est valide, soumettre le formulaire
+    // Si tout est valide, envoyer le formulaire
     console.log('Inscription réussie !', { lastname, firstname, email, password });
-    // TODO: Appel API pour créer le compte
     
     // Réinitialiser le formulaire
     setLastname('');
@@ -166,7 +165,6 @@ function Register() {
           </div>
 
           {/* Email */}
-          <div>
             <Input
               label={t.register.form.email}
               type="email"
@@ -177,7 +175,6 @@ function Register() {
             {errors.email && (
               <p className="text-red-500 text-sm mt-2">{errors.email}</p>
             )}
-          </div>
 
           {/* Mot de passe */}
           <div>
@@ -242,7 +239,7 @@ function Register() {
             )}
           </div>
 
-          {/* Bouton de soumission */}
+          {/* Bouton d’envoi */}
           <Button type="submit" className="w-full mt-4">
             {t.register.form.submit}
           </Button>

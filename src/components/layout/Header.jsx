@@ -5,7 +5,7 @@ import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '../../context/LanguageContext';
 
 /**
- * Composant Header (En-tête) - RESPONSIVE avec Menu Mobile
+ * Composant Header (En-tête) - Responsive avec Menu Mobile
  * Mobile: Logo + Menu burger qui ouvre un menu full-screen
  * Tablette/Desktop: Logo + Navigation (Contact) + Boutons (Log In, Join Now)
  */

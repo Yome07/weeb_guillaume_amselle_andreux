@@ -98,30 +98,27 @@ function Footer() {
           </div>
 
           {/* Section Bottom - responsive */}
-          <div className="border-t border-blue-gray-200 pt-12">
-            <div className="flex flex-col gap-6 md:flex-row md:justify-between md:items-center">
-              
-              {/* Copyright */}
-              <p className="text-blue-gray-900">
-                {t.footer.copyright}
-              </p>
-              
-              {/* Social Icons - générés dynamiquement */}
-              <div className="flex gap-4">
-                {socialLinks.map((social, index) => {
-                  const Icon = social.icon;
-                  return (
-                    <a
-                      key={index}
-                      href={social.url}
-                      className="text-blue-gray-900 hover:text-purple-600 transition"
-                      aria-label={social.name}
-                    >
-                      <Icon size={24} />
-                    </a>
-                  );
-                })}
-              </div>
+          <div className="border-t border-blue-gray-200 pt-12 flex flex-col gap-6 md:flex-row md:justify-between md:items-center">
+            {/* Copyright */}
+            <p className="text-blue-gray-900">
+              {t.footer.copyright}
+            </p>
+            
+            {/* Social Icons - générés dynamiquement */}
+            <div className="flex gap-4">
+              {socialLinks.map((social, index) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={index}
+                    href={social.url}
+                    className="text-blue-gray-900 hover:text-purple-600 transition"
+                    aria-label={social.name}
+                  >
+                    <Icon size={24} />
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>

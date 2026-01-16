@@ -12,7 +12,7 @@ import { useLanguage } from '../context/LanguageContext';
 
 /**
  * Page d'accueil (Home)
- * Contient le hero, la section de confiance, et deux sections de contenu
+ * Contient le hero, les sections de contenu
  * Version Responsive
  */
 function Home() {

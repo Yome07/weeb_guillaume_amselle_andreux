@@ -22,14 +22,13 @@ function Login() {
   const [password, setPassword] = useState('');
 
   /**
-   * Gère la soumission du formulaire
-   * @param {Event} e - L'événement de soumission du formulaire
+   * Gère l’envoi du formulaire
+   * @param {Event} e - événement d’envoi du formulaire
    */
   const handleSubmit = (e) => {
     e.preventDefault(); // Empêche le rechargement de la page
     console.log('Email:', email);
     console.log('Password:', password);
-    // TODO: Ajouter la logique de connexion ici
   };
 
   return (

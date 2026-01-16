@@ -4,7 +4,7 @@ import { useRef } from 'react';
 
 /**
  * Composant qui fait apparaître ses enfants au scroll
- * Animation de opacity 0 → 1 + translation vers le haut
+ * Animation de opacity 0 → 1 + translation
  * 
  * @param {ReactNode} children - Contenu à animer
  * @param {number} delay - Délai avant l'animation (en secondes)

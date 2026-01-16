@@ -49,7 +49,7 @@ function ForgotPassword() {
   };
 
   /**
-   * Gère la soumission du formulaire
+   * Gère l’envoi du formulaire
    */
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -78,9 +78,8 @@ function ForgotPassword() {
       return;
     }
 
-    // Si tout est valide, soumettre le formulaire
+    // Si tout est valide, envoyer le formulaire
     console.log('Réinitialisation réussie pour:', emailFromUrl, 'Nouveau mot de passe:', password);
-    // TODO: Appel API pour réinitialiser le mot de passe
     
     // Réinitialiser le formulaire
     setPassword('');
@@ -176,7 +175,7 @@ function ForgotPassword() {
             )}
           </div>
 
-          {/* Bouton de soumission */}
+          {/* Bouton d’envoi */}
           <Button type="submit" className="w-full mt-4">
             {t.forgotPassword.form.submit}
           </Button>
