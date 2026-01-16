@@ -65,7 +65,7 @@
       },
       "description": "Le monde du web évolue constamment, et nous sommes là pour vous guider à travers ses tendances, technologies et meilleures pratiques. Que vous soyez développeur, designer ou passionné du digital, notre blog vous offre du contenu de qualité pour rester à la pointe.",
       "ctaDiscover": "Découvrir les articles",
-      "ctaNewsletter": "S'abonner à la newsletter",
+      "ctaNewsletter": "S’abonner à la newsletter",
       "imageAlt": ""
     },
     "trust": {
@@ -112,8 +112,35 @@
       "password": "Password",
       "submit": "Se connecter",
       "forgotPassword": "Mot de passe oublié ?",
-      "noAccount": "Vous n'avez pas de compte ? Vous pouvez en",
+      "noAccount": "Vous n’avez pas de compte ? Vous pouvez en",
       "createAccount": "créer un"
+    }
+  },
+  "forgotPassword": {
+    "title": "Réinitialiser le mot de passe",
+    "description": "Entrez votre nouveau mot de passe pour le compte :",
+    "form": {
+      "email": "Email",
+      "password": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "Réinitialiser le mot de passe",
+      "backToLogin": "Retour à la connexion"
+    },
+    "validation": {
+      "passwordRequired": "Le mot de passe est requis",
+      "passwordWeak": "Le mot de passe ne respecte pas les critères de sécurité",
+      "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
+      "passwordMismatch": "Les mots de passe ne correspondent pas"
+    },
+    "passwordCriteria": {
+      "title": "Critères du mot de passe :",
+      "minLength": "Minimum 8 caractères",
+      "hasUppercase": "Au moins une majuscule",
+      "hasLowercase": "Au moins une minuscule",
+      "hasNumber": "Au moins un chiffre",
+      "hasSpecialChar": "Au moins un caractère spécial (!@#$%^&*...)",
+      "match": "Les mots de passe correspondent",
+      "noMatch": "Les mots de passe ne correspondent pas"
     }
   },
   "register": {
@@ -125,14 +152,14 @@
       "email": "Email",
       "password": "Mot de passe",
       "confirmPassword": "Confirmer le mot de passe",
-      "submit": "S'inscrire",
+      "submit": "S’inscrire",
       "hasAccount": "Vous avez déjà un compte ?",
       "loginLink": "Se connecter"
     },
     "validation": {
       "lastnameRequired": "Le nom est requis",
       "firstnameRequired": "Le prénom est requis",
-      "emailRequired": "L'email est requis",
+      "emailRequired": "L’email est requis",
       "emailInvalid": "Format d'email invalide",
       "passwordRequired": "Le mot de passe est requis",
       "passwordWeak": "Le mot de passe ne respecte pas les critères de sécurité",

@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
 import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
 
 // Configuration des routes avec createBrowserRouter
 const router = createBrowserRouter([
@@ -27,8 +28,12 @@ const router = createBrowserRouter([
         element: <Login />, // Coposant Login
       },
       {
-        path: "register", // ← Nouvelle route
-        element: <Register />,
+        path: "forgot-password", // Route /forgot-password
+        element: <ForgotPassword />,  // Composant ForgotPassword
+      },
+      {
+        path: "register", // Route /register
+        element: <Register />, // Composant Register
       },
     ],
   },

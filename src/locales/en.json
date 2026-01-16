@@ -116,6 +116,33 @@
       "createAccount": "create one"
     }
   },
+  "forgotPassword": {
+    "title": "Reset Password",
+    "description": "Enter your new password for the account:",
+    "form": {
+      "email": "Email",
+      "password": "New Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Reset Password",
+      "backToLogin": "Back to Login"
+    },
+    "validation": {
+      "passwordRequired": "Password is required",
+      "passwordWeak": "Password does not meet security criteria",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordMismatch": "Passwords do not match"
+    },
+    "passwordCriteria": {
+      "title": "Password criteria:",
+      "minLength": "Minimum 8 characters",
+      "hasUppercase": "At least one uppercase letter",
+      "hasLowercase": "At least one lowercase letter",
+      "hasNumber": "At least one number",
+      "hasSpecialChar": "At least one special character (!@#$%^&*...)",
+      "match": "Passwords match",
+      "noMatch": "Passwords do not match"
+    }
+  },
   "register": {
     "title": "Create an Account",
     "description": "Join our community and access all our exclusive content",

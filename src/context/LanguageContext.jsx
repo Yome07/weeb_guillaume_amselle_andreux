@@ -37,7 +37,6 @@ export function LanguageProvider({ children }) {
   // Valeur du contexte
   const value = {
     language,
-    changeLanguage,
     toggleLanguage,
     t: translations[language], // Traductions actuelles
   };

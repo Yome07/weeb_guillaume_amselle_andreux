@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../context/LanguageContext';
+import { Link, useSearchParams } from 'react-router-dom';
+
 
 /**
  * Page de connexion (Login)
@@ -10,8 +12,13 @@ import { useLanguage } from '../context/LanguageContext';
 function Login() {
   const { t } = useLanguage(); // Hook pour accéder aux traductions
 
+  const [searchParams] = useSearchParams(); // Pour récupérer l'email de l'URL
+
+  // Récupérer l'email depuis l'URL
+  const emailFromUrl = searchParams.get('email') || '';
+
   // États pour gérer les valeurs des champs du formulaire
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(emailFromUrl);
   const [password, setPassword] = useState('');
 
   /**
@@ -63,12 +70,12 @@ function Login() {
         </form>
 
         {/* Lien mot de passe oublié */}
-        <a 
-          href="#" 
+        <Link 
+          to={`/forgot-password${email ? `?email=${encodeURIComponent(email)}` : ''}`}
           className="text-white font-inter font-semibold text-sm text-center hover:text-purple-light transition"
         >
           {t.login.form.forgotPassword}
-        </a>
+        </Link>
 
         {/* Texte inscription */}
         <p className="text-gray-light font-poppins font-medium text-xs leading-5 text-center max-w-3/5">
