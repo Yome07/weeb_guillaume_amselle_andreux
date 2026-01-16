@@ -1,38 +1,42 @@
 # Weeb - Blog sur le Web
 
-## 📝 Description
-Site vitrine avec blog et authentification pour l'entreprise Weeb.
+## Description
+Site vitrine de l'entreprise Weeb.
 
-## 🛠️ Technologies utilisées
+## Technologies utilisées
 - React 18
 - Vite
 - Tailwind CSS
 - React Router DOM
+- Framer Motion
 
-## 📦 Librairies installées
+## Librairies installées
 - `react-router-dom` : Gestion du routing entre les pages
 - `tailwindcss` : Framework CSS utility-first pour le styling
 - `react-icons` : Bibliothèque d'icônes pour le footer et UI
+- `framer-motion` : Bibliothèque pour l’animation
 
-## 🏗️ Architecture du projet
+## Architecture du projet
 ```
 src/
 ├── components/     # Composants réutilisables
-│   ├── layout/     # Header, Footer, Layout
+│   ├── layout/     # Header, Footer, Layout, LanguageToggle
+    ├── animation/  # FadeInScroll
 │   └── ui/         # Button, Input
 ├── pages/          # Pages de l'application
 ├── assets/         # Images et ressources
+├── context/        # LanguageContext
+├── locales/        # Traductions fr et en
 ```
 
-## 🚀 Installation
+## Installation
 ```bash
 npm install
 npm run dev
 ```
 
-## 📋 Conventions Git
+## onventions Git
 Utilisation de Conventional Commits :
 - `feat:` nouvelle fonctionnalité
 - `fix:` correction de bug
 - `refactor:` refactoring de code
-- `docs:` documentation
