@@ -1,0 +1,153 @@
+{
+  "common": {
+    "language": "Français",
+    "languageCode": "fr"
+  },
+  "header": {
+    "logo": "Weeb",
+    "contact": "Contact",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "loginAriaLabel": "Se connecter à votre compte",
+    "registerAriaLabel": "Créer un nouveau compte",
+    "menuOpenAriaLabel": "Ouvrir le menu de navigation",
+    "menuCloseAriaLabel": "Fermer le menu de navigation",
+    "mobileMenuAriaLabel": "Menu de navigation mobile",
+    "mainNavAriaLabel": "Navigation principale",
+    "mobileNavAriaLabel": "Navigation mobile"
+  },
+  "footer": {
+    "logo": "Weeb",
+    "copyright": "@ 2025 Weeb, Inc. All rights reserved.",
+    "product": {
+      "title": "PRODUIT",
+      "pricing": "Tarifs",
+      "overview": "Aperçu",
+      "browse": "Parcourir",
+      "accessibility": "Accessibilité",
+      "five": "Five"
+    },
+    "solutions": {
+      "title": "SOLUTIONS",
+      "brainstorming": "Brainstorming",
+      "ideation": "Idéation",
+      "wireframing": "Wireframing",
+      "research": "Recherche"
+    },
+    "resources": {
+      "title": "RESSOURCES",
+      "helpCenter": "Centre d'aide",
+      "blog": "Blog",
+      "tutorials": "Tutoriels"
+    },
+    "company": {
+      "title": "ENTREPRISE",
+      "about": "À propos",
+      "press": "Presse",
+      "events": "Événements",
+      "careers": "Carrières"
+    },
+    "social": {
+      "youtube": "Youtube",
+      "facebook": "Facebook",
+      "bluesky": "Bluesky",
+      "instagram": "Instagram",
+      "linkedin": "Linkedin"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": {
+        "part1": "Explorez le",
+        "web": "Web",
+        "part2": "sous toutes ses",
+        "facets": "facettes"
+      },
+      "description": "Le monde du web évolue constamment, et nous sommes là pour vous guider à travers ses tendances, technologies et meilleures pratiques. Que vous soyez développeur, designer ou passionné du digital, notre blog vous offre du contenu de qualité pour rester à la pointe.",
+      "ctaDiscover": "Découvrir les articles",
+      "ctaNewsletter": "S'abonner à la newsletter",
+      "imageAlt": ""
+    },
+    "trust": {
+      "title": "Ils nous font confiance"
+    },
+    "learn": {
+      "subtitle": "DES RESSOURCES POUR TOUS LES NIVEAUX",
+      "title": {
+        "learn": "Apprenez",
+        "and": "et",
+        "progress": "progressez"
+      },
+      "description": "Que vous débutiez en développement web ou que vous soyez un expert cherchant à approfondir vos connaissances, nous vous proposons des tutoriels, guides et bonnes pratiques pour apprendre efficacement.",
+      "cta": "Explorer les ressources",
+      "imageAlt": ""
+    },
+    "stayInformed": {
+      "subtitle": "LE WEB, UN ÉCOSYSTÈME EN CONSTANTE ÉVOLUTION",
+      "title": {
+        "part1": "Restez informé des dernières",
+        "trends": "tendances"
+      },
+      "description": "Chaque semaine, nous analysons les nouveautés du web : frameworks émergents, bonnes pratiques SEO, accessibilité, et bien plus encore. Ne manquez aucune actualité du digital !",
+      "cta": "Lire les articles récents",
+      "imageAlt": ""
+    }
+  },
+  "contact": {
+    "title": "Votre avis compte !",
+    "description": "Votre retour est essentiel pour nous améliorer ! Partagez votre expérience, dites-nous ce que vous aimez et ce que nous pourrions améliorer. Vos suggestions nous aident à faire de ce blog une ressource toujours plus utile et enrichissante.",
+    "form": {
+      "lastname": "Nom",
+      "firstname": "Prénom",
+      "email": "Email",
+      "phone": "Téléphone",
+      "message": "Message",
+      "submit": "Contact"
+    }
+  },
+  "login": {
+    "title": "Se connecter",
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Se connecter",
+      "forgotPassword": "Mot de passe oublié ?",
+      "noAccount": "Vous n'avez pas de compte ? Vous pouvez en",
+      "createAccount": "créer un"
+    }
+  },
+  "register": {
+    "title": "Créer un compte",
+    "description": "Rejoignez notre communauté et accédez à tous nos contenus exclusifs",
+    "form": {
+      "lastname": "Nom",
+      "firstname": "Prénom",
+      "email": "Email",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "S'inscrire",
+      "hasAccount": "Vous avez déjà un compte ?",
+      "loginLink": "Se connecter"
+    },
+    "validation": {
+      "lastnameRequired": "Le nom est requis",
+      "firstnameRequired": "Le prénom est requis",
+      "emailRequired": "L'email est requis",
+      "emailInvalid": "Format d'email invalide",
+      "passwordRequired": "Le mot de passe est requis",
+      "passwordWeak": "Le mot de passe ne respecte pas les critères de sécurité",
+      "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
+      "passwordMismatch": "Les mots de passe ne correspondent pas"
+    },
+    "passwordCriteria": {
+      "title": "Critères du mot de passe :",
+      "minLength": "Minimum 8 caractères",
+      "hasUppercase": "Au moins une majuscule",
+      "hasLowercase": "Au moins une minuscule",
+      "hasNumber": "Au moins un chiffre",
+      "hasSpecialChar": "Au moins un caractère spécial (!@#$%^&*...)",
+      "match": "Les mots de passe correspondent",
+      "noMatch": "Les mots de passe ne correspondent pas"
+    }
+  }
+}

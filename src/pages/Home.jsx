@@ -8,6 +8,7 @@ import WAVESSVG from '../assets/WAVES.svg';
 import ZoomerrSVG from '../assets/Zoomerr.svg';
 import { FaArrowRight } from "react-icons/fa";
 import FadeInOnScroll from '../components/animation/FadeInOnScroll';
+import { useLanguage } from '../context/LanguageContext';
 
 /**
  * Page d'accueil (Home)
@@ -15,6 +16,9 @@ import FadeInOnScroll from '../components/animation/FadeInOnScroll';
  * Version Responsive
  */
 function Home() {
+  const { t } = useLanguage(); // Hook pour accéder aux traductions
+
+
   // Classes CSS réutilisables
   const sectionClass = "py-12 lg:py-20";
   const containerClass = "max-w-7xl mx-auto px-5 md:px-10 lg:px-20";
@@ -41,17 +45,17 @@ function Home() {
         {/* Titre principal */}
         <FadeInOnScroll delay={0}>
           <h1 className="text-white font-extrabold text-4xl leading-[110%] text-center mb-6 lg:text-6xl max-w-2xl">
-          Explorez le <span className="text-purple-light font-normal">Web</span> sous toutes ses{' '}
-          <span className="underline decoration-purple-light">facettes</span>
+            {t.home.hero.title.part1}{' '}
+            <span className="text-purple-light font-normal">{t.home.hero.title.web}</span>{' '}
+            {t.home.hero.title.part2}{' '}
+            <span className="underline decoration-purple-light">{t.home.hero.title.facets}</span>
           </h1>
         </FadeInOnScroll>
 
         {/* Description */}
         <FadeInOnScroll delay={0.2}>
           <p className="text-white leading-[140%] text-center mb-8 max-w-2xl lg:text-lg">
-          Le monde du web évolue constamment, et nous sommes là pour vous guider à travers ses tendances, 
-          technologies et meilleures pratiques. Que vous soyez développeur, designer ou passionné du digital, 
-          notre blog vous offre du contenu de qualité pour rester à la pointe.
+            {t.home.hero.description}
           </p>
         </FadeInOnScroll>
 
@@ -59,10 +63,10 @@ function Home() {
         <FadeInOnScroll delay={0.4}>
           <div className="flex flex-col md:flex-row gap-4 mb-12 lg:mb-16">
           <Button className="cursor-pointer">
-              Découvrir les articles
+              {t.home.hero.ctaDiscover}
           </Button>
           <Button variant="secondary" className="cursor-pointer">
-              S'abonner à la newsletter
+              {t.home.hero.ctaNewsletter}
           </Button>
           </div>
         </FadeInOnScroll>
@@ -86,7 +90,7 @@ function Home() {
           {/* Titre de la section */}
           <FadeInOnScroll>
             <h2 className="text-white font-extrabold text-3xl leading-[110%] text-center mb-12 lg:text-5xl">
-                Ils nous font confiance
+                {t.home.trust.title}
             </h2>
           </FadeInOnScroll>
           {/* Logos des partenaires - générés dynamiquement */}
@@ -113,19 +117,18 @@ function Home() {
             {/* Colonne gauche - Texte */}
             <FadeInOnScroll direction="right" className="flex-1 text-center lg:text-left">
               <p className={subtitleClass}>
-                DES RESSOURCES POUR TOUS LES NIVEAUX
+                {t.home.learn.subtitle}
               </p>
               <h2 className={titleClass}>
-                <span className="text-purple-light">Apprenez</span> et{' '}
-                <span className="text-purple-light">progressez</span>
+                <span className="text-purple-light">{t.home.learn.title.learn}</span>{' '}
+                {t.home.learn.title.and}{' '}
+                <span className="text-purple-light">{t.home.learn.title.progress}</span>
               </h2>
               <p className={paragraphClass}>
-                Que vous débutiez en développement web ou que vous soyez un expert 
-                cherchant à approfondir vos connaissances, nous vous proposons des tutoriels, 
-                guides et bonnes pratiques pour apprendre efficacement.
+                {t.home.learn.description}
               </p>
               <a href="#" className={linkClass}>
-                Explorer les ressources
+                {t.home.learn.cta}
                 <FaArrowRight />
               </a>
             </FadeInOnScroll>
@@ -134,7 +137,7 @@ function Home() {
             <FadeInOnScroll direction="left" delay={0.2} className="flex-1 w-full max-w-lg">
               <img 
                 src={DesktopImage} 
-                alt="" 
+                alt={t.home.learn.imageAlt}
                 className="w-full h-auto"
               />
             </FadeInOnScroll>
@@ -152,19 +155,17 @@ function Home() {
             {/* Colonne droite - Texte */}
             <FadeInOnScroll direction="left" className="flex-1 text-center lg:text-left">
               <p className={subtitleClass}>
-                LE WEB, UN ÉCOSYSTÈME EN CONSTANTE ÉVOLUTION
+                {t.home.stayInformed.subtitle}
               </p>
               <h2 className={titleClass}>
-                Restez informé des dernières{' '}
-                <span className="text-purple-light">tendances</span>
+                {t.home.stayInformed.title.part1}{' '}
+                <span className="text-purple-light">{t.home.stayInformed.title.trends}</span>
               </h2>
               <p className={paragraphClass}>
-                Chaque semaine, nous analysons les nouveautés du web : frameworks émergents, 
-                bonnes pratiques SEO, accessibilité, et bien plus encore. Ne manquez aucune 
-                actualité du digital !
+                {t.home.stayInformed.description}
               </p>
               <a href="#" className={linkClass}>
-                Lire les articles récents
+                {t.home.stayInformed.cta}
                 <FaArrowRight />
               </a>
             </FadeInOnScroll>
@@ -173,7 +174,7 @@ function Home() {
             <FadeInOnScroll direction="right" delay={0.2} className="flex-1 w-full max-w-xs">
               <img 
                 src={ShapesImage} 
-                alt="" 
+                alt={t.home.stayInformed.imageAlt} 
                 className="w-full h-auto"
               />
             </FadeInOnScroll>

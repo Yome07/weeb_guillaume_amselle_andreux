@@ -1,0 +1,153 @@
+{
+  "common": {
+    "language": "English",
+    "languageCode": "en"
+  },
+  "header": {
+    "logo": "Weeb",
+    "contact": "Contact",
+    "login": "Log In",
+    "register": "Join Now",
+    "loginAriaLabel": "Log in to your account",
+    "registerAriaLabel": "Create a new account",
+    "menuOpenAriaLabel": "Open navigation menu",
+    "menuCloseAriaLabel": "Close navigation menu",
+    "mobileMenuAriaLabel": "Mobile navigation menu",
+    "mainNavAriaLabel": "Main navigation",
+    "mobileNavAriaLabel": "Mobile navigation"
+  },
+  "footer": {
+    "logo": "Weeb",
+    "copyright": "@ 2025 Weeb, Inc. All rights reserved.",
+    "product": {
+      "title": "PRODUCT",
+      "pricing": "Pricing",
+      "overview": "Overview",
+      "browse": "Browse",
+      "accessibility": "Accessibility",
+      "five": "Five"
+    },
+    "solutions": {
+      "title": "SOLUTIONS",
+      "brainstorming": "Brainstorming",
+      "ideation": "Ideation",
+      "wireframing": "Wireframing",
+      "research": "Research"
+    },
+    "resources": {
+      "title": "RESOURCES",
+      "helpCenter": "Help Center",
+      "blog": "Blog",
+      "tutorials": "Tutorials"
+    },
+    "company": {
+      "title": "COMPANY",
+      "about": "About",
+      "press": "Press",
+      "events": "Events",
+      "careers": "Careers"
+    },
+    "social": {
+      "youtube": "Youtube",
+      "facebook": "Facebook",
+      "bluesky": "Bluesky",
+      "instagram": "Instagram",
+      "linkedin": "Linkedin"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": {
+        "part1": "Explore the",
+        "web": "Web",
+        "part2": "in all its",
+        "facets": "facets"
+      },
+      "description": "The web world is constantly evolving, and we're here to guide you through its trends, technologies and best practices. Whether you're a developer, designer or digital enthusiast, our blog offers you quality content to stay ahead.",
+      "ctaDiscover": "Discover Articles",
+      "ctaNewsletter": "Subscribe to Newsletter",
+      "imageAlt": ""
+    },
+    "trust": {
+      "title": "They Trust Us"
+    },
+    "learn": {
+      "subtitle": "RESOURCES FOR ALL LEVELS",
+      "title": {
+        "learn": "Learn",
+        "and": "and",
+        "progress": "progress"
+      },
+      "description": "Whether you're starting out in web development or you're an expert looking to deepen your knowledge, we offer tutorials, guides and best practices to help you learn effectively.",
+      "cta": "Explore Resources",
+      "imageAlt": ""
+    },
+    "stayInformed": {
+      "subtitle": "THE WEB, AN EVER-EVOLVING ECOSYSTEM",
+      "title": {
+        "part1": "Stay informed about the latest",
+        "trends": "trends"
+      },
+      "description": "Every week, we analyze web news: emerging frameworks, SEO best practices, accessibility, and much more. Don't miss any digital updates!",
+      "cta": "Read Recent Articles",
+      "imageAlt": ""
+    }
+  },
+  "contact": {
+    "title": "Your Opinion Matters!",
+    "description": "Your feedback is essential for us to improve! Share your experience, tell us what you like and what we could improve. Your suggestions help us make this blog an ever more useful and enriching resource.",
+    "form": {
+      "lastname": "Last Name",
+      "firstname": "First Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "submit": "Contact"
+    }
+  },
+  "login": {
+    "title": "Log In",
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Log In",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account? You can",
+      "createAccount": "create one"
+    }
+  },
+  "register": {
+    "title": "Create an Account",
+    "description": "Join our community and access all our exclusive content",
+    "form": {
+      "lastname": "Last Name",
+      "firstname": "First Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Sign Up",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Log in"
+    },
+    "validation": {
+      "lastnameRequired": "Last name is required",
+      "firstnameRequired": "First name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email format",
+      "passwordRequired": "Password is required",
+      "passwordWeak": "Password does not meet security criteria",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordMismatch": "Passwords do not match"
+    },
+    "passwordCriteria": {
+      "title": "Password criteria:",
+      "minLength": "Minimum 8 characters",
+      "hasUppercase": "At least one uppercase letter",
+      "hasLowercase": "At least one lowercase letter",
+      "hasNumber": "At least one number",
+      "hasSpecialChar": "At least one special character (!@#$%^&*...)",
+      "match": "Passwords match",
+      "noMatch": "Passwords do not match"
+    }
+  }
+}

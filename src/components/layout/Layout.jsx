@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
+import { LanguageProvider } from '../../context/LanguageContext';
 
 /**
  * Layout principal de l'application
@@ -9,18 +10,20 @@ import Footer from './Footer';
  */
 function Layout() {
   return (
-    <div className="min-h-screen flex flex-col bg-blue-gray-900">
-      {/* Header présent sur toutes les pages */}
-      <Header />
-      
-      {/* Contenu de la page (Home, Contact, Login, Register) */}
-      <main className="px-20 py-20">
-        <Outlet />
-      </main>
-      
-      {/* Footer présent sur toutes les pages */}
-      <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen flex flex-col bg-blue-gray-900">
+        {/* Header présent sur toutes les pages */}
+        <Header />
+        
+        {/* Contenu de la page (Home, Contact, Login, Register) */}
+        <main className="px-20 py-20">
+          <Outlet />
+        </main>
+        
+        {/* Footer présent sur toutes les pages */}
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 }
 

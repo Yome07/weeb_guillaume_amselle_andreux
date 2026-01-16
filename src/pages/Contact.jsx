@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
+import { useLanguage } from '../context/LanguageContext';
 
 /**
  * Page de contact (Contact)
  * Contient un formulaire avec nom, prénom, email et message
  */
 function Contact() {
+  const { t } = useLanguage(); // Hook pour accéder aux traductions
+
   // États pour gérer les valeurs des champs du formulaire
   const [lastname, setLastname] = useState('');
   const [firstname, setFirstname] = useState('');
@@ -33,10 +36,10 @@ function Contact() {
         {/* Titre et description */}
         <div className="text-center mb-8 lg:mb-12 max-w-4xl mx-auto">
           <h1 className="text-white font-extrabold text-4xl mb-6 lg:text-6xl">
-            Votre avis compte !
+            {t.contact.title}
           </h1>
           <p className="text-white lg:text-lg">
-            Votre retour est essentiel pour nous améliorer ! Partagez votre expérience, dites-nous ce que vous aimez et ce que nous pourrions améliorer. Vos suggestions nous aident à faire de ce blog une ressource toujours plus utile et enrichissante.
+            {t.contact.description}
           </p>
         </div>
 
@@ -51,7 +54,7 @@ function Contact() {
               {/* Champ Nom */}
               <div className="flex-1">
                 <Input
-                  label="Nom"
+                  label={t.contact.form.lastname}
                   type="text"
                   id="lastname"
                   value={lastname}
@@ -62,7 +65,7 @@ function Contact() {
               {/* Champ Prénom */}
               <div className="flex-1">
                 <Input
-                  label="Prénom"
+                  label={t.contact.form.firstname}
                   type="text"
                   id="firstname"
                   value={firstname}
@@ -74,7 +77,7 @@ function Contact() {
                 {/* Champ Téléphone */}
                 <div className="flex-1">
                     <Input
-                    label="Téléphone"
+                    label={t.contact.form.phone}
                     type="tel"
                     id="tel"
                     value={phone}
@@ -85,7 +88,7 @@ function Contact() {
                 {/* Champ Email */}
                 <div className="flex-1">
                     <Input
-                    label="Email"
+                    label={t.contact.form.email}
                     type="email"
                     id="email"
                     value={email}
@@ -99,7 +102,7 @@ function Contact() {
                 htmlFor="message" 
                 className="text-purple-light font-inter font-medium text-2xl text-center"
               >
-                Message
+                {t.contact.form.message}
               </label>
               <textarea
                 id="message"
@@ -112,7 +115,7 @@ function Contact() {
 
             {/* Bouton de soumission */}
             <Button type="submit" className="w-39 mx-auto mt-4">
-              Contact
+              {t.contact.form.submit}
             </Button>
           </form>
         </div>

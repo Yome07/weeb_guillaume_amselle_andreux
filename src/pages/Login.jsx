@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
+import { useLanguage } from '../context/LanguageContext';
 
 /**
  * Page de connexion (Login)
  * Contient un formulaire avec email et password
  */
 function Login() {
+  const { t } = useLanguage(); // Hook pour accéder aux traductions
+
   // États pour gérer les valeurs des champs du formulaire
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,7 +32,7 @@ function Login() {
         
         {/* Titre principal */}
         <h2 className="text-white font-extrabold text-4xl text-center">
-          Se connecter
+          {t.login.title}
         </h2>
 
         {/* Formulaire de connexion */}
@@ -37,7 +40,7 @@ function Login() {
           
           {/* Champ Email */}
           <Input
-            label="Email"
+            label={t.login.form.email}
             type="email"
             id="email"
             value={email}
@@ -46,7 +49,7 @@ function Login() {
 
           {/* Champ Password */}
           <Input
-            label="Password"
+            label={t.login.form.password}
             type="password"
             id="password"
             value={password}
@@ -55,7 +58,7 @@ function Login() {
 
           {/* Bouton de soumission */}
           <Button type="submit" className="w-3/5 mx-auto">
-            Se connecter
+            {t.login.form.submit}
           </Button>
         </form>
 
@@ -64,12 +67,12 @@ function Login() {
           href="#" 
           className="text-white font-inter font-semibold text-sm text-center hover:text-purple-light transition"
         >
-          Mot de passe oublié ?
+          {t.login.form.forgotPassword}
         </a>
 
         {/* Texte inscription */}
         <p className="text-gray-light font-poppins font-medium text-xs leading-5 text-center max-w-3/5">
-          Vous n'avez pas de compte ? Vous pouvez en <a href="/register" className='text-white underline'>créer un</a>
+          {t.login.form.noAccount}{' '}<a href="/register" className='text-white underline'>{t.login.form.createAccount}</a>
         </p>
       </div>
     </>

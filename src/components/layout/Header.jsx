@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../ui/Button';
+import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '../../context/LanguageContext';
 
 /**
  * Composant Header (En-tête) - RESPONSIVE avec Menu Mobile
  * Mobile: Logo + Menu burger qui ouvre un menu full-screen
- * Tablette/Desktop: Logo + Navigation (About Us, Contact) + Boutons (Log In, Join Now)
+ * Tablette/Desktop: Logo + Navigation (Contact) + Boutons (Log In, Join Now)
  */
 function Header() {
+  const { t } = useLanguage(); // Hook pour accéder aux traductions
+
   // État pour gérer l'ouverture/fermeture du menu mobile
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -32,7 +36,7 @@ function Header() {
 
   // Liens de navigation
   const navLinks = [
-    { name: "Contact", path: "/contact" },
+    { name: t.header.contact, path: "/contact" },
     // d’autres liens de navigation pourraient être rajoutés ici
   ];
 
@@ -50,14 +54,14 @@ function Header() {
                 aria-label="Weeb - Retour à l'accueil"
               >
                 <h1 className="text-white font-bold text-3xl hover:text-purple-light transition cursor-pointer">
-                  weeb
+                  {t.header.logo}
                 </h1>
               </Link>
 
               {/* Navigation Desktop - cachée sur mobile */}
               <nav 
                 className="hidden md:flex items-center gap-8"
-                aria-label="Navigation principale"
+                aria-label={t.header.mainNavAriaLabel}
               >
                 {navLinks.map((link, index) => (
                   <Link
@@ -74,30 +78,35 @@ function Header() {
 
             {/* Boutons Desktop - cachés sur mobile */}
             <div className="hidden md:flex items-center gap-4">
-              <Link to="/login" className={navLinkClass} aria-label="Se connecter à votre compte">
-                Connexion
+              {/* Bouton de changement de langue */}
+              <LanguageToggle />
+
+              <Link to="/login" className={navLinkClass} aria-label={t.header.loginAriaLabel}>
+                {t.header.login}
               </Link>
               <Link to="/register">
-                <Button aria-label="Créer un nouveau compte">S’inscrire</Button>
+                <Button aria-label={t.header.registerAriaLabel}>{t.header.register}</Button>
               </Link>
             </div>
-
-            {/* Menu Burger - visible uniquement sur mobile */}
-            <button
-              onClick={toggleMenu}
-              className="md:hidden w-12 h-12 bg-purple-600 rounded-lg flex flex-col justify-center items-center gap-1 hover:bg-purple-light transition"
-              aria-label={isMenuOpen ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation"}
-              aria-expanded={isMenuOpen}
-              aria-controls="mobile-menu"
-            >
-              {/* Barres du burger animées */}
-              <span className={`${burgerBarClass} ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} aria-hidden="true" />
-              <span className={`${burgerBarClass} ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} aria-hidden="true" />
-              <span className={`${burgerBarClass} ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} aria-hidden="true" />
-              <span className="sr-only">
-                {isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-              </span>
-            </button>
+            
+              
+              {/* Menu Burger - visible uniquement sur mobile */}
+              <button
+                onClick={toggleMenu}
+                className="md:hidden w-12 h-12 bg-purple-600 rounded-lg flex flex-col justify-center items-center gap-1 hover:bg-purple-light transition"
+                aria-label={isMenuOpen ? t.header.menuCloseAriaLabel : t.header.menuOpenAriaLabel}
+                aria-expanded={isMenuOpen}
+                aria-controls="mobile-menu"
+              >
+                {/* Barres du burger animées */}
+                <span className={`${burgerBarClass} ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} aria-hidden="true" />
+                <span className={`${burgerBarClass} ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} aria-hidden="true" />
+                <span className={`${burgerBarClass} ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} aria-hidden="true" />
+                <span className="sr-only">
+                  {isMenuOpen ? t.header.menuCloseAriaLabel : t.header.menuOpenAriaLabel}
+                </span>
+              </button>
+            
           </div>
         </div>
       </header>
@@ -113,10 +122,10 @@ function Header() {
         `}
         role="dialog"
         aria-modal="true"
-        aria-label="Menu de navigation mobile"
+        aria-label={t.header.mobileMenuAriaLabel}
       >
-        <nav className="flex flex-col items-center justify-center h-full gap-8" aria-label="Navigation mobile">
-          
+        <nav className="flex flex-col items-center justify-center h-full gap-8" aria-label={t.header.mobileNavAriaLabel}>
+          <LanguageToggle />
           {/* Liens de navigation mobile */}
           {navLinks.map((link, index) => (
             <Link
@@ -138,14 +147,14 @@ function Header() {
             to="/login"
             onClick={closeMenu}
             className="text-white font-roboto font-medium text-xl hover:text-purple-light transition"
-            aria-label="Se connecter à votre compte"
+            aria-label={t.header.loginAriaLabel}
           >
-            Connexion
+            {t.header.login}
           </Link>
 
           {/* Bouton Join Now */}
           <Link to="/register" onClick={closeMenu}>
-            <Button aria-label="Créer un nouveau compte">S’inscrire</Button>
+            <Button aria-label={t.header.registerAriaLabel}>{t.header.register}</Button>
           </Link>
         </nav>
       </div>
@@ -157,7 +166,7 @@ function Header() {
           className="fixed inset-0 z-30 bg-black/50 md:hidden"
           role="button"
           tabIndex={0}
-          aria-label="Fermer le menu de navigation"
+          aria-label={t.header.menuCloseAriaLabel}
         />
       )}
     </>

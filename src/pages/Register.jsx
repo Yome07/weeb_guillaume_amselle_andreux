@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
+import { useLanguage } from '../context/LanguageContext';
 
 /**
  * Page d'inscription (Register)
@@ -10,6 +11,8 @@ import Button from '../components/ui/Button';
  * - Vérification de correspondance des mots de passe
  */
 function Register() {
+  const { t } = useLanguage(); // Hook pour accéder aux traductions
+
   // États pour les champs du formulaire
   const [lastname, setLastname] = useState('');
   const [firstname, setFirstname] = useState('');
@@ -64,34 +67,34 @@ function Register() {
 
     // Validation du nom
     if (!lastname.trim()) {
-      newErrors.lastname = "Le nom est requis";
+      newErrors.lastname = t.register.validation.lastnameRequired;
     }
 
     // Validation du prénom
     if (!firstname.trim()) {
-      newErrors.firstname = "Le prénom est requis";
+      newErrors.firstname = t.register.validation.firstnameRequired;
     }
 
     // Validation de l'email
     if (!email.trim()) {
-      newErrors.email = "L'email est requis";
+      newErrors.email = t.register.validation.emailRequired;
     } else if (!validateEmail(email)) {
-      newErrors.email = "Format d'email invalide";
+      newErrors.email = t.register.validation.emailInvalid;
     }
 
     // Validation du mot de passe
     const passwordValidation = validatePassword(password);
     if (!password) {
-      newErrors.password = "Le mot de passe est requis";
+      newErrors.password = t.register.validation.passwordRequired;
     } else if (!passwordValidation.isValid) {
-      newErrors.password = "Le mot de passe ne respecte pas les critères de sécurité";
+      newErrors.password = t.register.validation.passwordWeak;
     }
 
     // Validation de la confirmation du mot de passe
     if (!confirmPassword) {
-      newErrors.confirmPassword = "Veuillez confirmer votre mot de passe";
+      newErrors.confirmPassword = t.register.validation.confirmPasswordRequired;
     } else if (password !== confirmPassword) {
-      newErrors.confirmPassword = "Les mots de passe ne correspondent pas";
+      newErrors.confirmPassword = t.register.validation.passwordMismatch;
     }
 
     // Si des erreurs existent, les afficher
@@ -122,10 +125,10 @@ function Register() {
       {/* Titre */}
       <div className="text-center mb-8 lg:mb-12 max-w-4xl mx-auto">
         <h1 className="text-white font-extrabold text-4xl mb-6 lg:text-6xl">
-          Créer un compte
+          {t.register.title}
         </h1>
         <p className="text-white lg:text-lg">
-          Rejoignez notre communauté et accédez à tous nos contenus exclusifs
+          {t.register.description}
         </p>
       </div>
 
@@ -137,7 +140,7 @@ function Register() {
           <div className="flex flex-col gap-6 lg:flex-row lg:gap-6">
             <div className="flex-1">
               <Input
-                label="Nom"
+                label={t.register.form.lastname}
                 type="text"
                 id="lastname"
                 value={lastname}
@@ -150,7 +153,7 @@ function Register() {
 
             <div className="flex-1">
               <Input
-                label="Prénom"
+                label={t.register.form.firstname}
                 type="text"
                 id="firstname"
                 value={firstname}
@@ -165,7 +168,7 @@ function Register() {
           {/* Email */}
           <div>
             <Input
-              label="Email"
+              label={t.register.form.email}
               type="email"
               id="email"
               value={email}
@@ -179,7 +182,7 @@ function Register() {
           {/* Mot de passe */}
           <div>
             <Input
-              label="Mot de passe"
+              label={t.register.form.password}
               type="password"
               id="password"
               value={password}
@@ -193,23 +196,23 @@ function Register() {
             {password && (
               <div className="mt-3 space-y-1">
                 <p className="text-white text-sm font-medium mb-2">
-                  Critères du mot de passe :
+                  {t.register.passwordCriteria.title}
                 </p>
                 <div className="space-y-1">
                   <p className={`text-xs ${passwordStrength.minLength ? 'text-green-400' : 'text-gray-400'}`}>
-                    {passwordStrength.minLength ? '✓' : '○'} Minimum 8 caractères
+                    {passwordStrength.minLength ? '✓' : '○'} {t.register.passwordCriteria.minLength}
                   </p>
                   <p className={`text-xs ${passwordStrength.hasUppercase ? 'text-green-400' : 'text-gray-400'}`}>
-                    {passwordStrength.hasUppercase ? '✓' : '○'} Au moins une majuscule
+                    {passwordStrength.hasUppercase ? '✓' : '○'} {t.register.passwordCriteria.hasUppercase}
                   </p>
                   <p className={`text-xs ${passwordStrength.hasLowercase ? 'text-green-400' : 'text-gray-400'}`}>
-                    {passwordStrength.hasLowercase ? '✓' : '○'} Au moins une minuscule
+                    {passwordStrength.hasLowercase ? '✓' : '○'} {t.register.passwordCriteria.hasLowercase}
                   </p>
                   <p className={`text-xs ${passwordStrength.hasNumber ? 'text-green-400' : 'text-gray-400'}`}>
-                    {passwordStrength.hasNumber ? '✓' : '○'} Au moins un chiffre
+                    {passwordStrength.hasNumber ? '✓' : '○'} {t.register.passwordCriteria.hasNumber}
                   </p>
                   <p className={`text-xs ${passwordStrength.hasSpecialChar ? 'text-green-400' : 'text-gray-400'}`}>
-                    {passwordStrength.hasSpecialChar ? '✓' : '○'} Au moins un caractère spécial (!@#$%^&*...)
+                    {passwordStrength.hasSpecialChar ? '✓' : '○'} {t.register.passwordCriteria.hasSpecialChar}
                   </p>
                 </div>
               </div>
@@ -219,7 +222,7 @@ function Register() {
           {/* Confirmation du mot de passe */}
           <div>
             <Input
-              label="Confirmer le mot de passe"
+              label={t.register.form.confirmPassword}
               type="password"
               id="confirmPassword"
               value={confirmPassword}
@@ -232,22 +235,24 @@ function Register() {
             {/* Indicateur de correspondance */}
             {confirmPassword && (
               <p className={`text-xs mt-2 ${password === confirmPassword ? 'text-green-400' : 'text-red-400'}`}>
-                {password === confirmPassword ? '✓ Les mots de passe correspondent' : '✗ Les mots de passe ne correspondent pas'}
+                {password === confirmPassword 
+                  ? `✓ ${t.register.passwordCriteria.match}` 
+                  : `✗ ${t.register.passwordCriteria.noMatch}`}
               </p>
             )}
           </div>
 
           {/* Bouton de soumission */}
           <Button type="submit" className="w-full mt-4">
-            S'inscrire
+            {t.register.form.submit}
           </Button>
         </form>
 
         {/* Lien vers la page de connexion */}
         <p className="text-white text-center text-sm mt-6">
-          Vous avez déjà un compte ?{' '}
+          {t.register.form.hasAccount}{' '}
           <a href="/login" className="text-purple-light hover:underline">
-            Se connecter
+            {t.register.form.loginLink}
           </a>
         </p>
       </div>

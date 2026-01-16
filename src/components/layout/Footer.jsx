@@ -1,5 +1,6 @@
 import { FaYoutube, FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { FaBluesky } from "react-icons/fa6";
+import { useLanguage } from '../../context/LanguageContext';
 
 /**
  * Composant Footer (Pied de page) - RESPONSIVE
@@ -8,6 +9,8 @@ import { FaBluesky } from "react-icons/fa6";
  * Desktop: Layout 5 colonnes
  */
 function Footer() {
+  const { t } = useLanguage(); // Hook pour accéder aux traductions
+
   // Classes CSS réutilisables
   const titleClass = "text-blue-gray-600 font-medium uppercase mb-4";
   const linkClass = "text-blue-gray-900 hover:text-purple-600 transition";
@@ -15,50 +18,50 @@ function Footer() {
   // Données des sections du footer
   const footerSections = [
     {
-      title: "PRODUIT",
+      title: t.footer.product.title,
       links: [
-        { name: "Tarifs", url: "#" },
-        { name: "Aperçu", url: "#" },
-        { name: "Parcourir", url: "#" },
-        { name: "Accessibilité", url: "#" },
-        { name: "Five", url: "#" },
+        { name: t.footer.product.pricing, url: "#" },
+        { name: t.footer.product.overview, url: "#" },
+        { name: t.footer.product.browse, url: "#" },
+        { name: t.footer.product.accessibility, url: "#" },
+        { name: t.footer.product.five, url: "#" },
       ],
     },
     {
-      title: "SOLUTIONS",
+      title: t.footer.solutions.title,
       links: [
-        { name: "Brainstorming", url: "#" },
-        { name: "Idéation", url: "#" },
-        { name: "Wireframing", url: "#" },
-        { name: "Recherche", url: "#" },
+        { name: t.footer.solutions.brainstorming, url: "#" },
+        { name: t.footer.solutions.ideation, url: "#" },
+        { name: t.footer.solutions.wireframing, url: "#" },
+        { name: t.footer.solutions.research, url: "#" },
       ],
     },
     {
-      title: "RESSOURCES",
+      title: t.footer.resources.title,
       links: [
-        { name: "Centre d’aide", url: "#" },
-        { name: "Blog", url: "#" },
-        { name: "Tutoriels", url: "#" },
+        { name: t.footer.resources.helpCenter, url: "#" },
+        { name: t.footer.resources.blog, url: "#" },
+        { name: t.footer.resources.tutorials, url: "#" },
       ],
     },
     {
-      title: "ENTREPRISE",
+      title: t.footer.company.title,
       links: [
-        { name: "À propos", url: "#" },
-        { name: "Presse", url: "#" },
-        { name: "Événements", url: "#" },
-        { name: "Carrières", url: "#" },
+        { name: t.footer.company.about, url: "#" },
+        { name: t.footer.company.press, url: "#" },
+        { name: t.footer.company.events, url: "#" },
+        { name: t.footer.company.careers, url: "#" },
       ],
     },
   ];
 
   // Données des réseaux sociaux
   const socialLinks = [
-    { name: "Youtube", icon: FaYoutube, url: "#" },
-    { name: "Facebook", icon: FaFacebook, url: "#" },
-    { name: "Bluesky", icon: FaBluesky, url: "#" },
-    { name: "Instagram", icon: FaInstagram, url: "#" },
-    { name: "Linkedin", icon: FaLinkedin, url: "#" },
+    { name: t.footer.social.youtube, icon: FaYoutube, url: "#" },
+    { name: t.footer.social.facebook, icon: FaFacebook, url: "#" },
+    { name: t.footer.social.bluesky, icon: FaBluesky, url: "#" },
+    { name: t.footer.social.instagram, icon: FaInstagram, url: "#" },
+    { name: t.footer.social.linkedin, icon: FaLinkedin, url: "#" },
   ];
 
   return (
@@ -73,7 +76,7 @@ function Footer() {
             {/* Logo */}
             <div className="md:row-span-2">
               <h2 className="text-blue-gray-900 font-bold text-3xl">
-                weeb
+                {t.footer.logo}
               </h2>
             </div>
 
@@ -100,7 +103,7 @@ function Footer() {
               
               {/* Copyright */}
               <p className="text-blue-gray-900">
-                @ 2025 Weeb, Inc. All rights reserved.
+                {t.footer.copyright}
               </p>
               
               {/* Social Icons - générés dynamiquement */}
