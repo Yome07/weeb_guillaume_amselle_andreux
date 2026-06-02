@@ -9,7 +9,7 @@ function LanguageToggle() {
   const { language, toggleLanguage } = useLanguage();
 
   // Noms des langues
-  const languageNames = {
+  const languageNames: Record<'fr' | 'en', string> = {
     fr: 'FR',
     en: 'EN',
   };
@@ -29,3 +29,4 @@ function LanguageToggle() {
 }
 
 export default LanguageToggle;
+

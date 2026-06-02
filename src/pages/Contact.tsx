@@ -70,7 +70,9 @@ function Contact() {
                                 onChange={(e) => setLastname(e.target.value)}
                             />
                             {errors.last_name && (
-                                <p className="text-red-400 text-sm mt-1">{errors.last_name[0]}</p>
+                                <p className="text-red-400 text-sm mt-1">
+                                  {Array.isArray(errors.last_name) ? errors.last_name[0] : errors.last_name}
+                                </p>
                             )}
                         </div>
 
@@ -84,7 +86,9 @@ function Contact() {
                                 onChange={(e) => setFirstname(e.target.value)}
                             />
                             {errors.first_name && (
-                                <p className="text-red-400 text-sm mt-1">{errors.first_name[0]}</p>
+                                <p className="text-red-400 text-sm mt-1">
+                                  {Array.isArray(errors.first_name) ? errors.first_name[0] : errors.first_name}
+                                </p>
                             )}
                         </div>
                     </div>
@@ -99,7 +103,9 @@ function Contact() {
                                 onChange={(e) => setPhone(e.target.value)}
                             />
                             {errors.phone && (
-                                <p className="text-red-400 text-sm mt-1">{errors.phone[0]}</p>
+                                <p className="text-red-400 text-sm mt-1">
+                                  {Array.isArray(errors.phone) ? errors.phone[0] : errors.phone}
+                                </p>
                             )}
                         </div>
 
@@ -113,7 +119,9 @@ function Contact() {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                             {errors.email && (
-                                <p className="text-red-400 text-sm mt-1">{errors.email[0]}</p>
+                                <p className="text-red-400 text-sm mt-1">
+                                  {Array.isArray(errors.email) ? errors.email[0] : errors.email}
+                                </p>
                             )}
                         </div>
                     </div>
@@ -129,12 +137,12 @@ function Contact() {
                             id="message"
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
-                            rows="5"
+                            rows={5}
                             className="border-b border-purple-light text-white text-lg p-2 font-inter focus:outline-none focus:border-purple-600 resize-none text-center"
                         />
                     </div>
 
-                    {/* Bouton d’envoi */}
+                    {/* Bouton d'envoi */}
                     <Button type="submit" className="w-39 mx-auto mt-4">
                         {t.contact.form.submit}
                     </Button>
@@ -145,3 +153,4 @@ function Contact() {
 }
 
 export default Contact;
+

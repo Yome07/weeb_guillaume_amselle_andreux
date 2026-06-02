@@ -25,7 +25,7 @@ function Login() {
     <>
       {/* Container du formulaire */}
       <div className="mx-auto flex flex-col items-center gap-8 w-full max-w-3xs">
-        
+
         {/* Titre principal */}
         <h2 className="text-white font-extrabold text-4xl text-center">
           {t.login.title}
@@ -33,7 +33,7 @@ function Login() {
 
         {/* Formulaire de connexion */}
         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-8">
-          
+
           {/* Champ Email */}
           <Input
             label={t.login.form.email}
@@ -59,7 +59,7 @@ function Login() {
         </form>
 
         {/* Lien mot de passe oublié */}
-        <Link 
+        <Link
           to={`/forgot-password${email ? `?email=${encodeURIComponent(email)}` : ''}`}
           className="text-white font-inter font-semibold text-sm text-center hover:text-purple-light transition"
         >
@@ -76,3 +76,4 @@ function Login() {
 }
 
 export default Login;
+

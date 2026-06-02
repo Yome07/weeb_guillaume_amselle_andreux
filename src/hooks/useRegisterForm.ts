@@ -1,26 +1,69 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
+
+interface PasswordStrength {
+  isValid: boolean;
+  minLength: boolean;
+  hasUppercase: boolean;
+  hasLowercase: boolean;
+  hasNumber: boolean;
+  hasSpecialChar: boolean;
+}
+
+interface UseRegisterFormReturn {
+  lastname: string;
+  firstname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  errors: Record<string, string>;
+  passwordStrength: PasswordStrength | null;
+  passwordsMatch: boolean;
+  setLastname: (value: string) => void;
+  setFirstname: (value: string) => void;
+  setEmail: (value: string) => void;
+  setPassword: (value: string) => void;
+  setConfirmPassword: (value: string) => void;
+  handleSubmit: (e: FormEvent<HTMLFormElement>, t: any) => boolean;
+  validateEmail: (email: string) => boolean;
+  validatePassword: (password: string) => PasswordStrength;
+}
+
+interface Translations {
+  register: {
+    validation: {
+      lastnameRequired: string;
+      firstnameRequired: string;
+      emailRequired: string;
+      emailInvalid: string;
+      passwordRequired: string;
+      passwordWeak: string;
+      confirmPasswordRequired: string;
+      passwordMismatch: string;
+    };
+  };
+}
 
 /**
  * Hook personnalisé pour gérer la logique du formulaire d'inscription
  * Gère la validation de l'email et du mot de passe
  *
- * @returns {Object} - État et fonctions pour gérer le formulaire
+ * @returns {UseRegisterFormReturn} - État et fonctions pour gérer le formulaire
  */
-export function useRegisterForm() {
+export function useRegisterForm(): UseRegisterFormReturn {
   // États pour les champs du formulaire
-  const [lastname, setLastname] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [lastname, setLastname] = useState<string>('');
+  const [firstname, setFirstname] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   // États pour les erreurs
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   /**
    * Valide le format de l'email
    */
-  const validateEmail = (email) => {
+  const validateEmail = (email: string): boolean => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
@@ -33,7 +76,7 @@ export function useRegisterForm() {
    * - Au moins un chiffre
    * - Au moins un caractère spécial
    */
-  const validatePassword = (password) => {
+  const validatePassword = (password: string): PasswordStrength => {
     const minLength = password.length >= 8;
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowercase = /[a-z]/.test(password);
@@ -53,11 +96,11 @@ export function useRegisterForm() {
   /**
    * Gère l'envoi du formulaire
    */
-  const handleSubmit = (e, t) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>, t: Translations): boolean => {
     e.preventDefault();
 
     // Réinitialiser les erreurs
-    const newErrors = {};
+    const newErrors: Record<string, string> = {};
 
     // Validation du nom
     if (!lastname.trim()) {

@@ -10,6 +10,11 @@ import { FaArrowRight } from "react-icons/fa";
 import FadeInOnScroll from '../components/animation/FadeInOnScroll';
 import { useLanguage } from '../context/LanguageContext';
 
+interface Partner {
+  name: string;
+  logo: string;
+}
+
 /**
  * Page d'accueil (Home)
  * Contient le hero, les sections de contenu
@@ -28,7 +33,7 @@ function Home() {
   const linkClass = "inline-flex items-center gap-2 text-white font-medium hover:text-purple-light transition";
 
   // Données des partenaires
-  const partners = [
+  const partners: Partner[] = [
     { name: "SmartFinder", logo: SmartFinderSVG },
     { name: "Zoomerr", logo: ZoomerrSVG },
     { name: "SHELLS", logo: SHELLSSVG },
@@ -38,10 +43,10 @@ function Home() {
 
   return (
     <>
-    
+
       {/* Section Hero */}
       <section className="flex-1 flex flex-col items-center pb-12 lg:pb-20">
-        
+
         {/* Titre principal */}
         <FadeInOnScroll delay={0}>
           <h1 className="text-white font-extrabold text-4xl leading-[110%] text-center mb-6 lg:text-6xl max-w-2xl">
@@ -74,9 +79,9 @@ function Home() {
         {/* Image mockup navigateur */}
         <FadeInOnScroll delay={0.6}>
           <div className="w-full max-w-lg lg:max-w-2xl">
-            <img 
-                src={DesktopImage} 
-                alt="" 
+            <img
+                src={DesktopImage}
+                alt=""
                 className="w-full h-auto"
             />
           </div>
@@ -86,7 +91,7 @@ function Home() {
       {/* Section "Ils nous font confiance" */}
       <section className={sectionClass}>
         <div className={containerClass}>
-          
+
           {/* Titre de la section */}
           <FadeInOnScroll>
             <h2 className="text-white font-extrabold text-3xl leading-[110%] text-center mb-12 lg:text-5xl">
@@ -110,10 +115,10 @@ function Home() {
       {/* Section "Apprenez et progressez" */}
       <section className={sectionClass}>
         <div className={containerClass}>
-          
+
           {/* Layout 2 colonnes sur desktop */}
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-            
+
             {/* Colonne gauche - Texte */}
             <FadeInOnScroll direction="right" className="flex-1 text-center lg:text-left">
               <p className={subtitleClass}>
@@ -135,8 +140,8 @@ function Home() {
 
             {/* Colonne droite - Image */}
             <FadeInOnScroll direction="left" delay={0.2} className="flex-1 w-full max-w-lg">
-              <img 
-                src={DesktopImage} 
+              <img
+                src={DesktopImage}
                 alt={t.home.learn.imageAlt}
                 className="w-full h-auto"
               />
@@ -148,10 +153,10 @@ function Home() {
       {/* Section "Restez informé" */}
       <section className={sectionClass}>
         <div className={containerClass}>
-          
+
           {/* Layout 2 colonnes sur desktop (inverse) */}
           <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-16">
-            
+
             {/* Colonne droite - Texte */}
             <FadeInOnScroll direction="left" className="flex-1 text-center lg:text-left">
               <p className={subtitleClass}>
@@ -172,9 +177,9 @@ function Home() {
 
             {/* Colonne gauche - Image géométrique */}
             <FadeInOnScroll direction="right" delay={0.2} className="flex-1 w-full max-w-xs">
-              <img 
-                src={ShapesImage} 
-                alt={t.home.stayInformed.imageAlt} 
+              <img
+                src={ShapesImage}
+                alt={t.home.stayInformed.imageAlt}
                 className="w-full h-auto"
               />
             </FadeInOnScroll>
@@ -186,3 +191,4 @@ function Home() {
 }
 
 export default Home;
+

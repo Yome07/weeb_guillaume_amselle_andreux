@@ -2,6 +2,7 @@ import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../context/LanguageContext';
 import { useRegisterForm } from '../hooks/useRegisterForm';
+import { FormEvent } from 'react';
 
 /**
  * Page d'inscription (Register)
@@ -32,7 +33,7 @@ function Register() {
   } = useRegisterForm();
 
   // Wrapper pour passer le contexte de traduction au hook
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     submitForm(e, t);
   };
 
@@ -108,7 +109,7 @@ function Register() {
             )}
 
             {/* Indicateurs de force du mot de passe */}
-            {password && (
+            {password && passwordStrength && (
               <div className="mt-3 space-y-1">
                 <p className="text-white text-sm font-medium mb-2">
                   {t.register.passwordCriteria.title}

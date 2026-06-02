@@ -13,19 +13,19 @@ function Header() {
   const { t } = useLanguage(); // Hook pour accéder aux traductions
 
   // État pour gérer l'ouverture/fermeture du menu mobile
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   /**
    * Toggle le menu mobile (ouvrir/fermer)
    */
-  const toggleMenu = () => {
+  const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   /**
    * Ferme le menu mobile
    */
-  const closeMenu = () => {
+  const closeMenu = (): void => {
     setIsMenuOpen(false);
   };
 
@@ -37,7 +37,7 @@ function Header() {
   // Liens de navigation
   const navLinks = [
     { name: t.header.contact, path: "/contact" },
-    // d’autres liens de navigation pourraient être rajoutés ici
+    // d'autres liens de navigation pourraient être rajoutés ici
   ];
 
   return (
@@ -49,7 +49,7 @@ function Header() {
             {/* Groupe gauche : Logo + Navigation */}
             <div className="flex items-center gap-8">
               {/* Logo Weeb */}
-              <Link 
+              <Link
                 to="/"
                 aria-label="Weeb - Retour à l'accueil"
               >
@@ -59,7 +59,7 @@ function Header() {
               </Link>
 
               {/* Navigation Desktop - cachée sur mobile */}
-              <nav 
+              <nav
                 className="hidden md:flex items-center gap-8"
                 aria-label={t.header.mainNavAriaLabel}
               >
@@ -88,8 +88,8 @@ function Header() {
                 <Button aria-label={t.header.registerAriaLabel}>{t.header.register}</Button>
               </Link>
             </div>
-            
-              
+
+
               {/* Menu Burger - visible uniquement sur mobile */}
               <button
                 onClick={toggleMenu}
@@ -106,7 +106,7 @@ function Header() {
                   {isMenuOpen ? t.header.menuCloseAriaLabel : t.header.menuOpenAriaLabel}
                 </span>
               </button>
-            
+
           </div>
         </div>
       </header>
@@ -174,3 +174,4 @@ function Header() {
 }
 
 export default Header;
+

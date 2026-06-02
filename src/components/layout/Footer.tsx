@@ -1,6 +1,21 @@
 import { FaYoutube, FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { FaBluesky } from "react-icons/fa6";
+import { IconType } from 'react-icons';
 import { useLanguage } from '../../context/LanguageContext';
+
+interface FooterSection {
+  title: string;
+  links: Array<{
+    name: string;
+    url: string;
+  }>;
+}
+
+interface SocialLink {
+  name: string;
+  icon: IconType;
+  url: string;
+}
 
 /**
  * Composant Footer (Pied de page) - RESPONSIVE
@@ -16,7 +31,7 @@ function Footer() {
   const linkClass = "text-blue-gray-900 hover:text-purple-600 transition";
 
   // Données des sections du footer
-  const footerSections = [
+  const footerSections: FooterSection[] = [
     {
       title: t.footer.product.title,
       links: [
@@ -56,7 +71,7 @@ function Footer() {
   ];
 
   // Données des réseaux sociaux
-  const socialLinks = [
+  const socialLinks: SocialLink[] = [
     { name: t.footer.social.youtube, icon: FaYoutube, url: "#" },
     { name: t.footer.social.facebook, icon: FaFacebook, url: "#" },
     { name: t.footer.social.bluesky, icon: FaBluesky, url: "#" },
@@ -72,7 +87,7 @@ function Footer() {
 
           {/* Grid des sections - responsive */}
           <div className="grid grid-cols-1 gap-12 mb-12 md:grid-cols-3 lg:grid-cols-5 lg:gap-8">
-            
+
             {/* Logo */}
             <div className="md:row-span-2">
               <h2 className="text-blue-gray-900 font-bold text-3xl">
@@ -103,7 +118,7 @@ function Footer() {
             <p className="text-blue-gray-900">
               {t.footer.copyright}
             </p>
-            
+
             {/* Social Icons - générés dynamiquement */}
             <div className="flex gap-4">
               {socialLinks.map((social, index) => {
@@ -128,3 +143,4 @@ function Footer() {
 }
 
 export default Footer;
+

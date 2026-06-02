@@ -1,30 +1,58 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import axios, { AxiosError } from 'axios';
+
+interface ContactFormState {
+  lastname: string;
+  firstname: string;
+  email: string;
+  phone: string;
+  message: string;
+  errors: Record<string, string | string[]>;
+  success: boolean;
+  isLoading: boolean;
+}
+
+interface UseContactFormReturn {
+  lastname: string;
+  firstname: string;
+  email: string;
+  phone: string;
+  message: string;
+  errors: Record<string, string | string[]>;
+  success: boolean;
+  isLoading: boolean;
+  setLastname: (value: string) => void;
+  setFirstname: (value: string) => void;
+  setEmail: (value: string) => void;
+  setPhone: (value: string) => void;
+  setMessage: (value: string) => void;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
+}
 
 /**
  * Hook personnalisé pour gérer la logique du formulaire de contact
  * Gère l'état des champs, les erreurs, et l'envoi du formulaire
  *
- * @returns {Object} - État et fonctions pour gérer le formulaire
+ * @returns {UseContactFormReturn} - État et fonctions pour gérer le formulaire
  */
-export function useContactForm() {
+export function useContactForm(): UseContactFormReturn {
   // États pour gérer les valeurs des champs du formulaire
-  const [lastname, setLastname] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState('');
+  const [lastname, setLastname] = useState<string>('');
+  const [firstname, setFirstname] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
 
   // États pour la gestion des erreurs et du succès
-  const [errors, setErrors] = useState({});
-  const [success, setSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string | string[]>>({});
+  const [success, setSuccess] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   /**
    * Gère la soumission du formulaire
-   * @param {Event} e - L'événement de soumission du formulaire
+   * @param {FormEvent} e - L'événement de soumission du formulaire
    */
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     setIsLoading(true);
     setErrors({});
@@ -56,10 +84,11 @@ export function useContactForm() {
       setMessage('');
     } catch (error) {
       // Gère les erreurs réseau ET les erreurs HTTP (4xx/5xx)
-      if (error.response) {
+      const axiosError = error as AxiosError<Record<string, string | string[]>>;
+      if (axiosError.response) {
         // Erreur HTTP 4xx/5xx - les données d'erreur viennent du serveur
-        setErrors(error.response.data);
-      } else if (error.request) {
+        setErrors(axiosError.response.data);
+      } else if (axiosError.request) {
         // Erreur réseau - pas de réponse du serveur
         setErrors({ global: 'Erreur réseau' });
       } else {

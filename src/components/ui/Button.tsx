@@ -1,17 +1,35 @@
+import { ReactNode, MouseEvent } from 'react';
+
+interface ButtonProps {
+  children: ReactNode;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'secondary';
+  className?: string;
+  'aria-label'?: string;
+}
+
 /**
  * Composant Button réutilisable
  * Permet de créer des boutons avec différentes variantes (primary, secondary)
- * 
+ *
  * @param {ReactNode} children - Le contenu du bouton (texte, icône, etc.)
  * @param {Function} onClick - Fonction appelée au clic
  * @param {string} type - Type HTML du bouton (button, submit, reset)
  * @param {string} variant - Style du bouton (primary ou secondary)
  * @param {string} className - Classes CSS supplémentaires
  */
-function Button({ children, onClick, type = "button", variant = "primary", className = "" }) {
+function Button({
+  children,
+  onClick,
+  type = "button",
+  variant = "primary",
+  className = "",
+  'aria-label': ariaLabel
+}: ButtonProps) {
   // Classes CSS communes à tous les boutons
   const baseClasses = "px-4 py-2 rounded-lg font-medium duration-200 text-white border-2 cursor-pointer";
-  
+
   // Définition des différentes variantes de style
   const variants = {
     primary: "bg-purple-600 border-purple-600 hover:bg-purple-light hover:border-purple-light hover:text-blue-gray-900",
@@ -22,6 +40,7 @@ function Button({ children, onClick, type = "button", variant = "primary", class
     <button
       type={type}
       onClick={onClick}
+      aria-label={ariaLabel}
       // Combine les classes de base + variante + classes personnalisées
       className={`${baseClasses} ${variants[variant]} ${className}`}
     >
@@ -31,3 +50,4 @@ function Button({ children, onClick, type = "button", variant = "primary", class
 }
 
 export default Button;
+

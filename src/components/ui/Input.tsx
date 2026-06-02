@@ -1,9 +1,18 @@
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
+
+interface InputProps {
+  label: string;
+  type?: string;
+  id: string;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+}
 
 /**
  * Composant Input réutilisable avec label
  * Crée un champ de saisie stylisé avec un label au-dessus
- * 
+ *
  * @param {string} label - Texte du label affiché au-dessus de l'input
  * @param {string} type - Type d'input HTML (text, password, email, etc.)
  * @param {string} id - Identifiant unique pour l'input et son label
@@ -11,9 +20,9 @@ import { useState } from 'react';
  * @param {Function} onChange - Fonction appelée à chaque modification
  * @param {string} placeholder - Texte d'indication dans l'input
  */
-function Input({ label, type = "text", id, value, onChange }) {
+function Input({ label, type = "text", id, value, onChange }: InputProps) {
   // État pour savoir si l'input est focus
-  const [isFocused, setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   // Le label doit monter si l'input est focus OU s'il contient du texte
   const shouldFloat = isFocused || value;
@@ -49,3 +58,4 @@ function Input({ label, type = "text", id, value, onChange }) {
 }
 
 export default Input;
+

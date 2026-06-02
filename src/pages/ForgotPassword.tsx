@@ -1,8 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, FormEvent } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../context/LanguageContext';
+
+interface PasswordStrengthState {
+  isValid: boolean;
+  minLength: boolean;
+  hasUppercase: boolean;
+  hasLowercase: boolean;
+  hasNumber: boolean;
+  hasSpecialChar: boolean;
+}
+
+interface ErrorsState {
+  password?: string;
+  confirmPassword?: string;
+}
 
 /**
  * Page de réinitialisation de mot de passe (Forgot Password)
@@ -17,11 +31,11 @@ function ForgotPassword() {
   const emailFromUrl = searchParams.get('email') || '';
 
   // États pour les champs du formulaire
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   // États pour les erreurs
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<ErrorsState>({});
 
   /**
    * Valide le mot de passe
@@ -31,7 +45,7 @@ function ForgotPassword() {
    * - Au moins un chiffre
    * - Au moins un caractère spécial
    */
-  const validatePassword = (password) => {
+  const validatePassword = (password: string): PasswordStrengthState => {
     const minLength = password.length >= 8;
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowercase = /[a-z]/.test(password);
@@ -49,13 +63,13 @@ function ForgotPassword() {
   };
 
   /**
-   * Gère l’envoi du formulaire
+   * Gère l'envoi du formulaire
    */
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    
+
     // Réinitialiser les erreurs
-    const newErrors = {};
+    const newErrors: ErrorsState = {};
 
     // Validation du mot de passe
     const passwordValidation = validatePassword(password);
@@ -80,7 +94,7 @@ function ForgotPassword() {
 
     // Si tout est valide, envoyer le formulaire
     console.log('Réinitialisation réussie pour:', emailFromUrl, 'Nouveau mot de passe:', password);
-    
+
     // Réinitialiser le formulaire
     setPassword('');
     setConfirmPassword('');
@@ -111,7 +125,7 @@ function ForgotPassword() {
       {/* Formulaire */}
       <div className="w-full max-w-sm lg:max-w-2xl p-8 lg:p-12 border-2 border-purple-light rounded-3xl bg-purple-dark mx-auto">
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 lg:gap-8">
-          
+
           {/* Nouveau mot de passe */}
           <div>
             <Input
@@ -124,9 +138,9 @@ function ForgotPassword() {
             {errors.password && (
               <p className="text-red-500 text-sm mt-2">{errors.password}</p>
             )}
-            
+
             {/* Indicateurs de force du mot de passe */}
-            {password && (
+            {password && passwordStrength && (
               <div className="mt-3 space-y-1">
                 <p className="text-white text-sm font-medium mb-2">
                   {t.forgotPassword.passwordCriteria.title}
@@ -164,18 +178,18 @@ function ForgotPassword() {
             {errors.confirmPassword && (
               <p className="text-red-500 text-sm mt-2">{errors.confirmPassword}</p>
             )}
-            
+
             {/* Indicateur de correspondance */}
             {confirmPassword && (
               <p className={`text-xs mt-2 ${password === confirmPassword ? 'text-green-400' : 'text-red-400'}`}>
-                {password === confirmPassword 
-                  ? `✓ ${t.forgotPassword.passwordCriteria.match}` 
+                {password === confirmPassword
+                  ? `✓ ${t.forgotPassword.passwordCriteria.match}`
                   : `✗ ${t.forgotPassword.passwordCriteria.noMatch}`}
               </p>
             )}
           </div>
 
-          {/* Bouton d’envoi */}
+          {/* Bouton d'envoi */}
           <Button type="submit" className="w-full mt-4">
             {t.forgotPassword.form.submit}
           </Button>
@@ -183,7 +197,7 @@ function ForgotPassword() {
 
         {/* Lien retour vers la page de connexion */}
         <div className="text-center mt-6">
-          <Link 
+          <Link
             to={`/login${emailFromUrl ? `?email=${encodeURIComponent(emailFromUrl)}` : ''}`}
             className="text-purple-light hover:underline text-sm font-medium"
           >
@@ -196,3 +210,5 @@ function ForgotPassword() {
 }
 
 export default ForgotPassword;
+
+
