@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../context/LanguageContext';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useLoginForm } from '../hooks/useLoginForm';
 
 
 /**
@@ -12,24 +12,14 @@ import { Link, useSearchParams } from 'react-router-dom';
 function Login() {
   const { t } = useLanguage(); // Hook pour accéder aux traductions
 
-  const [searchParams] = useSearchParams(); // Pour récupérer l'email de l'URL
-
-  // Récupérer l'email depuis l'URL
-  const emailFromUrl = searchParams.get('email') || '';
-
-  // États pour gérer les valeurs des champs du formulaire
-  const [email, setEmail] = useState(emailFromUrl);
-  const [password, setPassword] = useState('');
-
-  /**
-   * Gère l’envoi du formulaire
-   * @param {Event} e - événement d’envoi du formulaire
-   */
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Empêche le rechargement de la page
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
+  // Logique du formulaire extraite dans un hook personnalisé
+  const {
+    email,
+    password,
+    setEmail,
+    setPassword,
+    handleSubmit,
+  } = useLoginForm();
 
   return (
     <>
