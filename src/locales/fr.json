@@ -102,7 +102,9 @@
       "email": "Email",
       "phone": "Téléphone",
       "message": "Message",
-      "submit": "Contact"
+      "submit": "Contact",
+      "success": "Votre message a bien été envoyé !",
+      "errorNetwork": "Erreur réseau, veuillez réessayer."
     }
   },
   "login": {
