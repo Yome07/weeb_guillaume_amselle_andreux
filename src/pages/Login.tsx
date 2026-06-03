@@ -16,6 +16,8 @@ function Login() {
   const {
     email,
     password,
+    error,
+    isLoading,
     setEmail,
     setPassword,
     handleSubmit,
@@ -52,9 +54,14 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
+          {/* Affichage des erreurs API */}
+          {error && (
+              <p className="text-red-400 text-sm text-center">{error}</p>
+          )}
+
           {/* Bouton de soumission */}
-          <Button type="submit" className="w-3/5 mx-auto">
-            {t.login.form.submit}
+          <Button type="submit" className="w-3/5 mx-auto" disabled={isLoading}>
+            {isLoading ? 'Connexion...' : t.login.form.submit}
           </Button>
         </form>
 

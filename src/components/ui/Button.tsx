@@ -6,6 +6,7 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   variant?: 'primary' | 'secondary';
   className?: string;
+  disabled?: boolean;
   'aria-label'?: string;
 }
 
@@ -18,6 +19,7 @@ interface ButtonProps {
  * @param {string} type - Type HTML du bouton (button, submit, reset)
  * @param {string} variant - Style du bouton (primary ou secondary)
  * @param {string} className - Classes CSS supplémentaires
+ * @param {boolean} dsabled - Attribut HTML
  */
 function Button({
   children,
@@ -25,6 +27,7 @@ function Button({
   type = "button",
   variant = "primary",
   className = "",
+  disabled = false,
   'aria-label': ariaLabel
 }: ButtonProps) {
   // Classes CSS communes à tous les boutons
@@ -43,6 +46,7 @@ function Button({
       aria-label={ariaLabel}
       // Combine les classes de base + variante + classes personnalisées
       className={`${baseClasses} ${variants[variant]} ${className}`}
+      disabled={disabled}
     >
       {children}
     </button>

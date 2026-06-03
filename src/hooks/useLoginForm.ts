@@ -1,9 +1,12 @@
 import { useState, FormEvent } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { login } from '../services/authService';
 
 interface UseLoginFormReturn {
   email: string;
   password: string;
+  error: string | null;
+  isLoading: boolean;
   setEmail: (value: string) => void;
   setPassword: (value: string) => void;
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -18,6 +21,7 @@ interface UseLoginFormReturn {
  */
 export function useLoginForm(): UseLoginFormReturn {
   const [searchParams] = useSearchParams(); // Pour récupérer l'email de l'URL
+  const navigate = useNavigate();
 
   // Récupérer l'email depuis l'URL
   const emailFromUrl = searchParams.get('email') || '';
@@ -25,23 +29,40 @@ export function useLoginForm(): UseLoginFormReturn {
   // États pour gérer les valeurs des champs du formulaire
   const [email, setEmail] = useState<string>(emailFromUrl);
   const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   /**
    * Gère l'envoi du formulaire
    * @param {FormEvent} e - événement d'envoi du formulaire
    */
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault(); // Empêche le rechargement de la page
-    console.log('Email:', email);
-    console.log('Password:', password);
+    setError(null);
+    setIsLoading(true);
 
-    // TODO: Ajouter l'appel API pour la connexion
+    try {
+      const data = await login({ email, password });
+
+      // Stocker les tokens JWT
+      localStorage.setItem('access_token', data.access);
+
+      // Rediriger vers la page d'accueil après connexion
+      navigate('/');
+    } catch (err: any) {
+      setError(err?.response?.data?.detail || 'Identifiants incorrects.');
+    } finally {
+      setIsLoading(false);
+    }
+
   };
 
   return {
     // États
     email,
     password,
+    error,
+    isLoading,
 
     // Setters
     setEmail,

@@ -22,6 +22,8 @@ function Register() {
     password,
     confirmPassword,
     errors,
+    apiError,
+    isLoading,
     passwordStrength,
     passwordsMatch,
     setLastname,
@@ -158,9 +160,14 @@ function Register() {
             )}
           </div>
 
+          {/* Erreur API */}
+          {apiError && (
+              <p className="text-red-400 text-sm text-center">{apiError}</p>
+          )}
+
           {/* Bouton d'envoi */}
-          <Button type="submit" className="w-full mt-4">
-            {t.register.form.submit}
+          <Button type="submit" className="w-full mt-4" disabled={isLoading}>
+            {isLoading ? 'Inscription...' : t.register.form.submit}
           </Button>
         </form>
 
