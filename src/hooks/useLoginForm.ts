@@ -65,7 +65,9 @@ export function useLoginForm(): UseLoginFormReturn {
       // Rediriger vers la page d'accueil après connexion
       navigate('/');
     } catch (err: any) {
-      setError(err?.response?.data?.detail || 'Identifiants incorrects.');
+      const errorCode = err?.response?.data?.error_code;
+      const errorMessage = err?.response?.data?.message;
+      setError(errorMessage || (errorCode ? errorCode : 'Identifiants incorrects.'));
     } finally {
       setIsLoading(false);
     }
