@@ -63,7 +63,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
  * Hook personnalisé pour accéder au contexte de langue
  * @returns {LanguageContextType} { language, toggleLanguage, t }
  */
-// eslint-disable-next-line react-refresh/only-export-components
 export function useLanguage(): LanguageContextType {
     const context = useContext(LanguageContext);
     if (!context) {
