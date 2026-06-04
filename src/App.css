@@ -1,0 +1,40 @@
+/* Configuration du thème */
+@theme {
+    /* Couleurs personnalisées */
+    --color-blue-gray-900: #0f172a;
+    --color-blue-gray-600: #475569;
+    --color-blue-gray-300: #cbd5e1;
+    --color-blue-gray-200: #e2e8f0;
+
+    --color-purple-600: #9333ea;
+    --color-purple-light: #c084fc;
+    --color-purple-dark: rgb(33, 34, 63);
+
+    --color-gray-light: #c4c4c4;
+
+    /* Polices */
+    --font-family-roboto: 'Roboto', sans-serif;
+    --font-family-inter: 'Inter', sans-serif;
+    --font-family-poppins: 'Poppins', sans-serif;
+}
+
+/* Reset de base */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family-roboto);
+}
+
+/* Définir les classes de polices personnalisées */
+.font-inter {
+    font-family: var(--font-family-inter);
+}
+
+.font-poppins {
+    font-family: var(--font-family-poppins);
+}
+
+.font-roboto {
+    font-family: var(--font-family-roboto);
+}
