@@ -128,13 +128,16 @@
       "password": "Nouveau mot de passe",
       "confirmPassword": "Confirmer le mot de passe",
       "submit": "Réinitialiser le mot de passe",
-      "backToLogin": "Retour à la connexion"
+      "submitting": "Envoi…",
+      "backToLogin": "Retour à la connexion",
+      "resetSubmit": "Réinitialiser le mot de passe"
     },
     "validation": {
       "passwordRequired": "Le mot de passe est requis",
       "passwordWeak": "Le mot de passe ne respecte pas les critères de sécurité",
       "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
-      "passwordMismatch": "Les mots de passe ne correspondent pas"
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
+      "emailRequired": "L’email est requis"
     },
     "passwordCriteria": {
       "title": "Critères du mot de passe :",
@@ -145,6 +148,12 @@
       "hasSpecialChar": "Au moins un caractère spécial (!@#$%^&*...)",
       "match": "Les mots de passe correspondent",
       "noMatch": "Les mots de passe ne correspondent pas"
+    },
+    "resetTitle": "Nouveau mot de passe",
+    "resetDescription": "Choisissez un nouveau mot de passe.",
+    "successMessage": "Si un compte est associé à cet email, vous recevrez un lien de réinitialisation.",
+    "errors": {
+      "default": "Une erreur est survenue. Veuillez réessayer."
     }
   },
   "register": {

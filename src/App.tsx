@@ -10,6 +10,7 @@ import ArticleDetail from './pages/ArticleDetail';
 import ArticleCreate from './pages/ArticleCreate';
 import PrivateRoute from './PrivateRoute';
 import './App.css';
+import ResetPassword from "./pages/ResetPassword.tsx";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="contact" element={<Contact />} />
                 <Route path="login" element={<Login />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
+                <Route path="reset-password" element={<ResetPassword />} />
                 <Route path="register" element={<Register />} />
                 <Route path="blog" element={<ArticleList />} />
                 <Route

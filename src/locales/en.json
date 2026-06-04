@@ -128,13 +128,16 @@
       "password": "New Password",
       "confirmPassword": "Confirm Password",
       "submit": "Reset Password",
-      "backToLogin": "Back to Login"
+      "submitting": "Submitting…",
+      "backToLogin": "Back to Login",
+      "resetSubmit": "Reset Password"
     },
     "validation": {
       "passwordRequired": "Password is required",
       "passwordWeak": "Password does not meet security criteria",
       "confirmPasswordRequired": "Please confirm your password",
-      "passwordMismatch": "Passwords do not match"
+      "passwordMismatch": "Passwords do not match",
+      "emailRequired": "Email is required"
     },
     "passwordCriteria": {
       "title": "Password criteria:",
@@ -145,6 +148,12 @@
       "hasSpecialChar": "At least one special character (!@#$%^&*...)",
       "match": "Passwords match",
       "noMatch": "Passwords do not match"
+    },
+    "resetTitle": "Reset Password",
+    "resetDescription": "Enter your new password for the account:",
+    "successMessage": "If an account is associated with this email, you will receive a password reset link.",
+    "errors": {
+      "default": "An error occurred. Please try again."
     }
   },
   "register": {
