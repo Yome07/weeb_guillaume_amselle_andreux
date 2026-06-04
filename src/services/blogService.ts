@@ -40,3 +40,8 @@ export async function createArticle(payload: ArticleCreatePayload): Promise<Arti
     const response = await api.post<Article>('/articles/', payload);
     return response.data;
 }
+
+// Suppression protégée — seul le propriétaire peut supprimer
+export async function deleteArticle(slug: string): Promise<void> {
+    await api.delete(`/articles/${slug}/`);
+}

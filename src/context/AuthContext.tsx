@@ -2,6 +2,7 @@ import { createContext, useReducer, useContext, ReactNode } from 'react';
 
 // Types
 interface AuthUser {
+    id: string;
     first_name: string;
     last_name: string;
     email: string;
@@ -41,6 +42,7 @@ function getUserFromToken(): AuthUser | null {
     try {
         const payload = JSON.parse(atob(token.split('.')[1]));
         return {
+            id: payload.user_id,
             first_name: payload.first_name,
             last_name: payload.last_name,
             email: payload.email,
