@@ -11,6 +11,7 @@ interface LoginResponse {
 
 export async function login(payload: LoginPayload): Promise<LoginResponse> {
     const response = await publicApi.post<LoginResponse>('/users/login/', payload);
+    sessionStorage.setItem('access_token', response.data.access);
     return response.data;
 }
 
@@ -31,14 +32,10 @@ export async function register(payload: RegisterPayload): Promise<void> {
         first_name: payload.firstname,
         last_name: payload.lastname,
     };
-    await publicApi.post('/users/register/', djangoPayload);
+    const response = await publicApi.post('/users/register/', djangoPayload);
+    sessionStorage.setItem('access_token', response.data.access);
 }
 
 export async function logout(): Promise<void> {
-    localStorage.removeItem('access_token');
+    sessionStorage.removeItem('access_token');
 }
-
-// export async function refreshToken(refresh: string): Promise<{ access: string }> {
-//     const response = await api.post<{ access: string }>('/users/token/refresh/', { refresh });
-//     return response.data;
-// }

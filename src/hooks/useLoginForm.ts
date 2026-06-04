@@ -45,7 +45,7 @@ export function useLoginForm(): UseLoginFormReturn {
       const data = await login({ email, password });
 
       // Stocker les tokens JWT
-      localStorage.setItem('access_token', data.access);
+      sessionStorage.setItem('access_token', data.access);
 
       // Rediriger vers la page d'accueil après connexion
       navigate('/');
