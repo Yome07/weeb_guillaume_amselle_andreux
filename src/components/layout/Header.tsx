@@ -37,6 +37,7 @@ function Header() {
   // Liens de navigation
   const navLinks = [
     { name: t.header.contact, path: "/contact" },
+    { name: t.header.blog, path: "/blog" },
     // d'autres liens de navigation pourraient être rajoutés ici
   ];
 
