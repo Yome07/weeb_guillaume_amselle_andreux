@@ -24,6 +24,11 @@ export interface ArticleCreatePayload {
     content: string;
 }
 
+export interface ArticleUpdatePayload {
+    title: string;
+    content: string;
+}
+
 // Lecture publique — pas besoin de token
 export async function getArticles(): Promise<Article[]> {
     const response = await publicApi.get<Article[]>('/articles/');
@@ -38,6 +43,12 @@ export async function getArticle(slug: string): Promise<Article> {
 // Écriture protégée — token ajouté automatiquement par l'intercepteur
 export async function createArticle(payload: ArticleCreatePayload): Promise<Article> {
     const response = await api.post<Article>('/articles/', payload);
+    return response.data;
+}
+
+// Modification protégée — seul le propriétaire peut modifier
+export async function updateArticle(slug: string, payload: ArticleUpdatePayload): Promise<Article> {
+    const response = await api.patch<Article>(`/articles/${slug}/`, payload);
     return response.data;
 }
 
