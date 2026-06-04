@@ -1,16 +1,20 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Button from '../ui/Button';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '../../context/LanguageContext';
+import { useAuth } from '../../context/AuthContext';
 
 /**
  * Composant Header (En-tête) - Responsive avec Menu Mobile
  * Mobile: Logo + Menu burger qui ouvre un menu full-screen
  * Tablette/Desktop: Logo + Navigation (Contact) + Boutons (Log In, Join Now)
+ * Si connecté : affiche le prénom + bouton Déconnexion
  */
 function Header() {
   const { t } = useLanguage(); // Hook pour accéder aux traductions
+  const { state, dispatch } = useAuth();
+  const navigate = useNavigate();
 
   // État pour gérer l'ouverture/fermeture du menu mobile
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -27,6 +31,13 @@ function Header() {
    */
   const closeMenu = (): void => {
     setIsMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('access_token');
+    dispatch({ type: 'LOGOUT' });
+    closeMenu();
+    navigate('/');
   };
 
   // Classes CSS réutilisables
@@ -82,12 +93,25 @@ function Header() {
               {/* Bouton de changement de langue */}
               <LanguageToggle />
 
-              <Link to="/login" className={navLinkClass} aria-label={t.header.loginAriaLabel}>
-                {t.header.login}
-              </Link>
-              <Link to="/register">
-                <Button aria-label={t.header.registerAriaLabel}>{t.header.register}</Button>
-              </Link>
+              {state.user ? (
+                  <>
+                  <span className="text-white font-medium">
+                    {state.user.first_name}
+                  </span>
+                    <button onClick={handleLogout} className={navLinkClass}>
+                      {t.header.logout ?? 'Déconnexion'}
+                    </button>
+                  </>
+              ) : (
+                  <>
+                    <Link to="/login" className={navLinkClass} aria-label={t.header.loginAriaLabel}>
+                      {t.header.login}
+                    </Link>
+                    <Link to="/register">
+                      <Button aria-label={t.header.registerAriaLabel}>{t.header.register}</Button>
+                    </Link>
+                  </>
+              )}
             </div>
 
 
@@ -143,20 +167,23 @@ function Header() {
           {/* Séparateur */}
           <div className="w-24 h-px bg-white/20 my-4" aria-hidden="true" />
 
-          {/* Bouton Log In */}
-          <Link
-            to="/login"
-            onClick={closeMenu}
-            className="text-white font-roboto font-medium text-xl hover:text-purple-light transition"
-            aria-label={t.header.loginAriaLabel}
-          >
-            {t.header.login}
-          </Link>
-
-          {/* Bouton Join Now */}
-          <Link to="/register" onClick={closeMenu}>
-            <Button aria-label={t.header.registerAriaLabel}>{t.header.register}</Button>
-          </Link>
+          {state.user ? (
+              <>
+                <span className="text-white font-medium text-xl">{state.user.first_name}</span>
+                <button onClick={handleLogout} className="text-white font-medium text-xl hover:text-purple-light transition">
+                  {t.header.logout ?? 'Déconnexion'}
+                </button>
+              </>
+          ) : (
+              <>
+                <Link to="/login" onClick={closeMenu} className="text-white font-roboto font-medium text-xl hover:text-purple-light transition">
+                  {t.header.login}
+                </Link>
+                <Link to="/register" onClick={closeMenu}>
+                  <Button>{t.header.register}</Button>
+                </Link>
+              </>
+          )}
         </nav>
       </div>
 

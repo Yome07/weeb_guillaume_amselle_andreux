@@ -8,6 +8,7 @@
     "contact": "Contact",
     "blog": "Blog",
     "login": "Connexion",
+    "logout": "Déconnexion",
     "register": "S'inscrire",
     "loginAriaLabel": "Se connecter à votre compte",
     "registerAriaLabel": "Créer un nouveau compte",

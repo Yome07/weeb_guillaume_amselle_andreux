@@ -8,6 +8,7 @@
     "contact": "Contact",
     "blog": "Blog",
     "login": "Log In",
+    "logout": "Logout",
     "register": "Join Now",
     "loginAriaLabel": "Log in to your account",
     "registerAriaLabel": "Create a new account",

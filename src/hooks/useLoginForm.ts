@@ -1,6 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { login } from '../services/authService';
+import {useAuth} from "../context/AuthContext";
 
 interface UseLoginFormReturn {
   email: string;
@@ -20,6 +21,7 @@ interface UseLoginFormReturn {
  * @returns {UseLoginFormReturn} - État et fonctions pour gérer le formulaire
  */
 export function useLoginForm(): UseLoginFormReturn {
+  const { dispatch } = useAuth();
   const [searchParams] = useSearchParams(); // Pour récupérer l'email de l'URL
   const navigate = useNavigate();
 
@@ -46,6 +48,18 @@ export function useLoginForm(): UseLoginFormReturn {
 
       // Stocker les tokens JWT
       sessionStorage.setItem('access_token', data.access);
+
+      const payload = JSON.parse(atob(data.access.split('.')[1]));
+      dispatch({
+        type: 'LOGIN',
+        payload: {
+          first_name: payload.first_name,
+          last_name: payload.last_name,
+          email: payload.email,
+          is_staff: payload.is_staff,
+          is_active: payload.is_active,
+        }
+      });
 
       // Rediriger vers la page d'accueil après connexion
       navigate('/');
