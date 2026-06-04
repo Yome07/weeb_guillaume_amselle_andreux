@@ -2,6 +2,7 @@ import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../context/LanguageContext';
 import { useContactForm } from '../hooks/useContactForm';
+import Textarea from '../components/ui/Textarea';
 
 /**
  * Page de contact (Contact)
@@ -127,18 +128,12 @@ function Contact() {
                     </div>
                     {/* Champ Message (textarea) */}
                     <div className="flex flex-col gap-2">
-                        <label
-                            htmlFor="message"
-                            className="text-purple-light font-inter font-medium text-2xl text-center"
-                        >
-                            {t.contact.form.message}
-                        </label>
-                        <textarea
+                        <Textarea
+                            label={t.contact.form.message}
                             id="message"
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             rows={5}
-                            className="border-b border-purple-light text-white text-lg p-2 font-inter focus:outline-none focus:border-purple-600 resize-none text-center"
                         />
                     </div>
 
