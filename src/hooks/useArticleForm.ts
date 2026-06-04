@@ -53,7 +53,7 @@ export function useArticleForm(): UseArticleFormReturn {
             setTitle('');
             setContent('');
             setErrors({});
-            navigate(`/blog/${article.id}`);
+            navigate(`/blog/${article.slug}`);
         } catch (err: any) {
             setApiError(err.message || "Une erreur est survenue lors de la publication.");
         } finally {
