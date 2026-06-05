@@ -2,7 +2,7 @@
 
 ## Description
 
-Projet de Blog développé dans le cadre d'un projet de formation. Permet aux utilisateurs de lire des articles, de s'inscrire, de publier et gérer leurs propres articles. Un dashboard d'administration permet de gérer les utilisateurs et les publications.
+Projet de blog développé dans le cadre d'un projet de formation. Permet aux utilisateurs de lire des articles, de s'inscrire, de publier et gérer leurs propres articles. Un dashboard d'administration permet de gérer les utilisateurs et les publications.
 
 Le backend est développé avec Django REST Framework (projet d'équipe). Ce dépôt contient uniquement le frontend.
 
@@ -17,11 +17,37 @@ Le backend est développé avec Django REST Framework (projet d'équipe). Ce dé
 
 ## Librairies installées
 
-- `react-router-dom` — routing entre les pages
-- `tailwindcss` — framework CSS utility-first pour le styling
-- `axios` — requêtes HTTP et gestion automatique des tokens JWT
-- `react-icons` — bibliothèque d'icônes pour le footer et l'UI
-- `framer-motion` — bibliothèque pour les animations au scroll
+| Package | Version | Usage |
+|---|---|---|
+| `react-router-dom` | ^7.12.0 | Routing entre les pages |
+| `tailwindcss` | ^4.1.18 | Framework CSS utility-first |
+| `axios` | ^1.16.1 | Requêtes HTTP et gestion automatique des tokens JWT |
+| `react-icons` | ^5.5.0 | Icônes pour le footer et l'UI |
+| `framer-motion` | ^12.26.2 | Animations au scroll |
+
+## Prérequis
+
+- Node.js >= 18
+- npm >= 9
+- Le backend Django doit tourner sur `http://localhost:8000`
+
+## Installation et démarrage
+
+```bash
+npm install
+npm run dev
+```
+
+L'application démarre sur `http://localhost:5173`.
+
+## Scripts disponibles
+
+```bash
+npm run dev      # Lancer en développement
+npm run build    # Build de production (fichiers générés dans dist/)
+npm run lint     # Linter ESLint
+npm run preview  # Prévisualiser le build de production
+```
 
 ## Architecture du projet
 
@@ -45,20 +71,11 @@ src/
 └── PrivateAdminRoute.tsx    # Protection routes (admin is_staff)
 ```
 
-## Installation
-
-```bash
-npm install
-npm run dev
-```
-
-L'application démarre sur `http://localhost:5173`. Le backend Django est sur `http://localhost:8000`.
-
 ## Authentification
 
 Stratégie hybride JWT :
-- `access_token` stocké en `sessionStorage`
-- `refresh_token` en cookie HttpOnly géré par Django
+- `access_token` stocké en `sessionStorage` (perdu à la fermeture de l'onglet)
+- `refresh_token` en cookie HttpOnly géré par Django (inaccessible au JavaScript)
 
 Le rafraîchissement du token est automatique et silencieux via les intercepteurs Axios.
 
@@ -99,4 +116,6 @@ Une documentation détaillée est disponible dans le dossier `documentation/` :
 - `ADMIN.md` — dashboard administration
 - `ROUTING.md` — routes et navigation
 - `STYLES_ASSETS.md` — thème et assets
+- `ENVIRONMENT.md` — variables d'environnement et configuration
 - `ERROR_HANDLING.md` — gestion des erreurs
+- `AUTH.md` — authentification JWT
