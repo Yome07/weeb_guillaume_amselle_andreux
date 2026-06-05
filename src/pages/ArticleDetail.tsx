@@ -1,10 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { useArticleDetail } from '../hooks/useArticleDetail';
-import {useAuth} from "../context/AuthContext.tsx";
-import {FormEvent, useState} from "react";
-import {deleteArticle, updateArticle} from "../services/blogService.ts";
+import { useArticleActions } from '../hooks/useArticleActions';
 import ConfirmModal from '../components/ui/ConfirmModal';
-import ArticleForm from "../components/ui/ArticleForm.tsx";
+import ArticleForm from '../components/ui/ArticleForm';
 
 /**
  * Page détail d'un article (publique)
@@ -13,88 +11,28 @@ import ArticleForm from "../components/ui/ArticleForm.tsx";
 function ArticleDetail() {
     const { slug } = useParams<{ slug: string }>();
     const { article, isLoading, error } = useArticleDetail(slug ?? '');
-    const { state } = useAuth();
 
-    // États suppression
-    const [isDeleting, setIsDeleting] = useState<boolean>(false);
-    const [deleteError, setDeleteError] = useState<string | null>(null);
-    const [successMessage, setSuccessMessage] = useState<string | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-    // États édition
-    const [isEditing, setIsEditing] = useState<boolean>(false);
-    const [editTitle, setEditTitle] = useState<string>('');
-    const [editContent, setEditContent] = useState<string>('');
-    const [isSaving, setIsSaving] = useState<boolean>(false);
-    const [editError, setEditError] = useState<string | null>(null);
-    const [editErrors, setEditErrors] = useState<Record<string, string>>({});
-    const [currentArticle, setCurrentArticle] = useState(article);
-
-    // Synchroniser currentArticle avec article au chargement
-    if (article && !currentArticle) {
-        setCurrentArticle(article);
-    }
-
-    // Vérifier si l'utilisateur connecté est l'auteur de l'article
-    const isAuthor = state.user?.id === article?.author.id;
-
-    // Passer en mode édition
-    const handleEditStart = () => {
-        const current = currentArticle ?? article;
-        if (!current) return;
-        setEditTitle(current.title);
-        setEditContent(current.content);
-        setEditError(null);
-        setEditErrors({});
-        setIsEditing(true);
-    };
-
-    // Sauvegarder les modifications
-    const handleEditSave = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!slug) return;
-
-        const newErrors: Record<string, string> = {};
-        if (!editTitle.trim()) newErrors.title = 'Le titre est requis.';
-        if (!editContent.trim()) newErrors.content = 'Le contenu est requis.';
-
-        if (Object.keys(newErrors).length > 0) {
-            setEditErrors(newErrors);
-            return;
-        }
-
-        setIsSaving(true);
-        setEditError(null);
-        try {
-            const updated = await updateArticle(slug, {
-                title: editTitle.trim(),
-                content: editContent.trim(),
-            });
-            setCurrentArticle(updated);
-            setIsEditing(false);
-        } catch {
-            setEditError('Une erreur est survenue lors de la sauvegarde.');
-        } finally {
-            setIsSaving(false);
-        }
-    };
-
-    // Supprimer l'article
-    const handleDelete = async () => {
-        setIsModalOpen(false);
-        setIsDeleting(true);
-        setDeleteError(null);
-        try {
-            await deleteArticle(slug!);
-            setSuccessMessage('L\'article a été supprimé avec succès.');
-        } catch {
-            setDeleteError('Une erreur est survenue lors de la suppression.');
-        } finally {
-            setIsDeleting(false);
-        }
-    };
-
-    const displayArticle = currentArticle ?? article;
+    const {
+        isDeleting,
+        deleteError,
+        successMessage,
+        isModalOpen,
+        setIsModalOpen,
+        handleDelete,
+        isEditing,
+        editTitle,
+        editContent,
+        isSaving,
+        editError,
+        editErrors,
+        setEditTitle,
+        setEditContent,
+        setIsEditing,
+        handleEditStart,
+        handleEditSave,
+        displayArticle,
+        isAuthor,
+    } = useArticleActions({ slug: slug ?? '', article });
 
     return (
         <>
@@ -192,17 +130,13 @@ function ArticleDetail() {
                                 <p>
                                     Publié le{' '}
                                     {new Date(displayArticle.created_at).toLocaleDateString('fr-FR', {
-                                        year: 'numeric',
-                                        month: 'long',
-                                        day: 'numeric',
+                                        year: 'numeric', month: 'long', day: 'numeric',
                                     })}
                                     {displayArticle.updated_at !== displayArticle.created_at && (
                                         <span>
                                             {' '}· Mis à jour le{' '}
                                             {new Date(displayArticle.updated_at).toLocaleDateString('fr-FR', {
-                                                year: 'numeric',
-                                                month: 'long',
-                                                day: 'numeric',
+                                                year: 'numeric', month: 'long', day: 'numeric',
                                             })}
                                         </span>
                                     )}

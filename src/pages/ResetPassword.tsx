@@ -1,103 +1,36 @@
-import { useState, FormEvent } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { FormEvent } from 'react';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../context/LanguageContext';
-import { confirmPasswordReset } from '../services/authService';
-
-interface PasswordStrength {
-    isValid: boolean;
-    minLength: boolean;
-    hasUppercase: boolean;
-    hasLowercase: boolean;
-    hasNumber: boolean;
-    hasSpecialChar: boolean;
-}
+import { useResetPasswordForm } from '../hooks/useResetPasswordForm';
 
 /**
  * Page de confirmation de réinitialisation de mot de passe
- * Récupère uidb64 et token depuis l'URL
- * Envoie le nouveau mot de passe à l'API
+ * Récupère uidb64 et token depuis l'URL, affiche un formulaire de nouveau mot de passe et envoie la requête à l'API
  */
 function ResetPassword() {
     const { t } = useLanguage();
-    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-
-    // Récupérer uidb64 et token depuis l'URL
     const uidb64 = searchParams.get('uidb64') || '';
     const token = searchParams.get('token') || '';
 
-    const [password, setPassword] = useState<string>('');
-    const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const [errors, setErrors] = useState<Record<string, string>>({});
-    const [apiError, setApiError] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const {
+        password,
+        confirmPassword,
+        errors,
+        apiError,
+        isLoading,
+        passwordStrength,
+        passwordsMatch,
+        setPassword,
+        setConfirmPassword,
+        handleSubmit: submitForm,
+    } = useResetPasswordForm();
 
-    const validatePassword = (password: string): PasswordStrength => {
-        const minLength = password.length >= 12;
-        const hasUppercase = /[A-Z]/.test(password);
-        const hasLowercase = /[a-z]/.test(password);
-        const hasNumber = /[0-9]/.test(password);
-        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-        return {
-            isValid: minLength && hasUppercase && hasLowercase && hasNumber && hasSpecialChar,
-            minLength,
-            hasUppercase,
-            hasLowercase,
-            hasNumber,
-            hasSpecialChar,
-        };
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        submitForm(e, t, uidb64, token);
     };
-
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
-        e.preventDefault();
-        setApiError(null);
-
-        const newErrors: Record<string, string> = {};
-        const passwordValidation = validatePassword(password);
-
-        if (!password) {
-            newErrors.password = t.forgotPassword.validation?.passwordRequired ?? 'Le mot de passe est requis.';
-        } else if (!passwordValidation.isValid) {
-            newErrors.password = t.forgotPassword.validation?.passwordWeak ?? 'Le mot de passe est trop faible.';
-        }
-
-        if (!confirmPassword) {
-            newErrors.confirmPassword = t.forgotPassword.validation?.confirmPasswordRequired ?? 'La confirmation est requise.';
-        } else if (password !== confirmPassword) {
-            newErrors.confirmPassword = t.forgotPassword.validation?.passwordMismatch ?? 'Les mots de passe ne correspondent pas.';
-        }
-
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            return;
-        }
-
-        // Vérifier que le lien contient bien uidb64 et token
-        if (!uidb64 || !token) {
-            setApiError('Le lien de réinitialisation est invalide ou a expiré.');
-            return;
-        }
-
-        setIsLoading(true);
-        try {
-            await confirmPasswordReset({ uidb64, token, password });
-            navigate('/login');
-        } catch (err: any) {
-            const errorCode = err?.response?.data?.error_code;
-            if (errorCode === 'INVALID_TOKEN') {
-                setApiError('Le lien de réinitialisation est invalide ou a expiré.');
-            } else {
-                setApiError('Une erreur est survenue. Veuillez réessayer.');
-            }
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const passwordStrength = password ? validatePassword(password) : null;
 
     return (
         <>
@@ -168,8 +101,8 @@ function ResetPassword() {
                             <p className="text-red-500 text-sm mt-2">{errors.confirmPassword}</p>
                         )}
                         {confirmPassword && (
-                            <p className={`text-xs mt-2 ${password === confirmPassword ? 'text-green-400' : 'text-red-400'}`}>
-                                {password === confirmPassword
+                            <p className={`text-xs mt-2 ${passwordsMatch ? 'text-green-400' : 'text-red-400'}`}>
+                                {passwordsMatch
                                     ? `✓ ${t.forgotPassword.passwordCriteria?.match ?? 'Les mots de passe correspondent'}`
                                     : `✗ ${t.forgotPassword.passwordCriteria?.noMatch ?? 'Les mots de passe ne correspondent pas'}`}
                             </p>

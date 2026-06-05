@@ -1,9 +1,9 @@
-import { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { FormEvent } from 'react';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../context/LanguageContext';
-import { requestPasswordReset } from '../services/authService';
+import { useForgotPasswordForm } from '../hooks/useForgotPasswordForm';
 
 /**
  * Page de demande de réinitialisation de mot de passe
@@ -11,38 +11,17 @@ import { requestPasswordReset } from '../services/authService';
  */
 function ForgotPassword() {
     const { t } = useLanguage();
-    const [email, setEmail] = useState<string>('');
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [successMessage, setSuccessMessage] = useState<string | null>(null);
-    const [apiError, setApiError] = useState<string | null>(null);
+    const {
+        email,
+        isLoading,
+        successMessage,
+        apiError,
+        setEmail,
+        handleSubmit: submitForm,
+    } = useForgotPasswordForm();
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
-        e.preventDefault();
-        setApiError(null);
-        setSuccessMessage(null);
-
-        if (!email.trim()) {
-            setApiError(t.forgotPassword.validation?.emailRequired ?? 'L\'email est requis.');
-            return;
-        }
-
-        setIsLoading(true);
-        try {
-            await requestPasswordReset(email);
-            // Message générique intentionnel : ne révèle pas si l'email existe
-            setSuccessMessage(
-                t.forgotPassword.successMessage ??
-                'Si un compte est associé à cet email, vous recevrez un lien de réinitialisation.'
-            );
-            setEmail('');
-        } catch {
-            setApiError(
-                t.forgotPassword.errors?.default ??
-                'Une erreur est survenue. Veuillez réessayer.'
-            );
-        } finally {
-            setIsLoading(false);
-        }
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        submitForm(e, t);
     };
 
     return (

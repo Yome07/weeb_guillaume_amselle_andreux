@@ -1,8 +1,8 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { getAdminUsers, updateAdminUser, type AdminUser } from '../services/adminService';
-import { getArticles, deleteArticle, type Article } from '../services/blogService';
+import { useAdminArticles } from '../hooks/useAdminArticles';
+import { useAdminUsers } from '../hooks/useAdminUsers';
 import ConfirmModal from '../components/ui/ConfirmModal';
 
 type AdminTab = 'articles' | 'users';
@@ -10,99 +10,32 @@ type AdminTab = 'articles' | 'users';
 /**
  * Dashboard d'administration
  * Accessible uniquement aux superusers (is_staff = true)
- * Gestion des articles et des utilisateurs
  */
 function AdminDashboard() {
     const { state } = useAuth();
     const [activeTab, setActiveTab] = useState<AdminTab>('articles');
 
-    // Articles
-    const [articles, setArticles] = useState<Article[]>([]);
-    const [loadingArticles, setLoadingArticles] = useState<boolean>(true);
-    const [articlesError, setArticlesError] = useState<string | null>(null);
-    const [deletingSlug, setDeletingSlug] = useState<string | null>(null);
-    const [articleToDelete, setArticleToDelete] = useState<string | null>(null);
-    const [articleActionMessage, setArticleActionMessage] = useState<string | null>(null);
+    const {
+        articles,
+        loadingArticles,
+        articlesError,
+        deletingSlug,
+        articleToDelete,
+        articleActionMessage,
+        setArticleToDelete,
+        handleDeleteArticle,
+    } = useAdminArticles();
 
-    // Utilisateurs
-    const [users, setUsers] = useState<AdminUser[]>([]);
-    const [loadingUsers, setLoadingUsers] = useState<boolean>(true);
-    const [usersError, setUsersError] = useState<string | null>(null);
-    const [updatingUserId, setUpdatingUserId] = useState<string | null>(null);
-    const [userActionMessage, setUserActionMessage] = useState<string | null>(null);
-
-    // Chargement des articles
-    useEffect(() => {
-        let cancelled = false;
-        setLoadingArticles(true);
-        getArticles()
-            .then((data) => { if (!cancelled) setArticles(data); })
-            .catch(() => { if (!cancelled) setArticlesError('Impossible de charger les articles.'); })
-            .finally(() => { if (!cancelled) setLoadingArticles(false); });
-        return () => { cancelled = true; };
-    }, []);
-
-    // Chargement des utilisateurs
-    useEffect(() => {
-        let cancelled = false;
-        setLoadingUsers(true);
-        getAdminUsers()
-            .then((data) => { if (!cancelled) setUsers(data); })
-            .catch(() => { if (!cancelled) setUsersError('Impossible de charger les utilisateurs.'); })
-            .finally(() => { if (!cancelled) setLoadingUsers(false); });
-        return () => { cancelled = true; };
-    }, []);
-
-    const pendingUsers = useMemo(() => users.filter((u) => !u.is_active), [users]);
-
-    // Supprimer un article
-    const handleDeleteArticle = async () => {
-        if (!articleToDelete) return;
-        setDeletingSlug(articleToDelete);
-        setArticleToDelete(null);
-        setArticleActionMessage(null);
-        try {
-            await deleteArticle(articleToDelete);
-            setArticles((prev) => prev.filter((a) => a.slug !== articleToDelete));
-            setArticleActionMessage('Article supprimé avec succès.');
-        } catch {
-            setArticleActionMessage('Erreur lors de la suppression.');
-        } finally {
-            setDeletingSlug(null);
-        }
-    };
-
-    // Valider ou désactiver un utilisateur
-    const handleToggleUserActive = async (user: AdminUser) => {
-        setUpdatingUserId(user.id);
-        setUserActionMessage(null);
-        try {
-            const updated = await updateAdminUser(user.id, { is_active: !user.is_active });
-            setUsers((prev) => prev.map((u) => u.id === user.id ? { ...u, ...updated } : u));
-            setUserActionMessage(user.is_active ? 'Utilisateur désactivé.' : 'Utilisateur validé.');
-        } catch (err: any) {
-            const message = err?.response?.data?.message;
-            setUserActionMessage(message || 'Erreur lors de la modification.');
-        } finally {
-            setUpdatingUserId(null);
-        }
-    };
-
-    // Promouvoir ou rétrograder un utilisateur
-    const handleToggleUserStaff = async (user: AdminUser) => {
-        setUpdatingUserId(user.id);
-        setUserActionMessage(null);
-        try {
-            const updated = await updateAdminUser(user.id, { is_staff: !user.is_staff });
-            setUsers((prev) => prev.map((u) => u.id === user.id ? { ...u, ...updated } : u));
-            setUserActionMessage(user.is_staff ? 'Droits admin retirés.' : 'Droits admin accordés.');
-        } catch (err: any) {
-            const message = err?.response?.data?.message;
-            setUserActionMessage(message || 'Erreur lors de la modification.');
-        } finally {
-            setUpdatingUserId(null);
-        }
-    };
+    const {
+        users,
+        loadingUsers,
+        usersError,
+        updatingUserId,
+        userActionMessage,
+        pendingUsers,
+        handleToggleUserActive,
+        handleToggleUserStaff,
+    } = useAdminUsers();
 
     const tabClass = (tab: AdminTab) =>
         `px-6 py-2 rounded-xl text-sm font-medium transition ${
@@ -159,8 +92,8 @@ function AdminDashboard() {
                     Utilisateurs
                     {pendingUsers.length > 0 && (
                         <span className="ml-2 bg-yellow-400 text-blue-gray-900 text-xs font-bold px-2 py-0.5 rounded-full">
-              {pendingUsers.length}
-            </span>
+                            {pendingUsers.length}
+                        </span>
                     )}
                 </button>
             </div>
@@ -241,19 +174,17 @@ function AdminDashboard() {
                                         <h2 className="text-white font-bold text-lg">
                                             {user.first_name} {user.last_name}
                                         </h2>
-                                        {/* Badge statut */}
                                         <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                                             user.is_active
                                                 ? 'bg-green-400/20 text-green-400'
                                                 : 'bg-yellow-400/20 text-yellow-400'
                                         }`}>
-                      {user.is_active ? 'Validé' : 'En attente'}
-                    </span>
-                                        {/* Badge admin */}
+                                            {user.is_active ? 'Validé' : 'En attente'}
+                                        </span>
                                         {user.is_staff && (
                                             <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-purple-400/20 text-purple-300">
-                        Admin
-                      </span>
+                                                Admin
+                                            </span>
                                         )}
                                     </div>
                                     <p className="text-gray-400 text-sm">{user.email}</p>
@@ -264,7 +195,6 @@ function AdminDashboard() {
                                     </p>
                                 </div>
 
-                                {/* Boutons actions — désactivés pour soi-même */}
                                 {user.id !== state.user?.id && (
                                     <div className="flex gap-3 shrink-0">
                                         <button
@@ -289,7 +219,6 @@ function AdminDashboard() {
                                     </div>
                                 )}
 
-                                {/* Message si c'est soi-même */}
                                 {user.id === state.user?.id && (
                                     <span className="text-gray-500 text-xs italic">Votre compte</span>
                                 )}
