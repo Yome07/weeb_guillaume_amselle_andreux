@@ -17,8 +17,6 @@ export function useArticleList(): UseArticleListReturn {
 
     useEffect(() => {
         let cancelled = false;
-        setIsLoading(true);
-        setError(null);
 
         getArticles()
             .then((data) => {

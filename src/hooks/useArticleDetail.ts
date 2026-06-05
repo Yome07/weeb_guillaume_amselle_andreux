@@ -18,8 +18,6 @@ export function useArticleDetail(slug: string): UseArticleDetailReturn {
     useEffect(() => {
         if (!slug) return;
         let cancelled = false;
-        setIsLoading(true);
-        setError(null);
 
         getArticle(slug)
             .then((data) => {
