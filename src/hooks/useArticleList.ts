@@ -9,6 +9,9 @@ interface UseArticleListReturn {
 
 /**
  * Hook pour récupérer la liste de tous les articles
+ *
+ * @returns {UseArticleListReturn} - État et fonctions pour gérer la liste des articles
+ *
  */
 export function useArticleList(): UseArticleListReturn {
     const [articles, setArticles] = useState<Article[]>([]);

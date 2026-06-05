@@ -9,6 +9,8 @@ interface UseArticleDetailReturn {
 
 /**
  * Hook pour récupérer le détail d'un article par son id
+ *
+ * @returns {UseArticleDetailReturn} - État et fonctions pour gérer le détail de l'article
  */
 export function useArticleDetail(slug: string): UseArticleDetailReturn {
     const [article, setArticle] = useState<Article | null>(null);

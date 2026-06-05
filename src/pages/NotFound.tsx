@@ -1,5 +1,10 @@
 import { Link } from 'react-router-dom';
 
+/**
+ *
+ * Page 404 - Not Found
+ *
+ */
 function NotFound() {
     return (
         <div className="text-center max-w-4xl mx-auto">

@@ -15,6 +15,8 @@ interface UseArticleFormReturn {
 
 /**
  * Hook pour gérer la logique du formulaire de création d'article
+ *
+ * @returns {UseArticleFormReturn} - État et fonctions pour gérer le formulaire
  */
 export function useArticleForm(): UseArticleFormReturn {
     const navigate = useNavigate();
@@ -24,6 +26,10 @@ export function useArticleForm(): UseArticleFormReturn {
     const [apiError, setApiError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    /**
+     * Gère l'envoi du formulaire
+     * @param {FormEvent} e - événement d'envoi du formulaire
+     */
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         setApiError(null);
