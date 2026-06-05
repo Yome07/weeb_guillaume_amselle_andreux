@@ -13,6 +13,7 @@ import './App.css';
 import ResetPassword from "./pages/ResetPassword.tsx";
 import PrivateAdminRoute from "./PrivateAdminRoute.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
+import NotFound from "./pages/NotFound.tsx";
 
 function App() {
     return (
@@ -42,6 +43,7 @@ function App() {
             }
                 />
                 <Route path="blog/:slug" element={<ArticleDetail />} />
+                <Route path="*" element={<NotFound />} />
             </Route>
         </Routes>
     );
