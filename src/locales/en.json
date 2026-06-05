@@ -181,7 +181,7 @@
     },
     "passwordCriteria": {
       "title": "Password criteria:",
-      "minLength": "Minimum 8 characters",
+      "minLength": "Minimum 12 characters",
       "hasUppercase": "At least one uppercase letter",
       "hasLowercase": "At least one lowercase letter",
       "hasNumber": "At least one number",
