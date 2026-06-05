@@ -85,6 +85,9 @@ function Header() {
                     {link.name}
                   </Link>
                 ))}
+                {state.user?.is_staff && (
+                    <Link to="/admin" className={navLinkClass}>Admin</Link>
+                )}
               </nav>
             </div>
 

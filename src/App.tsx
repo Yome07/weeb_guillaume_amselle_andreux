@@ -11,6 +11,8 @@ import ArticleCreate from './pages/ArticleCreate';
 import PrivateRoute from './PrivateRoute';
 import './App.css';
 import ResetPassword from "./pages/ResetPassword.tsx";
+import PrivateAdminRoute from "./PrivateAdminRoute.tsx";
+import AdminDashboard from "./pages/AdminDashboard.tsx";
 
 function App() {
     return (
@@ -30,6 +32,14 @@ function App() {
                             <ArticleCreate />
                         </PrivateRoute>
                     }
+                />
+                <Route
+                path="admin"
+                element={
+                <PrivateAdminRoute>
+                    <AdminDashboard />
+                </PrivateAdminRoute>
+            }
                 />
                 <Route path="blog/:slug" element={<ArticleDetail />} />
             </Route>
