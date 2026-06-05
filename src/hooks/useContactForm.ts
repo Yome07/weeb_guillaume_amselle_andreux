@@ -1,16 +1,7 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
-import axios, { AxiosError } from 'axios';
+import { useState, FormEvent } from 'react';
+import { publicApi } from '../services/api';
+import {AxiosError} from "axios";
 
-interface ContactFormState {
-  lastname: string;
-  firstname: string;
-  email: string;
-  phone: string;
-  message: string;
-  errors: Record<string, string | string[]>;
-  success: boolean;
-  isLoading: boolean;
-}
 
 interface UseContactFormReturn {
   lastname: string;
@@ -56,18 +47,9 @@ export function useContactForm(): UseContactFormReturn {
     e.preventDefault();
     setIsLoading(true);
     setErrors({});
-    console.log('Lastname:', lastname);
-    console.log('Firstname:', firstname);
-    console.log('Email:', email);
-    console.log('Phone:', phone);
-    console.log('Message:', message);
 
     try {
-      // axios.post prend l'URL et l'objet de données en 2ème argument.
-      // axios s'occupe de :
-      // 1. Transformer l'objet en chaîne JSON.
-      // 2. Définir automatiquement l'en-tête 'Content-Type': 'application/json'.
-      await axios.post('http://localhost:8000/contact/', {
+      await publicApi.post('/contact/', {
         last_name: lastname,
         first_name: firstname,
         email: email,
