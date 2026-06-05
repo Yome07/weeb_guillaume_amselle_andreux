@@ -8,25 +8,5 @@ export default defineConfig({
     tailwindcss(),
     react()
   ],
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-      },
-      '/users': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-      },
-      '/articles': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-      },
-      '/contact': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-      },
-    },
-  },
 })
 

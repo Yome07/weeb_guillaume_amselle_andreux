@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const API_URL = (import.meta.env.VITE_API_URL ?? "http://localhost:8000").replace(/\/+$/, "");
+
 // Instance publique — sans token (register, login, forgot password...)
 export const publicApi = axios.create({
-  baseURL: '/',
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -11,7 +13,7 @@ export const publicApi = axios.create({
 
 // Instance privée — avec token (routes protégées)
 const api = axios.create({
-  baseURL: '/',
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
