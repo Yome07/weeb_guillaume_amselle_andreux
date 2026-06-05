@@ -166,6 +166,9 @@ function Header() {
               {link.name}
             </Link>
           ))}
+          {state.user?.is_staff && (
+              <Link to="/admin" className={mobileNavLinkClass}>Admin</Link>
+          )}
 
           {/* Séparateur */}
           <div className="w-24 h-px bg-white/20 my-4" aria-hidden="true" />
