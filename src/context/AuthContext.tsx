@@ -41,6 +41,12 @@ function getUserFromToken(): AuthUser | null {
     if (!token) return null;
     try {
         const payload = JSON.parse(atob(token.split('.')[1]));
+        // Vérifier si le token est expiré
+        const isExpired = payload.exp * 1000 < Date.now();
+        if (isExpired) {
+            sessionStorage.removeItem('access_token');
+            return null;
+        }
         return {
             id: payload.user_id,
             first_name: payload.first_name,
