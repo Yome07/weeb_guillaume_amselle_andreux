@@ -32,8 +32,7 @@ export async function register(payload: RegisterPayload): Promise<void> {
         first_name: payload.firstname,
         last_name: payload.lastname,
     };
-    const response = await publicApi.post('/users/register/', djangoPayload);
-    sessionStorage.setItem('access_token', response.data.access);
+    await publicApi.post('/users/register/', djangoPayload);
 }
 
 export async function logout(): Promise<void> {
