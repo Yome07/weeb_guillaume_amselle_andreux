@@ -1,4 +1,4 @@
-import { publicApi } from './api';
+import api, { publicApi } from './api';
 
 interface LoginPayload {
     email: string;
@@ -36,7 +36,13 @@ export async function register(payload: RegisterPayload): Promise<void> {
 }
 
 export async function logout(): Promise<void> {
-    sessionStorage.removeItem('access_token');
+    try {
+        await api.post('/users/logout/', {}, { withCredentials: true });
+    } catch {
+        // On nettoie quand même la session locale même si le serveur échoue
+    } finally {
+        sessionStorage.removeItem('access_token');
+    }
 }
 
 export async function requestPasswordReset(email: string): Promise<void> {

@@ -4,6 +4,7 @@ import Button from '../ui/Button';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '../../context/LanguageContext';
 import { useAuth } from '../../context/AuthContext';
+import {logout as logoutService } from "../../services/authService.ts";
 
 /**
  * Composant Header (En-tête) - Responsive avec Menu Mobile
@@ -33,8 +34,13 @@ function Header() {
     setIsMenuOpen(false);
   };
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('access_token');
+  /**
+   *  Gère la déconnexion de l'utilisateur
+   *  Appelle l'API de logout, met à jour le contexte d'authentification, ferme le menu et redirige vers la page d'accueil
+    *  @returns {Promise<void>}
+   */
+  const handleLogout = async () => {
+    await logoutService();
     dispatch({ type: 'LOGOUT' });
     closeMenu();
     navigate('/');
