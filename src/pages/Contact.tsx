@@ -16,14 +16,14 @@ function Contact() {
         lastname,
         firstname,
         email,
-        phone,
+        subject,
         message,
         errors,
         success,
         setLastname,
         setFirstname,
         setEmail,
-        setPhone,
+        setSubject,
         setMessage,
         handleSubmit,
     } = useContactForm();
@@ -94,18 +94,18 @@ function Contact() {
                         </div>
                     </div>
                     <div className="flex flex-col gap-6 lg:flex-row lg:gap-6">
-                        {/* Champ Téléphone */}
+                        {/* Champ Sujet */}
                         <div className="flex-1">
                             <Input
-                                label={t.contact.form.phone}
-                                type="tel"
-                                id="tel"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
+                                label={t.contact.form.subject}
+                                type="text"
+                                id="subject"
+                                value={subject}
+                                onChange={(e) => setSubject(e.target.value)}
                             />
-                            {errors.phone && (
+                            {errors.subject && (
                                 <p className="text-red-400 text-sm mt-1">
-                                  {Array.isArray(errors.phone) ? errors.phone[0] : errors.phone}
+                                  {Array.isArray(errors.subject) ? errors.subject[0] : errors.subject}
                                 </p>
                             )}
                         </div>

@@ -102,7 +102,7 @@
       "lastname": "Last Name",
       "firstname": "First Name",
       "email": "Email",
-      "phone": "Phone",
+      "subject": "Subject",
       "message": "Message",
       "submit": "Contact",
       "success": "Your message has been sent successfully!",

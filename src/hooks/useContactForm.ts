@@ -7,7 +7,7 @@ interface UseContactFormReturn {
   lastname: string;
   firstname: string;
   email: string;
-  phone: string;
+  subject: string;
   message: string;
   errors: Record<string, string | string[]>;
   success: boolean;
@@ -15,7 +15,7 @@ interface UseContactFormReturn {
   setLastname: (value: string) => void;
   setFirstname: (value: string) => void;
   setEmail: (value: string) => void;
-  setPhone: (value: string) => void;
+  setSubject: (value: string) => void;
   setMessage: (value: string) => void;
   handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
 }
@@ -31,7 +31,7 @@ export function useContactForm(): UseContactFormReturn {
   const [lastname, setLastname] = useState<string>('');
   const [firstname, setFirstname] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [phone, setPhone] = useState<string>('');
+  const [subject, setSubject] = useState<string>('');
   const [message, setMessage] = useState<string>('');
 
   // États pour la gestion des erreurs et du succès
@@ -53,7 +53,7 @@ export function useContactForm(): UseContactFormReturn {
         last_name: lastname,
         first_name: firstname,
         email: email,
-        phone: phone,
+        subject: subject,
         message: message,
       });
 
@@ -62,7 +62,7 @@ export function useContactForm(): UseContactFormReturn {
       setLastname('');
       setFirstname('');
       setEmail('');
-      setPhone('');
+      setSubject('');
       setMessage('');
     } catch (error) {
       // Gère les erreurs réseau ET les erreurs HTTP (4xx/5xx)
@@ -87,7 +87,7 @@ export function useContactForm(): UseContactFormReturn {
     lastname,
     firstname,
     email,
-    phone,
+    subject,
     message,
     errors,
     success,
@@ -97,7 +97,7 @@ export function useContactForm(): UseContactFormReturn {
     setLastname,
     setFirstname,
     setEmail,
-    setPhone,
+    setSubject,
     setMessage,
 
     // Fonctions
