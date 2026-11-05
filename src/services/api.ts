@@ -22,9 +22,9 @@ const api = axios.create({
 
 
 // =================== INTERCEPTEUR DE REQUÊTE =======================
-// Attache l'access_token à chaque requête sortante
+// Attache l'access à chaque requête sortante
 api.interceptors.request.use((config) => {
-  const token = sessionStorage.getItem('access_token');
+  const token = sessionStorage.getItem('access');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -48,7 +48,7 @@ api.interceptors.response.use(
       // Si c'est la requête de refresh elle-même qui échoue,
       // on coupe tout pour éviter une boucle infinie
       if (originalRequest?.url?.includes('users/token/refresh/')) {
-        sessionStorage.removeItem('access_token');
+        sessionStorage.removeItem('access');
         window.location.href = '/login';
         return Promise.reject(error);
       }
@@ -66,7 +66,7 @@ api.interceptors.response.use(
           );
 
           const newAccessToken = res.data.access;
-          sessionStorage.setItem('access_token', newAccessToken);
+          sessionStorage.setItem('access', newAccessToken);
 
           // Rejouer la requête originale avec le nouveau token
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
@@ -74,7 +74,7 @@ api.interceptors.response.use(
 
         } catch (refreshError) {
           // Refresh token expiré ou invalide : déconnexion forcée
-          sessionStorage.removeItem('access_token');
+          sessionStorage.removeItem('access');
           window.location.href = '/login';
           return Promise.reject(refreshError);
         }
