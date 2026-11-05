@@ -1,5 +1,12 @@
-import { createContext, useReducer, useContext, ReactNode } from 'react';
-
+import {
+    createContext,
+    useReducer,
+    useContext,
+    useEffect,
+    type Dispatch,
+    type ReactNode,
+} from 'react';
+import api from '../services/api';
 // Types
 interface AuthUser {
     id: string;
@@ -9,60 +16,30 @@ interface AuthUser {
     is_staff: boolean;
     is_active: boolean;
 }
-
 interface AuthState {
     user: AuthUser | null;
+    isLoading: boolean;
 }
-
 type AuthAction =
     | { type: 'LOGIN'; payload: AuthUser }
     | { type: 'LOGOUT' };
-
 interface AuthContextType {
     state: AuthState;
-    dispatch: React.Dispatch<AuthAction>;
+    dispatch: Dispatch<AuthAction>;
 }
-
 // Reducer
 function authReducer(state: AuthState, action: AuthAction): AuthState {
     switch (action.type) {
         case 'LOGIN':
-            return { user: action.payload };
+            return { user: action.payload, isLoading: false };
         case 'LOGOUT':
-            return { user: null };
+            return { user: null, isLoading: false };
         default:
             return state;
     }
 }
-
-// Décoder le token JWT depuis sessionStorage pour initialiser l'état
-function getUserFromToken(): AuthUser | null {
-    const token = sessionStorage.getItem('access');
-    if (!token) return null;
-    try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        // Vérifier si le token est expiré
-        const isExpired = payload.exp * 1000 < Date.now();
-        if (isExpired) {
-            sessionStorage.removeItem('access');
-            return null;
-        }
-        return {
-            id: payload.user_id,
-            first_name: payload.first_name,
-            last_name: payload.last_name,
-            email: payload.email,
-            is_staff: payload.is_staff,
-            is_active: payload.is_active,
-        };
-    } catch {
-        return null;
-    }
-}
-
 // Créer le contexte
 const AuthContext = createContext<AuthContextType | null>(null);
-
 /**
  * Provider d'authentification
  * Gère l'état de connexion et les infos utilisateur
@@ -70,16 +47,40 @@ const AuthContext = createContext<AuthContextType | null>(null);
  */
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [state, dispatch] = useReducer(authReducer, {
-        user: getUserFromToken(), // Restaure la session si un token existe
+        user: null,
+        isLoading: true,
     });
-
+    useEffect(() => {
+        let cancelled = false;
+        async function restoreSession(): Promise<void> {
+            const accessToken = sessionStorage.getItem('access_token');
+            if (!accessToken) {
+                if (!cancelled) dispatch({ type: 'LOGOUT' });
+                return;
+            }
+            try {
+// L'intercepteur renouvelle automatiquement l'access token si
+// celui actuellement stocké a expiré, puis rejoue cette requête.
+                const response = await api.get<AuthUser>('/users/');
+                if (!cancelled) {
+                    dispatch({ type: 'LOGIN', payload: response.data });
+                }
+            } catch {
+                sessionStorage.removeItem('access_token');
+                if (!cancelled) dispatch({ type: 'LOGOUT' });
+            }
+        }
+        restoreSession();
+        return () => {
+            cancelled = true;
+        };
+    }, []);
     return (
         <AuthContext.Provider value={{ state, dispatch }}>
             {children}
         </AuthContext.Provider>
     );
 }
-
 /**
  * Hook personnalisé pour consommer le contexte d'authentification
  * @returns { state, dispatch }
