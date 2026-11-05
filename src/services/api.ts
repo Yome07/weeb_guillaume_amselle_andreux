@@ -7,7 +7,7 @@ interface RefreshResponse {
     access: string;
 }
 let refreshPromise: Promise<string> | null = null;
-None
+
 export function refreshAccessToken(): Promise<string> {
     if (!refreshPromise) {
         refreshPromise = publicApi
