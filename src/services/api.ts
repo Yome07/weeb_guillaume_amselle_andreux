@@ -1,4 +1,31 @@
-import axios from 'axios';
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
+
+interface RetryRequestConfig extends InternalAxiosRequestConfig {
+    _retry?: boolean;
+}
+interface RefreshResponse {
+    access: string;
+}
+let refreshPromise: Promise<string> | null = null;
+None
+export function refreshAccessToken(): Promise<string> {
+    if (!refreshPromise) {
+        refreshPromise = publicApi
+            .post<RefreshResponse>('/users/token/refresh/', {})
+            .then((response) => {
+                const access = response.data?.access;
+                if (!access || typeof access !== 'string') {
+                    throw new Error('Access token absent de la réponse de refresh');
+                }
+                sessionStorage.setItem('access_token', access);
+                return access;
+            })
+            .finally(() => {
+                refreshPromise = null;
+            });
+    }
+    return refreshPromise;
+}
 
 const API_URL = (import.meta.env.VITE_API_URL ?? "http://localhost:8000").replace(/\/+$/, "");
 
@@ -33,7 +60,7 @@ api.interceptors.request.use((config) => {
 
 // =================== INTERCEPTEUR DE RÉPONSE =======================
 // Gère automatiquement l'expiration de l'access token
-api.interceptors.response.use(
+/*api.interceptors.response.use(
     // Chemin heureux : laisser passer les réponses 2xx
     (response) => response,
 
@@ -81,6 +108,38 @@ api.interceptors.response.use(
       }
 
       return Promise.reject(error);
+    }
+);*/
+
+api.interceptors.response.use(
+    (response) => response,
+    async (error: AxiosError) => {
+        const originalRequest = error.config as RetryRequestConfig |
+            undefined;
+        if (!error.response || !originalRequest) {
+            return Promise.reject(error);
+        }
+        if (error.response.status !== 401 || originalRequest._retry)
+        {
+            return Promise.reject(error);
+        }
+        originalRequest._retry = true;
+        try {
+            const newAccessToken = await refreshAccessToken();
+            originalRequest.headers.Authorization =
+                `Bearer ${newAccessToken}`;
+            return api(originalRequest);
+        } catch (refreshError) {
+            const status = axios.isAxiosError(refreshError)
+                ? refreshError.response?.status
+                : undefined;
+// Déconnexion uniquement si le refresh est réellemen refusé.
+            if (status === 401 || status === 403) {
+                sessionStorage.removeItem('access_token');
+                window.location.assign('/login');
+            }
+            return Promise.reject(refreshError);
+        }
     }
 );
 
