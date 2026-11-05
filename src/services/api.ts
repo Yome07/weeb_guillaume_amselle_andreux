@@ -15,8 +15,7 @@ export function refreshAccessToken(): Promise<string> {
             .then((response) => {
                 const access = response.data?.access;
                 if (!access || typeof access !== 'string') {
-                    throw new Error('Access token absent de la réponse de
-                    refresh');
+                    throw new Error('Access token absent de la réponse de refresh');
                 }
                 sessionStorage.setItem('access_token', access);
                 return access;
@@ -134,8 +133,7 @@ api.interceptors.response.use(
             const status = axios.isAxiosError(refreshError)
                 ? refreshError.response?.status
                 : undefined;
-// Déconnexion uniquement si le refresh est réellement
-            refusé.
+// Déconnexion uniquement si le refresh est réellemen refusé.
             if (status === 401 || status === 403) {
                 sessionStorage.removeItem('access_token');
                 window.location.assign('/login');
