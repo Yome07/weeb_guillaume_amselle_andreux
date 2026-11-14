@@ -6,7 +6,7 @@ import {
     type Dispatch,
     type ReactNode,
 } from 'react';
-import api from '../services/api';
+import api, { refreshAccessToken } from '../services/api';
 // Types
 interface AuthUser {
     id: string;
@@ -52,25 +52,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
     useEffect(() => {
         let cancelled = false;
+
         async function restoreSession(): Promise<void> {
-            const accessToken = sessionStorage.getItem('access_token');
-            if (!accessToken) {
-                if (!cancelled) dispatch({ type: 'LOGOUT' });
-                return;
-            }
             try {
-// L'intercepteur renouvelle automatiquement l'access token si
-// celui actuellement stocké a expiré, puis rejoue cette requête.
+                if (!sessionStorage.getItem('access_token')) {
+                    await refreshAccessToken();
+                }
+
                 const response = await api.get<AuthUser>('/users/');
+
                 if (!cancelled) {
                     dispatch({ type: 'LOGIN', payload: response.data });
                 }
             } catch {
                 sessionStorage.removeItem('access_token');
-                if (!cancelled) dispatch({ type: 'LOGOUT' });
+
+                if (!cancelled) {
+                    dispatch({ type: 'LOGOUT' });
+                }
             }
         }
+
         restoreSession();
+
         return () => {
             cancelled = true;
         };

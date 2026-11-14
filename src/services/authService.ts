@@ -5,8 +5,18 @@ interface LoginPayload {
     password: string;
 }
 
+interface LoginUser {
+    id: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    is_staff: boolean;
+    is_active: boolean;
+}
+
 interface LoginResponse {
     access: string;
+    user: LoginUser;
 }
 
 export async function login(payload: LoginPayload): Promise<LoginResponse> {
