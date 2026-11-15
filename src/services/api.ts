@@ -86,7 +86,7 @@ api.interceptors.response.use(
                 window.location.assign('/login');
             }
             return Promise.reject(refreshError);
-            }
+        }
 
     }
 );
