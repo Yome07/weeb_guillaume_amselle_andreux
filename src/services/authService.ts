@@ -47,7 +47,7 @@ export async function register(payload: RegisterPayload): Promise<void> {
 
 export async function logout(): Promise<void> {
     try {
-        await api.post('/users/logout/', {}, { withCredentials: true });
+        await publicApi.post('/users/logout/', {});
     } catch {
         // On nettoie quand même la session locale même si le serveur échoue
     } finally {
