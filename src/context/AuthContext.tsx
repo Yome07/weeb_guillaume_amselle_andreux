@@ -8,7 +8,7 @@ import {
 } from 'react';
 import api, { refreshAccessToken } from '../services/api';
 // Types
-interface AuthUser {
+export interface AuthUser {
     id: string;
     first_name: string;
     last_name: string;
@@ -20,7 +20,7 @@ interface AuthState {
     user: AuthUser | null;
     isLoading: boolean;
 }
-type AuthAction =
+export type AuthAction =
     | { type: 'LOGIN'; payload: AuthUser }
     | { type: 'LOGOUT' };
 interface AuthContextType {
