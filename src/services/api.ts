@@ -1,4 +1,4 @@
-import axios, { type InternalAxiosRequestConfig } from 'axios';
+import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios';
 const API_URL = (import.meta.env.VITE_API_URL ??
     "http://localhost:8000").replace(/\/+$/, "");
 // Instance publique — sans token (register, login, forgot password...)
@@ -33,7 +33,7 @@ export function refreshAccessToken(): Promise<string> {
             .post<RefreshResponse>('/users/token/refresh/', {})
             .then((response) => {
                 const accessToken = response.data?.access;
-                if (!accessToken) {
+                if (typeof accessToken !== 'string' || accessToken.length === 0) {
                     throw new Error("Le backend n'a pas renvoyé de nouvel access token.");
                 }
                 sessionStorage.setItem('access_token', accessToken);
@@ -59,29 +59,35 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
 // Chemin heureux : laisser passer les réponses 2xx
     (response) => response,
-    async (error) => {
+    async (error: AxiosError) => {
         const originalRequest = error.config as RetryRequestConfig | undefined;
 // Pas de réponse du serveur (erreur réseau)
-        if (!error.response) {
+        if (!error.response || !originalRequest) {
             return Promise.reject(error);
         }
 // Si on reçoit un 401 et qu'on n'a pas encore tenté le refresh
-        if (error.response.status === 401 && originalRequest &&
-            !originalRequest._retry) {
-            originalRequest._retry = true;
-            try {
-                const newAccessToken = await refreshAccessToken();
+        if (error.response.status !== 401 || originalRequest._retry) {
+            return Promise.reject(error);
+        }
+        originalRequest._retry = true;
+        try {
+            const newAccessToken = await refreshAccessToken();
 // Rejouer la requête originale avec le nouveau token
-                originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-                return api(originalRequest);
-            } catch (refreshError) {
+            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+            return api(originalRequest);
+        } catch (refreshError) {
 // Refresh token expiré ou invalide : déconnexion forcée
+            const status = axios.isAxiosError(refreshError)
+                ? refreshError.response?.status
+                : undefined;
+// Déconnexion uniquement si le refresh est réellement refusé.
+            if (status === 401 || status === 403) {
                 sessionStorage.removeItem('access_token');
                 window.location.assign('/login');
-                return Promise.reject(refreshError);
             }
-        }
-        return Promise.reject(error);
+            return Promise.reject(refreshError);
+            }
+
     }
 );
 export default api;
