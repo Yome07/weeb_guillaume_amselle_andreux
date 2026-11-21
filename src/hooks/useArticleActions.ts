@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+import { useEffect, useState, FormEvent } from 'react';
 import { deleteArticle, updateArticle, Article } from '../services/blogService';
 import { useAuth } from '../context/AuthContext';
 
@@ -31,7 +31,7 @@ interface UseArticleActionsReturn {
 
     // Article courant (mis à jour après édition)
     displayArticle: Article | null;
-    isAuthor: boolean;
+    canManageArticle: boolean;
 }
 
 /**
@@ -56,15 +56,19 @@ export function useArticleActions({ slug, article }: UseArticleActionsProps): Us
     const [editErrors, setEditErrors] = useState<Record<string, string>>({});
     const [currentArticle, setCurrentArticle] = useState<Article | null>(article);
 
-    // Synchroniser currentArticle avec article au chargement
-    if (article && !currentArticle) {
+    useEffect(() => {
         setCurrentArticle(article);
-    }
+    }, [article]);
 
     const displayArticle = currentArticle ?? article;
 
-    // Vérifier si l'utilisateur connecté est l'auteur de l'article
-    const isAuthor = state.user?.id === displayArticle?.author.id;
+    // Vérifier si l'utilisateur connecté est autorisé à éditer l'article
+    const user = state.user;
+    const canManageArticle = Boolean(
+        user?.is_active &&
+        displayArticle &&
+        (user.id === displayArticle.author.id || user.is_staff)
+    );
 
     // Passer en mode édition
     const handleEditStart = () => {
@@ -140,6 +144,6 @@ export function useArticleActions({ slug, article }: UseArticleActionsProps): Us
         handleEditStart,
         handleEditSave,
         displayArticle,
-        isAuthor,
+        canManageArticle,
     };
 }
