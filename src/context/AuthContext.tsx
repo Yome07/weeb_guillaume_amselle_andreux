@@ -6,6 +6,7 @@ import {
     type Dispatch,
     type ReactNode,
 } from 'react';
+import axios from 'axios';
 import api, { refreshAccessToken } from '../services/api';
 // Types
 export interface AuthUser {
@@ -64,8 +65,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 if (!cancelled) {
                     dispatch({ type: 'LOGIN', payload: response.data });
                 }
-            } catch {
-                sessionStorage.removeItem('access_token');
+            } catch (error) {
+                const status = axios.isAxiosError(error)
+                    ? error.response?.status
+                    : undefined;
+
+                if (status === 401 || status === 403) {
+                    sessionStorage.removeItem('access_token');
+                }
 
                 if (!cancelled) {
                     dispatch({ type: 'LOGOUT' });
