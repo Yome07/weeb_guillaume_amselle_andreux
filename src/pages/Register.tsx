@@ -3,6 +3,7 @@ import Button from '../components/ui/Button';
 import { useLanguage } from '../context/LanguageContext';
 import { useRegisterForm } from '../hooks/useRegisterForm';
 import { FormEvent } from 'react';
+import {Link} from "react-router-dom";
 
 /**
  * Page d'inscription (Register)
@@ -181,9 +182,9 @@ function Register() {
         {/* Lien vers la page de connexion */}
         <p className="text-white text-center text-sm mt-6">
           {t.register.form.hasAccount}{' '}
-          <a href="/login" className="text-purple-light hover:underline">
+          <Link to="/login" className="text-purple-light hover:underline">
             {t.register.form.loginLink}
-          </a>
+          </Link>
         </p>
       </div>
     </>

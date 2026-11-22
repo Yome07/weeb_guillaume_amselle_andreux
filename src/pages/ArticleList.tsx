@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useArticleList } from '../hooks/useArticleList';
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/AuthContext';
 
 /**
  * Page liste des articles (publique)

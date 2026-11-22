@@ -75,7 +75,7 @@ function Login() {
 
         {/* Texte inscription */}
         <p className="text-gray-light font-poppins font-medium text-xs leading-5 text-center max-w-3/5">
-          {t.login.form.noAccount}{' '}<a href="/register" className='text-white underline'>{t.login.form.createAccount}</a>
+          {t.login.form.noAccount}{' '}<Link to="/register" className='text-white underline'>{t.login.form.createAccount}</Link>
         </p>
       </div>
     </>
