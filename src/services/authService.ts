@@ -58,13 +58,3 @@ export async function logout(): Promise<void> {
 export async function requestPasswordReset(email: string): Promise<void> {
     await publicApi.post('/users/password-reset/request/', { email });
 }
-
-interface PasswordResetConfirmPayload {
-    uidb64: string;
-    token: string;
-    password: string;
-}
-
-export async function confirmPasswordReset(payload: PasswordResetConfirmPayload): Promise<void> {
-    await publicApi.post('/users/password-reset/confirm/', payload);
-}

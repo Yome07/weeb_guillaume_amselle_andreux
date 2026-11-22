@@ -10,7 +10,6 @@ import ArticleDetail from './pages/ArticleDetail';
 import ArticleCreate from './pages/ArticleCreate';
 import PrivateRoute from './PrivateRoute';
 import './App.css';
-import ResetPassword from "./pages/ResetPassword.tsx";
 import PrivateAdminRoute from "./PrivateAdminRoute.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -23,7 +22,6 @@ function App() {
                 <Route path="contact" element={<Contact />} />
                 <Route path="login" element={<Login />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
-                <Route path="reset-password" element={<ResetPassword />} />
                 <Route path="register" element={<Register />} />
                 <Route path="blog" element={<ArticleList />} />
                 <Route

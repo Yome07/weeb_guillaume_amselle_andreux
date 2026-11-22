@@ -13,7 +13,6 @@ Le routing utilise React Router v7 avec `BrowserRouter` dans `main.tsx` et `Rout
 | `/login` | `Login` | Publique |
 | `/register` | `Register` | Publique |
 | `/forgot-password` | `ForgotPassword` | Publique |
-| `/reset-password` | `ResetPassword` | Publique |
 | `/blog` | `ArticleList` | Publique |
 | `/blog/:slug` | `ArticleDetail` | Publique |
 | `/blog/new` | `ArticleCreate` | `PrivateRoute` |
@@ -30,6 +29,5 @@ Le routing utilise React Router v7 avec `BrowserRouter` dans `main.tsx` et `Rout
 
 `/blog/:slug` — le slug de l'article est récupéré avec `useParams` dans `ArticleDetail`.
 
-`/reset-password?uidb64=XX&token=XX` — les paramètres de réinitialisation sont récupérés avec `useSearchParams` dans `ResetPassword`.
 
 `/forgot-password?email=XX` — l'email est pré-rempli depuis la page Login via `useSearchParams`.

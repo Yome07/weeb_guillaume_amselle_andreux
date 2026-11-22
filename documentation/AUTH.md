@@ -51,4 +51,4 @@ Un compte créé est inactif par défaut (`is_active = false`). Un administrateu
 
 **Étape 1** — `ForgotPassword.tsx` : l'utilisateur saisit son email → `POST /users/password-reset/request/`. La réponse est toujours générique pour éviter l'énumération d'utilisateurs.
 
-**Étape 2** — `ResetPassword.tsx` : l'utilisateur arrive depuis le lien email (`/reset-password?uidb64=XX&token=XX`) → `POST /users/password-reset/confirm/`. Redirection vers `/login` en cas de succès.
+**Étape 2** — Le lien envoyé par email ouvre `/users/password-reset/form/?uidb64=...&token=...`, une page HTML servie directement par Django. L’utilisateur y choisit son nouveau mot de passe. Le frontend ne lit pas les paramètres du lien et n’appelle pas `POST /users/password-reset/confirm/, qui reste disponible côté backend pour compatibilité.
