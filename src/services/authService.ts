@@ -25,6 +25,30 @@ export async function login(payload: LoginPayload): Promise<LoginResponse> {
     return response.data;
 }
 
+interface ProfileUpdateResponse {
+    message: string;
+    user: LoginUser;
+}
+
+export async function updateProfile(
+    payload: Pick<LoginUser, 'first_name' | 'last_name'>
+): Promise<LoginUser> {
+    const response = await api.patch<ProfileUpdateResponse>('/users/', payload);
+    return response.data.user;
+}
+
+interface ChangePasswordPayload {
+    current_password: string;
+    password: string;
+    password_confirm: string;
+}
+
+export async function changePassword(
+    payload: ChangePasswordPayload
+): Promise<void> {
+    await api.patch('/users/', payload);
+}
+
 interface RegisterPayload {
     email: string;
     password: string;
@@ -33,7 +57,11 @@ interface RegisterPayload {
     lastname: string;
 }
 
-export async function register(payload: RegisterPayload): Promise<void> {
+interface RegisterResponse {
+    message: string;
+}
+
+export async function register(payload: RegisterPayload): Promise<RegisterResponse> {
     // Mapper les clés camelCase en snake_case pour Django
     const djangoPayload = {
         email: payload.email,
@@ -42,7 +70,9 @@ export async function register(payload: RegisterPayload): Promise<void> {
         first_name: payload.firstname,
         last_name: payload.lastname,
     };
-    await publicApi.post('/users/register/', djangoPayload);
+    const response = await publicApi.post<RegisterResponse>('/users/register/', djangoPayload);
+
+    return response.data;
 }
 
 export async function logout(): Promise<void> {

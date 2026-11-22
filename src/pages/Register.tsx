@@ -23,6 +23,7 @@ function Register() {
     confirmPassword,
     errors,
     apiError,
+    successMessage,
     isLoading,
     passwordStrength,
     passwordsMatch,
@@ -159,6 +160,12 @@ function Register() {
               </p>
             )}
           </div>
+
+          {successMessage && (
+              <p role="status" className="text-green-400 text-center">
+              {successMessage}
+              </p>
+          )}
 
           {/* Erreur API */}
           {apiError && (
