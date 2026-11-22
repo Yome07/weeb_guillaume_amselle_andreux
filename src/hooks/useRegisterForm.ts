@@ -1,5 +1,5 @@
+import axios from 'axios';
 import { useState, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { register } from '../services/authService';
 
 interface PasswordStrength {
@@ -11,6 +11,13 @@ interface PasswordStrength {
   hasSpecialChar: boolean;
 }
 
+interface RegisterErrorResponse {
+  message?: unknown;
+  detail?: unknown;
+  error_code?: unknown;
+  details?: unknown;
+}
+
 interface UseRegisterFormReturn {
   lastname: string;
   firstname: string;
@@ -19,6 +26,7 @@ interface UseRegisterFormReturn {
   confirmPassword: string;
   errors: Record<string, string>;
   apiError: string | null;
+  successMessage: string | null;
   isLoading: boolean;
   passwordStrength: PasswordStrength | null;
   passwordsMatch: boolean;
@@ -54,7 +62,6 @@ interface Translations {
  * @returns {UseRegisterFormReturn} - État et fonctions pour gérer le formulaire
  */
 export function useRegisterForm(): UseRegisterFormReturn {
-  const navigate = useNavigate();
   // États pour les champs du formulaire
   const [lastname, setLastname] = useState<string>('');
   const [firstname, setFirstname] = useState<string>('');
@@ -64,6 +71,7 @@ export function useRegisterForm(): UseRegisterFormReturn {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [apiError, setApiError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   /**
    * Valide le format de l'email
@@ -103,7 +111,6 @@ export function useRegisterForm(): UseRegisterFormReturn {
    */
   const handleSubmit = async (e: FormEvent<HTMLFormElement>, t: Translations): Promise<void> => {
     e.preventDefault();
-    setApiError(null);
 
     // Réinitialiser les erreurs
     const newErrors: Record<string, string> = {};
@@ -149,20 +156,62 @@ export function useRegisterForm(): UseRegisterFormReturn {
     // Appel API
     setIsLoading(true);
     try {
-      await register({ lastname, firstname, email, password, password_confirm: confirmPassword });
+      const response = await register({
+        lastname,
+        firstname,
+        email,
+        password,
+        password_confirm: confirmPassword,
+      });
 
-      // Réinitialiser le formulaire
+      setSuccessMessage(response.message);
+
       setLastname('');
       setFirstname('');
       setEmail('');
       setPassword('');
       setConfirmPassword('');
       setErrors({});
+    } catch (err: unknown) {
+      if (axios.isAxiosError<RegisterErrorResponse>(err)) {
+        const data = err.response?.data;
 
-      // Rediriger vers la page de connexion après inscription
-      navigate('/login');
-    } catch (err: any) {
-      setApiError(err?.response?.data?.detail || "Une erreur est survenue lors de l'inscription.");
+        const details = Array.isArray(data?.details)
+          ? data.details
+            .filter((detail): detail is string => typeof detail === 'string')
+            .join(' ')
+          : undefined;
+
+        const codeMessages: Record<string, string> = {
+          EMAIL_ALREADY_EXISTS: 'Cet email existe déjà.',
+          PASSWORD_MISMATCH: 'Les mots de passe ne correspondent pas.',
+          WEAK_PASSWORD: 'Le mot de passe ne respecte pas les règles de sécurité.',
+        };
+
+        const getFirstString = (value: unknown): string | undefined => {
+          if (typeof value === 'string') return value;
+
+          if (Array.isArray(value)) {
+            return value.find((item): item is string => typeof item === 'string');
+          }
+
+          return undefined;
+        }
+
+        const errorCode = getFirstString(data?.error_code);
+
+        const backendMessage =
+            getFirstString(data?.message) ||
+            getFirstString(data?.detail) ||
+            details ||
+            (errorCode ? codeMessages[errorCode]: undefined);
+
+        setApiError(
+            backendMessage || "Une erreur est survenue lors de l’inscription."
+        );
+      } else {
+        setApiError("Une erreur est survenue lors de l’inscription.")
+      }
     } finally {
       setIsLoading(false);
     }
@@ -183,6 +232,7 @@ export function useRegisterForm(): UseRegisterFormReturn {
     confirmPassword,
     errors,
     apiError,
+    successMessage,
     isLoading,
     passwordStrength,
     passwordsMatch,

@@ -37,8 +37,7 @@ src/
 │   ├── Contact.tsx              # Page contact
 │   ├── Login.tsx                # Page connexion
 │   ├── Register.tsx             # Page inscription
-│   ├── ForgotPassword.tsx       # Demande reset mot de passe
-│   ├── ResetPassword.tsx        # Confirmation reset mot de passe
+│   ├── ForgotPassword.tsx       # Demande d’envoi du lien pour nouveau mot de passe
 │   ├── ArticleList.tsx          # Liste des articles
 │   ├── ArticleDetail.tsx        # Détail + édition + suppression article
 │   ├── ArticleCreate.tsx        # Création d'un article

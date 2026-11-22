@@ -31,7 +31,7 @@ function ArticleDetail() {
         handleEditStart,
         handleEditSave,
         displayArticle,
-        isAuthor,
+        canManageArticle,
     } = useArticleActions({ slug: slug ?? '', article });
 
     return (
@@ -100,7 +100,7 @@ function ArticleDetail() {
                                 <h1 className="text-white font-extrabold text-3xl lg:text-5xl">
                                     {displayArticle.title}
                                 </h1>
-                                {isAuthor && (
+                                {canManageArticle && (
                                     <div className="flex items-center gap-4 shrink-0">
                                         <button
                                             onClick={handleEditStart}

@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useArticleList } from '../hooks/useArticleList';
+import { useAuth } from '../context/AuthContext';
 
 /**
  * Page liste des articles (publique)
  * Affiche tous les articles avec titre, auteur, date et extrait du contenu
  */
 function ArticleList() {
+    const { state } = useAuth();
     const { articles, isLoading, error } = useArticleList();
 
     return (
@@ -21,7 +23,7 @@ function ArticleList() {
             </div>
 
             {/* Lien vers la création (visible uniquement si connecté) */}
-            {sessionStorage.getItem('access_token') && (
+            {!state.isLoading && state.user?.is_active && (
                 <div className="max-w-4xl mx-auto mb-8 flex justify-end">
                     <Link
                         to="/blog/new"

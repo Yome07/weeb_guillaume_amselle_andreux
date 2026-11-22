@@ -8,9 +8,9 @@ import ForgotPassword from './pages/ForgotPassword';
 import ArticleList from './pages/ArticleList';
 import ArticleDetail from './pages/ArticleDetail';
 import ArticleCreate from './pages/ArticleCreate';
+import PublicOnlyRoute from "./PublicOnlyRoute.tsx";
 import PrivateRoute from './PrivateRoute';
 import './App.css';
-import ResetPassword from "./pages/ResetPassword.tsx";
 import PrivateAdminRoute from "./PrivateAdminRoute.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -21,10 +21,23 @@ function App() {
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
                 <Route path="contact" element={<Contact />} />
-                <Route path="login" element={<Login />} />
+                <Route
+                    path="login"
+                    element={
+                        <PublicOnlyRoute>
+                            <Login />
+                        </PublicOnlyRoute>
+                    }
+                />
                 <Route path="forgot-password" element={<ForgotPassword />} />
-                <Route path="reset-password" element={<ResetPassword />} />
-                <Route path="register" element={<Register />} />
+                <Route
+                    path="register"
+                    element={
+                        <PublicOnlyRoute>
+                            <Register />
+                        </PublicOnlyRoute>
+                    }
+                />
                 <Route path="blog" element={<ArticleList />} />
                 <Route
                     path="blog/new"

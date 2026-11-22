@@ -6,9 +6,10 @@ import {
     type Dispatch,
     type ReactNode,
 } from 'react';
-import api from '../services/api';
+import axios from 'axios';
+import api, { refreshAccessToken } from '../services/api';
 // Types
-interface AuthUser {
+export interface AuthUser {
     id: string;
     first_name: string;
     last_name: string;
@@ -20,7 +21,7 @@ interface AuthState {
     user: AuthUser | null;
     isLoading: boolean;
 }
-type AuthAction =
+export type AuthAction =
     | { type: 'LOGIN'; payload: AuthUser }
     | { type: 'LOGOUT' };
 interface AuthContextType {
@@ -52,25 +53,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
     useEffect(() => {
         let cancelled = false;
+
         async function restoreSession(): Promise<void> {
-            const accessToken = sessionStorage.getItem('access_token');
-            if (!accessToken) {
-                if (!cancelled) dispatch({ type: 'LOGOUT' });
-                return;
-            }
             try {
-// L'intercepteur renouvelle automatiquement l'access token si
-// celui actuellement stocké a expiré, puis rejoue cette requête.
+                if (!sessionStorage.getItem('access_token')) {
+                    await refreshAccessToken();
+                }
+
                 const response = await api.get<AuthUser>('/users/');
+
                 if (!cancelled) {
                     dispatch({ type: 'LOGIN', payload: response.data });
                 }
-            } catch {
-                sessionStorage.removeItem('access_token');
-                if (!cancelled) dispatch({ type: 'LOGOUT' });
+            } catch (error) {
+                const status = axios.isAxiosError(error)
+                    ? error.response?.status
+                    : undefined;
+
+                if (status === 401 || status === 403) {
+                    sessionStorage.removeItem('access_token');
+                }
+
+                if (!cancelled) {
+                    dispatch({ type: 'LOGOUT' });
+                }
             }
         }
+
         restoreSession();
+
         return () => {
             cancelled = true;
         };

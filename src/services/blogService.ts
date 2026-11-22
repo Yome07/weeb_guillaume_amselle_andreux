@@ -1,20 +1,18 @@
 import api, { publicApi } from './api';
 
 export interface ArticleAuthor {
-    id: number;
-    email: string;
+    id: string; // UUID
     first_name: string;
     last_name: string;
-    is_staff: boolean;
-    is_active: boolean;
 }
 
 export interface Article {
-    id: number;
     author: ArticleAuthor;
     title: string;
     content: string;
     slug: string;
+    favorites_count: number;
+    is_favorite: boolean;
     created_at: string;
     updated_at: string;
 }

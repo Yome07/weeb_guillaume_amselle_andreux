@@ -3,6 +3,7 @@ import Button from '../components/ui/Button';
 import { useLanguage } from '../context/LanguageContext';
 import { useRegisterForm } from '../hooks/useRegisterForm';
 import { FormEvent } from 'react';
+import {Link} from "react-router-dom";
 
 /**
  * Page d'inscription (Register)
@@ -23,6 +24,7 @@ function Register() {
     confirmPassword,
     errors,
     apiError,
+    successMessage,
     isLoading,
     passwordStrength,
     passwordsMatch,
@@ -160,6 +162,12 @@ function Register() {
             )}
           </div>
 
+          {successMessage && (
+              <p role="status" className="text-green-400 text-center">
+              {successMessage}
+              </p>
+          )}
+
           {/* Erreur API */}
           {apiError && (
               <p className="text-red-400 text-sm text-center">{apiError}</p>
@@ -174,9 +182,9 @@ function Register() {
         {/* Lien vers la page de connexion */}
         <p className="text-white text-center text-sm mt-6">
           {t.register.form.hasAccount}{' '}
-          <a href="/login" className="text-purple-light hover:underline">
+          <Link to="/login" className="text-purple-light hover:underline">
             {t.register.form.loginLink}
-          </a>
+          </Link>
         </p>
       </div>
     </>
